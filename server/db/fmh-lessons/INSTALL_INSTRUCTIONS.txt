@@ -1,0 +1,51 @@
+HOW TO INSTALL THE FULL LESSON UPDATE
+======================================
+
+This update gives you full, detailed lessons with:
+- Complete grammar explanations with rules and exceptions
+- Pronunciation guides with Listen buttons (browser TTS)
+- Real dialogues in Canadian/Oakville context
+- TEF/TCF exam tips
+- Practice exercises with instant feedback
+- A quiz you must pass to complete each lesson
+
+STEP 1 — Stop the app
+----------------------
+In your PowerShell windows, press Ctrl+C to stop everything.
+
+STEP 2 — Replace the seed file
+-------------------------------
+Go to: C:\French\french-mastery-hub2\server\db\
+Delete the file called: seed.js
+Copy the new seed.js from this zip into that same folder.
+
+STEP 3 — Delete old data
+-------------------------
+Go to: C:\French\french-mastery-hub2\server\db\
+Delete the file called: data.json
+(This removes the old thin lesson content so the new content loads fresh.)
+
+STEP 4 — Replace the App.jsx
+-----------------------------
+Open: C:\French\french-mastery-hub2\src\App.jsx
+Find the function that says:   function Lessons({ V }) {
+Select from that line all the way down to the next top-level function (the one that starts with "function Grammar")
+Replace everything between those two points with the contents of LessonViewer.jsx from this zip.
+
+Easier option: I can do this automatically — just tell me and I'll send you
+a complete replacement App.jsx file instead.
+
+STEP 5 — Restart the app
+-------------------------
+Open PowerShell in C:\French\french-mastery-hub2\
+Run: node server/index.js   (in one window)
+Open another PowerShell window and run: npx vite --host
+
+STEP 6 — Open the app
+----------------------
+Go to http://localhost:5173
+Log in and go to Lessons
+You will see full detailed lessons now.
+
+NOTE: You will need to create a new account or the lessons will reload automatically.
+If your old account doesn't show new content, just register a new account.
