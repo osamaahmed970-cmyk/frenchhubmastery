@@ -966,6 +966,276 @@ function seedIfEmpty() {
   })
 },
 
+// ─────────────────────────────────────────────────────────────────
+// LESSON 14 — Essential Verbs & Conjugation
+// ─────────────────────────────────────────────────────────────────
+{
+  level: 'A1', sort_order: 14, duration_min: 40, xp_reward: 75,
+  title: 'Essential Verbs & Conjugation',
+  description: 'Vouloir, pouvoir, devoir, savoir, voir, partir, sortir, dormir, mettre, lire, écrire, connaître — 12 key irregular verbs with full conjugation tables.',
+  content: JSON.stringify({
+    intro: `These 12 verbs are among the most frequently used in French. All are irregular — their stems or endings do not follow standard patterns. This lesson gives you the full present-tense conjugation for each verb, highlights the tricky forms, and gives memory tips to lock them in.`,
+    sections: [
+      {
+        type: 'grammar',
+        title: 'Vouloir — to want',
+        rules: [
+          { rule: 'Je', example: 'veux', translation: 'Je veux un café.', breakdown: '' },
+          { rule: 'Tu', example: 'veux', translation: 'Tu veux sortir ?', breakdown: '' },
+          { rule: 'Il / Elle / On', example: 'veut', translation: 'Elle veut apprendre.', breakdown: '' },
+          { rule: 'Nous', example: 'voulons', translation: 'Nous voulons partir.', breakdown: '' },
+          { rule: 'Vous', example: 'voulez', translation: 'Vous voulez du thé ?', breakdown: '' },
+          { rule: 'Ils / Elles', example: 'veulent ⚠️', translation: 'Ils veulent rester.', breakdown: 'NOT voulont — stem changes back to veu- for ils/elles' },
+        ]
+      },
+      {
+        type: 'tips',
+        title: 'Memory tip — vouloir',
+        tips: [
+          'Two stems: veu- (je/tu/il/ils) and voul- (nous/vous)',
+          '"Je voudrais" (I would like) is the polite conditional — essential in restaurants and shops',
+          'veulent rhymes with veut — both use the veu- stem',
+        ]
+      },
+      {
+        type: 'grammar',
+        title: 'Pouvoir — can / to be able to',
+        rules: [
+          { rule: 'Je', example: 'peux', translation: 'Je peux t\'aider.', breakdown: '' },
+          { rule: 'Tu', example: 'peux', translation: 'Tu peux venir ?', breakdown: '' },
+          { rule: 'Il / Elle / On', example: 'peut', translation: 'Il peut rester.', breakdown: '' },
+          { rule: 'Nous', example: 'pouvons', translation: 'Nous pouvons y aller.', breakdown: '' },
+          { rule: 'Vous', example: 'pouvez', translation: 'Vous pouvez entrer.', breakdown: '' },
+          { rule: 'Ils / Elles', example: 'peuvent ⚠️', translation: 'Ils peuvent partir.', breakdown: 'NOT pouvont — same irregular ils pattern as vouloir' },
+        ]
+      },
+      {
+        type: 'tips',
+        title: 'Memory tip — pouvoir',
+        tips: [
+          'Mirrors vouloir: veut/peut, voulons/pouvons, veulent/peuvent',
+          'Two stems: peu- (singular + ils) and pouv- (nous/vous)',
+          '"Puis-je ?" is the formal inverted question form of "Est-ce que je peux ?" (May I?)',
+        ]
+      },
+      {
+        type: 'grammar',
+        title: 'Devoir — must / to have to',
+        rules: [
+          { rule: 'Je', example: 'dois', translation: 'Je dois travailler.', breakdown: '' },
+          { rule: 'Tu', example: 'dois', translation: 'Tu dois étudier.', breakdown: '' },
+          { rule: 'Il / Elle / On', example: 'doit', translation: 'Elle doit partir.', breakdown: '' },
+          { rule: 'Nous', example: 'devons', translation: 'Nous devons y aller.', breakdown: '' },
+          { rule: 'Vous', example: 'devez', translation: 'Vous devez vous dépêcher.', breakdown: '' },
+          { rule: 'Ils / Elles', example: 'doivent ⚠️', translation: 'Ils doivent rester.', breakdown: 'doi- stem for singular + ils; dev- for nous/vous' },
+        ]
+      },
+      {
+        type: 'tips',
+        title: 'Memory tip — devoir',
+        tips: [
+          'Two stems: doi- (singular + ils) and dev- (nous/vous)',
+          'devoir + infinitive = obligation: Je dois partir = I must leave',
+          'Devoir can also mean "to owe": Je te dois dix euros = I owe you ten euros',
+        ]
+      },
+      {
+        type: 'grammar',
+        title: 'Savoir — to know (a fact or skill)',
+        rules: [
+          { rule: 'Je', example: 'sais', translation: 'Je sais nager.', breakdown: '' },
+          { rule: 'Tu', example: 'sais', translation: 'Tu sais où c\'est ?', breakdown: '' },
+          { rule: 'Il / Elle / On', example: 'sait', translation: 'Il sait conduire.', breakdown: '' },
+          { rule: 'Nous', example: 'savons', translation: 'Nous savons la réponse.', breakdown: '' },
+          { rule: 'Vous', example: 'savez', translation: 'Vous savez cuisiner ?', breakdown: '' },
+          { rule: 'Ils / Elles', example: 'savent', translation: 'Ils savent la vérité.', breakdown: '' },
+        ]
+      },
+      {
+        type: 'grammar',
+        title: 'Connaître — to know (a person or place)',
+        rules: [
+          { rule: 'Je', example: 'connais', translation: 'Je connais Marie.', breakdown: '' },
+          { rule: 'Tu', example: 'connais', translation: 'Tu connais Paris ?', breakdown: '' },
+          { rule: 'Il / Elle / On', example: 'connaît ⚠️', translation: 'Elle connaît bien le quartier.', breakdown: 'Circumflex î in il/elle form — a defining feature of -aître verbs' },
+          { rule: 'Nous', example: 'connaissons', translation: 'Nous connaissons la ville.', breakdown: '' },
+          { rule: 'Vous', example: 'connaissez', translation: 'Vous connaissez cet endroit ?', breakdown: '' },
+          { rule: 'Ils / Elles', example: 'connaissent', translation: 'Ils connaissent bien le pays.', breakdown: '' },
+        ]
+      },
+      {
+        type: 'tips',
+        title: 'Savoir vs Connaître — critical difference',
+        tips: [
+          'SAVOIR = to know a fact, information, or how to do something: Je sais parler français.',
+          'CONNAÎTRE = to know / be familiar with a person or place: Je connais Paris.',
+          'Quick test: if you can replace "know" with "be familiar with" → connaître.',
+          'If you can replace "know" with "know that / know how to" → savoir.',
+          'connaît has a circumflex î — picture a little hat on the i of il/elle',
+        ]
+      },
+      {
+        type: 'grammar',
+        title: 'Voir — to see',
+        rules: [
+          { rule: 'Je', example: 'vois', translation: 'Je vois la tour.', breakdown: '' },
+          { rule: 'Tu', example: 'vois', translation: 'Tu vois ce que je veux dire ?', breakdown: '' },
+          { rule: 'Il / Elle / On', example: 'voit', translation: 'Elle voit ses amis.', breakdown: '' },
+          { rule: 'Nous', example: 'voyons ⚠️', translation: 'Nous voyons un film.', breakdown: 'Stem changes: voi- → voy- for nous/vous' },
+          { rule: 'Vous', example: 'voyez ⚠️', translation: 'Vous voyez le problème ?', breakdown: '' },
+          { rule: 'Ils / Elles', example: 'voient ⚠️', translation: 'Ils voient tout.', breakdown: 'voi- + -ent (the -ent is silent as always)' },
+        ]
+      },
+      {
+        type: 'tips',
+        title: 'Memory tip — voir',
+        tips: [
+          'Stem voi- in je/tu/il/ils — changes to voy- in nous/vous only',
+          '"On verra" = we\'ll see (future tense) — a very common expression',
+          'voient (ils) — do not confuse with veulent; voi + -ent, the ending is silent',
+        ]
+      },
+      {
+        type: 'grammar',
+        title: 'Partir — to leave / to go away',
+        rules: [
+          { rule: 'Je', example: 'pars', translation: 'Je pars à 8h.', breakdown: 'Drop last 3 letters: partir → par- → pars' },
+          { rule: 'Tu', example: 'pars', translation: 'Tu pars maintenant ?', breakdown: '' },
+          { rule: 'Il / Elle / On', example: 'part', translation: 'Le train part à midi.', breakdown: '' },
+          { rule: 'Nous', example: 'partons', translation: 'Nous partons en vacances.', breakdown: 'Full stem restored in plural' },
+          { rule: 'Vous', example: 'partez', translation: 'Vous partez demain ?', breakdown: '' },
+          { rule: 'Ils / Elles', example: 'partent', translation: 'Ils partent tôt.', breakdown: '' },
+        ]
+      },
+      {
+        type: 'grammar',
+        title: 'Sortir — to go out',
+        rules: [
+          { rule: 'Je', example: 'sors', translation: 'Je sors ce soir.', breakdown: 'Drop last 3 letters: sortir → sor- → sors' },
+          { rule: 'Tu', example: 'sors', translation: 'Tu sors avec qui ?', breakdown: '' },
+          { rule: 'Il / Elle / On', example: 'sort', translation: 'Elle sort du bureau.', breakdown: '' },
+          { rule: 'Nous', example: 'sortons', translation: 'Nous sortons ensemble.', breakdown: 'Full stem in plural' },
+          { rule: 'Vous', example: 'sortez', translation: 'Vous sortez souvent ?', breakdown: '' },
+          { rule: 'Ils / Elles', example: 'sortent', translation: 'Ils sortent ce soir.', breakdown: '' },
+        ]
+      },
+      {
+        type: 'grammar',
+        title: 'Dormir — to sleep',
+        rules: [
+          { rule: 'Je', example: 'dors', translation: 'Je dors huit heures.', breakdown: 'Drop last 3 letters: dormir → dor- → dors' },
+          { rule: 'Tu', example: 'dors', translation: 'Tu dors bien ?', breakdown: '' },
+          { rule: 'Il / Elle / On', example: 'dort', translation: 'Le bébé dort.', breakdown: '' },
+          { rule: 'Nous', example: 'dormons', translation: 'Nous dormons tard.', breakdown: 'Full stem in plural' },
+          { rule: 'Vous', example: 'dormez', translation: 'Vous dormez assez ?', breakdown: '' },
+          { rule: 'Ils / Elles', example: 'dorment', translation: 'Ils dorment encore.', breakdown: '' },
+        ]
+      },
+      {
+        type: 'tips',
+        title: 'Memory tip — partir, sortir, dormir',
+        tips: [
+          'All three: drop the last 3 letters of the infinitive to get the singular stem',
+          'partir → par- | sortir → sor- | dormir → dor-',
+          'Singular endings: -s, -s, -t (pars/pars/part, sors/sors/sort, dors/dors/dort)',
+          'Plural: restore full stem and add -ons, -ez, -ent (partons/sortez/dorment)',
+        ]
+      },
+      {
+        type: 'grammar',
+        title: 'Mettre — to put / to place',
+        rules: [
+          { rule: 'Je', example: 'mets', translation: 'Je mets mon manteau.', breakdown: 'Single t in singular' },
+          { rule: 'Tu', example: 'mets', translation: 'Tu mets la table ?', breakdown: '' },
+          { rule: 'Il / Elle / On', example: 'met', translation: 'Elle met son sac là.', breakdown: '' },
+          { rule: 'Nous', example: 'mettons ⚠️', translation: 'Nous mettons nos affaires.', breakdown: 'Double tt in all plural forms' },
+          { rule: 'Vous', example: 'mettez ⚠️', translation: 'Vous mettez vos chaussures ?', breakdown: '' },
+          { rule: 'Ils / Elles', example: 'mettent ⚠️', translation: 'Ils mettent la table.', breakdown: '' },
+        ]
+      },
+      {
+        type: 'tips',
+        title: 'Memory tip — mettre',
+        tips: [
+          'Singular: single t (mets, mets, met)',
+          'Plural: double tt (mettons, mettez, mettent)',
+          '"Mettre la table" = to set the table — very common French expression',
+          'Related verbs follow the same pattern: permettre (to allow), promettre (to promise)',
+        ]
+      },
+      {
+        type: 'grammar',
+        title: 'Lire — to read',
+        rules: [
+          { rule: 'Je', example: 'lis', translation: 'Je lis un roman.', breakdown: '' },
+          { rule: 'Tu', example: 'lis', translation: 'Tu lis beaucoup ?', breakdown: '' },
+          { rule: 'Il / Elle / On', example: 'lit', translation: 'Il lit le journal.', breakdown: '' },
+          { rule: 'Nous', example: 'lisons', translation: 'Nous lisons ensemble.', breakdown: '' },
+          { rule: 'Vous', example: 'lisez', translation: 'Vous lisez quoi en ce moment ?', breakdown: '' },
+          { rule: 'Ils / Elles', example: 'lisent', translation: 'Elles lisent des romans.', breakdown: '' },
+        ]
+      },
+      {
+        type: 'grammar',
+        title: 'Écrire — to write',
+        rules: [
+          { rule: 'Je / J\'', example: 'écris', translation: 'J\'écris une lettre.', breakdown: 'je → j\' before vowel (élision)' },
+          { rule: 'Tu', example: 'écris', translation: 'Tu écris bien.', breakdown: '' },
+          { rule: 'Il / Elle / On', example: 'écrit', translation: 'Elle écrit un email.', breakdown: '' },
+          { rule: 'Nous', example: 'écrivons ⚠️', translation: 'Nous écrivons un rapport.', breakdown: 'Stem changes: écri- → écriv- in plural' },
+          { rule: 'Vous', example: 'écrivez ⚠️', translation: 'Vous écrivez en français ?', breakdown: '' },
+          { rule: 'Ils / Elles', example: 'écrivent ⚠️', translation: 'Ils écrivent chaque jour.', breakdown: '' },
+        ]
+      },
+      {
+        type: 'tips',
+        title: 'Memory tip — lire & écrire',
+        tips: [
+          'Lire is the simpler of the two: lis, lis, lit, lisons, lisez, lisent',
+          'Écrire changes stem: écri- (singular) → écriv- (plural)',
+          '"J\'écris" uses élision (j\') because écrire starts with a vowel',
+          'Related: décrire (to describe), inscrire (to register) — same pattern as écrire',
+        ]
+      },
+      {
+        type: 'tips',
+        title: 'Quick-reference summary of all 12 verbs',
+        tips: [
+          'vouloir: veux/veux/veut — voulons/voulez/veulent',
+          'pouvoir: peux/peux/peut — pouvons/pouvez/peuvent',
+          'devoir: dois/dois/doit — devons/devez/doivent',
+          'savoir: sais/sais/sait — savons/savez/savent',
+          'connaître: connais/connais/connaît — connaissons/connaissez/connaissent',
+          'voir: vois/vois/voit — voyons/voyez/voient',
+          'partir: pars/pars/part — partons/partez/partent',
+          'sortir: sors/sors/sort — sortons/sortez/sortent',
+          'dormir: dors/dors/dort — dormons/dormez/dorment',
+          'mettre: mets/mets/met — mettons/mettez/mettent',
+          'lire: lis/lis/lit — lisons/lisez/lisent',
+          'écrire: écris/écris/écrit — écrivons/écrivez/écrivent',
+        ]
+      }
+    ],
+    exercises: [
+      { type: 'multiple_choice', question: '"Ils ___ rester." (vouloir)', options: ['voulont', 'veulent', 'voulons', 'veut'], correct: 1, explanation: 'veulent — the ils/elles form of vouloir. The stem shifts back to veu- (NOT voul-). This is the most common error with vouloir.' },
+      { type: 'multiple_choice', question: 'Which sentence is correct for "I know Marie"?', options: ['Je sais Marie.', 'Je connais Marie.', 'Je vois Marie.', 'Je peux Marie.'], correct: 1, explanation: 'Use connaître for people and places: Je connais Marie. Savoir is for facts and skills, not people.' },
+      { type: 'multiple_choice', question: '"Nous ___ ensemble ce soir." (sortir)', options: ['sort', 'sortent', 'sortons', 'sortez'], correct: 2, explanation: 'Nous → sortons. Sortir restores full stem in plural: sor- + -tons = sortons.' },
+      { type: 'fill_blank', question: '"Tu ___ bien ?" (dormir)', options: ['dormez', 'dorment', 'dors', 'dort'], correct: 2, explanation: 'Tu → dors. Drop last 3 letters of dormir: dorm-ir → dor- + -s.' },
+      { type: 'multiple_choice', question: '"Ils ___ la table." (mettre)', options: ['mets', 'met', 'mettons', 'mettent'], correct: 3, explanation: 'Ils/Elles → mettent. Double-tt in all plural forms of mettre.' },
+      { type: 'multiple_choice', question: '"Vous ___ en français ?" (écrire)', options: ['écrivons', 'écrivez', 'écrits', 'écrivent'], correct: 1, explanation: 'Vous → écrivez. The stem changes to écriv- in all plural forms of écrire.' },
+      { type: 'translate', question: 'Translate: "She must leave at 8."', answer: 'Elle doit partir à 8h.', alternatives: ['Elle doit partir à huit heures.'], explanation: 'devoir + infinitive = must. Elle doit (she must) + partir (infinitive = to leave) + à 8h.' },
+      { type: 'multiple_choice', question: '"Je ___ nager." Choose the right verb for "I know how to swim."', options: ['Je connais nager.', 'Je vois nager.', 'Je sais nager.', 'Je peux nager.'], correct: 2, explanation: 'Savoir + infinitive = to know how to do something. Je sais nager. (Connaître is never followed directly by an infinitive.)' },
+    ],
+    quiz: [
+      { question: 'What is the ils/elles form of pouvoir?', options: ['pouvont', 'peuvont', 'peuvent', 'pouvent'], correct: 2, explanation: 'peuvent — same irregular ils pattern as veulent (vouloir). Stem shifts to peu-.' },
+      { question: '"Il connaît" has a circumflex (î). Why?', options: ['All -aître verbs use î in the il/elle form', 'It changes the pronunciation to a long vowel', 'It\'s only for feminine subjects', 'It replaces the silent s from connaiss-'], correct: 0, explanation: 'Verbs ending in -aître (connaître, paraître) use î in the il/elle form: connaît, paraît. It\'s a spelling rule.' },
+      { question: 'Which sentence is correct for "I know how to drive"?', options: ['Je connais conduire.', 'Je sais conduire.', 'Je peux conduire.', 'Je dois conduire.'], correct: 1, explanation: 'Savoir + infinitive = to know how to. Je sais conduire. (Je peux conduire means "I can drive" — possible but different meaning.)' },
+      { question: 'What is the nous form of partir?', options: ['partissons', 'partons', 'partent', 'partisons'], correct: 1, explanation: 'partons — full stem par- restored in plural + -tons. Partir drops last 3 letters only for singular.' },
+      { question: '"Nous lisons" comes from which verb?', options: ['lire', 'écrire', 'voir', 'mettre'], correct: 0, explanation: 'lisons = nous form of lire (to read). The stem is lis-.' },
+    ]
+  })
+},
+
   ]; // end lessons array
 
   // ── Vocab cards (from notes) ──────────────────────────────────────────────
@@ -1012,6 +1282,19 @@ function seedIfEmpty() {
     { level:'A1', word:'avoir faim', word_type:'expression', translation:'to be hungry', example_fr:'J\'ai faim.', example_en:'I am hungry.' },
     { level:'A1', word:'avoir soif', word_type:'expression', translation:'to be thirsty', example_fr:'Tu as soif ?', example_en:'Are you thirsty?' },
     { level:'A1', word:'avoir raison', word_type:'expression', translation:'to be right', example_fr:'Vous avez raison.', example_en:'You are right.' },
+    // Lesson 14 verbs
+    { level:'A1', word:'vouloir', word_type:'verb (irreg)', translation:'to want', example_fr:'Je veux un café.', example_en:'I want a coffee.' },
+    { level:'A1', word:'pouvoir', word_type:'verb (irreg)', translation:'can / to be able to', example_fr:'Tu peux m\'aider ?', example_en:'Can you help me?' },
+    { level:'A1', word:'devoir', word_type:'verb (irreg)', translation:'must / to have to', example_fr:'Je dois partir.', example_en:'I must leave.' },
+    { level:'A1', word:'savoir', word_type:'verb (irreg)', translation:'to know (fact/skill)', example_fr:'Je sais nager.', example_en:'I know how to swim.' },
+    { level:'A1', word:'voir', word_type:'verb (irreg)', translation:'to see', example_fr:'Je vois la tour Eiffel.', example_en:'I see the Eiffel Tower.' },
+    { level:'A1', word:'partir', word_type:'verb (-ir irreg)', translation:'to leave / go away', example_fr:'Le train part à midi.', example_en:'The train leaves at noon.' },
+    { level:'A1', word:'sortir', word_type:'verb (-ir irreg)', translation:'to go out', example_fr:'Je sors ce soir.', example_en:'I am going out tonight.' },
+    { level:'A1', word:'dormir', word_type:'verb (-ir irreg)', translation:'to sleep', example_fr:'Je dors huit heures par nuit.', example_en:'I sleep eight hours a night.' },
+    { level:'A1', word:'mettre', word_type:'verb (irreg)', translation:'to put / to place', example_fr:'Je mets mon manteau.', example_en:'I put on my coat.' },
+    { level:'A1', word:'lire', word_type:'verb (irreg)', translation:'to read', example_fr:'Je lis un roman.', example_en:'I am reading a novel.' },
+    { level:'A1', word:'écrire', word_type:'verb (irreg)', translation:'to write', example_fr:'J\'écris une lettre.', example_en:'I am writing a letter.' },
+    { level:'A1', word:'connaître', word_type:'verb (irreg)', translation:'to know (person/place)', example_fr:'Je connais bien Paris.', example_en:'I know Paris well.' },
   ];
 
   lessons.forEach(l => DB.insert('lessons', l));
