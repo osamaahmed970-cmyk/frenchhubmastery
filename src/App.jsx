@@ -16,6 +16,49 @@ async function api(path, opts = {}) {
   return data;
 }
 
+// ── Mobile detection hook ─────────────────────────────────────────────────────
+function useIsMobile() {
+  const [m, setM] = useState(() => window.innerWidth < 640);
+  useEffect(() => {
+    const h = () => setM(window.innerWidth < 640);
+    window.addEventListener('resize', h);
+    return () => window.removeEventListener('resize', h);
+  }, []);
+  return m;
+}
+
+// Injects one-time global CSS for things inline styles can't do
+function GlobalCSS() {
+  useEffect(() => {
+    const id = 'fmh-global';
+    if (document.getElementById(id)) return;
+    const s = document.createElement('style');
+    s.id = id;
+    s.textContent = `
+      *, *::before, *::after { box-sizing: border-box; }
+      body { -webkit-text-size-adjust: 100%; }
+      /* Prevent iOS from zooming into small inputs */
+      @media (max-width: 639px) {
+        input, textarea, select { font-size: 16px !important; }
+      }
+      /* Horizontally scrollable tables / rule sections */
+      .fmh-scroll-x { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      /* Conjugation table rows wrap gracefully */
+      .fmh-rule-row { display: flex; align-items: flex-start; gap: 12px; flex-wrap: wrap; }
+      .fmh-rule-key { min-width: 140px; font-size: 13px; font-weight: 600; }
+      @media (max-width: 639px) {
+        .fmh-rule-key { min-width: 0; width: 100%; }
+      }
+      /* Scrollable filter pill rows */
+      .fmh-pill-row { display: flex; gap: 3px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+      .fmh-pill-row::-webkit-scrollbar { display: none; }
+      .fmh-pill-row button { white-space: nowrap; flex-shrink: 0; }
+    `;
+    document.head.appendChild(s);
+  }, []);
+  return null;
+}
+
 // ── LOGO MARK SVG ─────────────────────────────────────────────────────────────
 function LogoMark({ size = 40 }) {
   return (
@@ -247,6 +290,7 @@ function LoginScreen({ onLogin }) {
   const [form, setForm] = useState({ name: '', email: '', password: '', city: 'Oakville' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const isMobile = useIsMobile();
 
   async function submit(e) {
     e.preventDefault();
@@ -264,12 +308,12 @@ function LoginScreen({ onLogin }) {
     }
   }
 
-  const inp = { display: 'block', width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 10, padding: '13px 16px', color: '#fff', fontSize: 14, marginBottom: 10, boxSizing: 'border-box', fontFamily: 'inherit', outline: 'none' };
+  const inp = { display: 'block', width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 10, padding: '14px 16px', color: '#fff', fontSize: 16, marginBottom: 12, boxSizing: 'border-box', fontFamily: 'inherit', outline: 'none', minHeight: 48 };
 
   return (
-    <div style={{ minHeight: '100vh', background: '#0f0e17', display: 'flex', fontFamily: 'system-ui, sans-serif' }}>
-      {/* Left panel - branding */}
-      <div style={{ flex: 1, background: 'linear-gradient(135deg, #1a1929 0%, #0f0e17 100%)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: 48, borderRight: '1px solid rgba(255,255,255,0.06)' }}>
+    <div style={{ minHeight: '100vh', background: '#0f0e17', display: 'flex', flexDirection: isMobile ? 'column' : 'row', fontFamily: 'system-ui, sans-serif' }}>
+      {/* Left panel - branding (hidden on mobile) */}
+      <div style={{ flex: 1, background: 'linear-gradient(135deg, #1a1929 0%, #0f0e17 100%)', display: isMobile ? 'none' : 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: 48, borderRight: '1px solid rgba(255,255,255,0.06)' }}>
         <Logo size="lg" />
         <div style={{ marginTop: 40, maxWidth: 340 }}>
           <div style={{ fontSize: 28, fontWeight: 700, color: '#fff', lineHeight: 1.3, marginBottom: 16 }}>
@@ -300,7 +344,7 @@ function LoginScreen({ onLogin }) {
       </div>
 
       {/* Right panel - form */}
-      <div style={{ width: 420, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: 48 }}>
+      <div style={{ width: isMobile ? '100%' : 420, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: isMobile ? 'flex-start' : 'center', padding: isMobile ? '32px 24px' : 48, minHeight: isMobile ? '100vh' : 'auto' }}>
         <div style={{ width: '100%', maxWidth: 340 }}>
           <div style={{ marginBottom: 28 }}>
             <div style={{ fontSize: 22, fontWeight: 700, color: '#fff', marginBottom: 6 }}>
@@ -331,7 +375,7 @@ function LoginScreen({ onLogin }) {
 
             {error && <div style={{ color: '#f87171', fontSize: 13, marginBottom: 12, padding: '10px 14px', background: 'rgba(248,113,113,0.1)', borderRadius: 8 }}>{error}</div>}
 
-            <button type="submit" disabled={loading} style={{ width: '100%', padding: '14px 0', background: 'linear-gradient(135deg, #6c63ff, #5b52f0)', color: '#fff', border: 'none', borderRadius: 10, fontSize: 15, fontWeight: 600, cursor: 'pointer', opacity: loading ? 0.7 : 1, fontFamily: 'inherit', marginTop: 4 }}>
+            <button type="submit" disabled={loading} style={{ width: '100%', padding: '16px 0', background: 'linear-gradient(135deg, #6c63ff, #5b52f0)', color: '#fff', border: 'none', borderRadius: 10, fontSize: 16, fontWeight: 600, cursor: 'pointer', opacity: loading ? 0.7 : 1, fontFamily: 'inherit', marginTop: 4, minHeight: 52 }}>
               {loading ? 'Please wait...' : mode === 'login' ? 'Sign In →' : 'Create Account →'}
             </button>
           </form>
@@ -392,7 +436,12 @@ export default function App() {
     return <WelcomeScreen user={user} profile={profile} onContinue={() => setShowWelcome(false)} />;
   }
 
-  return <Hub user={user} onLogout={() => { localStorage.removeItem('fmh_token'); setUser(null); }} />;
+  return (
+    <>
+      <GlobalCSS />
+      <Hub user={user} onLogout={() => { localStorage.removeItem('fmh_token'); setUser(null); }} />
+    </>
+  );
 }
 
 // ── TOOLTIP TOUR ──────────────────────────────────────────────────────────────
@@ -537,7 +586,7 @@ function Tour({ onClose }) {
       top: '50%',
       left: '50%',
       transform: 'translate(-50%, -50%)',
-      width: 380,
+      width: Math.min(380, window.innerWidth - 32),
       zIndex: 10001,
     };
   }
@@ -618,15 +667,45 @@ function Tour({ onClose }) {
 }
 
 
+// ── Bottom Navigation (mobile only) ──────────────────────────────────────────
+function BottomNav({ section, setSection, V }) {
+  const items = [
+    ['dashboard', '🏠', 'Home'],
+    ['lessons', '📖', 'Lessons'],
+    ['vocab', '🃏', 'Vocab'],
+    ['grammar', '✏️', 'Drills'],
+    ['progress', '📈', 'Progress'],
+  ];
+  return (
+    <div style={{
+      position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 200,
+      background: V.bg2, borderTop: `1px solid ${V.border}`,
+      display: 'flex', height: 60,
+      paddingBottom: 'env(safe-area-inset-bottom)',
+    }}>
+      {items.map(([id, icon, label]) => (
+        <button key={id} onClick={() => setSection(id)} style={{
+          flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+          background: 'none', border: 'none', cursor: 'pointer', gap: 2, padding: '6px 2px',
+          color: section === id ? V.accent : V.text3,
+          borderTop: `2px solid ${section === id ? V.accent : 'transparent'}`,
+          fontFamily: 'inherit',
+        }}>
+          <span style={{ fontSize: 20, lineHeight: 1 }}>{icon}</span>
+          <span style={{ fontSize: 9, fontWeight: section === id ? 700 : 400, letterSpacing: '0.3px' }}>{label}</span>
+        </button>
+      ))}
+    </div>
+  );
+}
+
 // ── Hub: full app loaded after login ─────────────────────────────────────────
 function Hub({ user, onLogout }) {
   const [section, setSection] = useState('dashboard');
   const [isLight, setIsLight] = useState(false);
   const [isEN, setIsEN] = useState(false);
-  const [showTour, setShowTour] = useState(() => {
-    // Auto-show for new users who haven't seen the tour
-    return !localStorage.getItem('fmh_tour_done');
-  });
+  const [showTour, setShowTour] = useState(() => !localStorage.getItem('fmh_tour_done'));
+  const isMobile = useIsMobile();
 
   // Inject the main CSS variables into body
   useEffect(() => {
@@ -655,8 +734,8 @@ function Hub({ user, onLogout }) {
 
   return (
     <div style={{ display: 'flex', height: '100vh', overflow: 'hidden', background: V.bg, color: V.text }}>
-      {/* Sidebar */}
-      <div style={{ width: 220, background: V.bg2, borderRight: `1px solid ${V.border}`, display: 'flex', flexDirection: 'column', flexShrink: 0, overflowY: 'auto' }}>
+      {/* Sidebar - hidden on mobile (replaced by BottomNav) */}
+      <div style={{ width: 220, background: V.bg2, borderRight: `1px solid ${V.border}`, display: isMobile ? 'none' : 'flex', flexDirection: 'column', flexShrink: 0, overflowY: 'auto' }}>
         <div style={{ padding: '16px 18px 14px', borderBottom: `1px solid ${V.border}` }}>
           <Logo size="sm" />
           <div style={{ marginTop: 10, display: 'inline-flex', alignItems: 'center', gap: 5, background: 'linear-gradient(135deg,#6c63ff,#a78bfa)', color: '#fff', fontSize: 10, fontWeight: 700, padding: '4px 10px', borderRadius: 20, letterSpacing: '0.5px' }}>⬡ A1 → B2 Journey</div>
@@ -728,9 +807,12 @@ function Hub({ user, onLogout }) {
       </div>
 
       {/* Main content */}
-      <div style={{ flex: 1, overflowY: 'auto', background: V.bg }}>
+      <div style={{ flex: 1, overflowY: 'auto', background: V.bg, paddingBottom: isMobile ? 64 : 0 }}>
         <SectionContent section={section} user={user} V={V} isEN={isEN} onNavigate={setSection} />
       </div>
+
+      {/* Bottom nav - mobile only */}
+      {isMobile && <BottomNav section={section} setSection={setSection} V={V} />}
 
       {/* Tour overlay */}
       {showTour && <Tour onClose={() => setShowTour(false)} />}
@@ -747,10 +829,11 @@ function SectionContent({ section, user, V, isEN, onNavigate }) {
 
 // ── Shared UI ─────────────────────────────────────────────────────────────────
 function PageHeader({ title, sub, V }) {
+  const isMobile = useIsMobile();
   return (
-    <div style={{ marginBottom: 24 }}>
-      <div style={{ fontSize: 26, fontWeight: 700, color: V.text, marginBottom: 4, fontFamily: 'Georgia, serif' }}>{title}</div>
-      {sub && <div style={{ fontSize: 13, color: V.text2 }}>{sub}</div>}
+    <div style={{ marginBottom: isMobile ? 16 : 24 }}>
+      <div style={{ fontSize: isMobile ? 20 : 26, fontWeight: 700, color: V.text, marginBottom: 4, fontFamily: 'Georgia, serif', lineHeight: 1.2 }}>{title}</div>
+      {sub && <div style={{ fontSize: isMobile ? 12 : 13, color: V.text2, lineHeight: 1.4 }}>{sub}</div>}
     </div>
   );
 }
@@ -798,6 +881,7 @@ function Btn({ children, onClick, primary, small, V, style = {} }) {
 // ── Dashboard ─────────────────────────────────────────────────────────────────
 function Dashboard({ user, V, onNavigate }) {
   const [data, setData] = useState(null);
+  const isMobile = useIsMobile();
   const [done, setDone] = useState(() => {
     try { return JSON.parse(localStorage.getItem('fmh_daily_done') || '[]'); } catch { return []; }
   });
@@ -829,29 +913,29 @@ function Dashboard({ user, V, onNavigate }) {
   const totalTasks = todayTasks.length;
 
   return (
-    <div style={{ padding: '28px 32px' }}>
+    <div style={{ padding: isMobile ? '16px' : '28px 32px' }}>
       <PageHeader title={`Bonjour, ${user.name?.split(' ')[0]}! 👋`} sub={`${new Date().toLocaleDateString('fr-CA', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} · ${user.city || 'Oakville'}, Ontario`} V={V} />
 
-      <div style={{ background: 'linear-gradient(135deg, rgba(108,99,255,0.15), rgba(45,212,191,0.1))', border: '1px solid rgba(108,99,255,0.25)', borderRadius: 12, padding: '16px 20px', marginBottom: 20, display: 'flex', alignItems: 'center', gap: 16 }}>
-        <span style={{ fontSize: 32 }}>🇨🇦</span>
-        <div style={{ flex: 1 }}>
-          <div style={{ fontSize: 14, fontWeight: 600, color: V.text }}>Target: B2 {user.target_exam || 'TEF'}/TCF - Canadian Permanent Residency</div>
-          <div style={{ fontSize: 12, color: V.text2, marginTop: 2 }}>Current: A1 → Next milestone: A2 (est. September 2026)</div>
+      <div style={{ background: 'linear-gradient(135deg, rgba(108,99,255,0.15), rgba(45,212,191,0.1))', border: '1px solid rgba(108,99,255,0.25)', borderRadius: 12, padding: isMobile ? '12px 14px' : '16px 20px', marginBottom: 16, display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
+        <span style={{ fontSize: 28 }}>🇨🇦</span>
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <div style={{ fontSize: isMobile ? 12 : 14, fontWeight: 600, color: V.text }}>Target: B2 {user.target_exam || 'TEF'}/TCF - Canadian PR</div>
+          <div style={{ fontSize: 11, color: V.text2, marginTop: 2 }}>Current: A1 → Next milestone: A2 (est. Sep 2026)</div>
         </div>
-        <div style={{ textAlign: 'right' }}>
-          <div style={{ fontSize: 22, fontWeight: 700, color: V.accent, fontFamily: 'monospace' }}>{daysLeft}</div>
-          <div style={{ fontSize: 10, color: V.text3, textTransform: 'uppercase', letterSpacing: '0.8px' }}>Days to Goal</div>
+        <div style={{ textAlign: 'right', flexShrink: 0 }}>
+          <div style={{ fontSize: 20, fontWeight: 700, color: V.accent, fontFamily: 'monospace' }}>{daysLeft}</div>
+          <div style={{ fontSize: 9, color: V.text3, textTransform: 'uppercase', letterSpacing: '0.8px' }}>Days to Goal</div>
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 12, marginBottom: 16 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr 1fr' : 'repeat(4,1fr)', gap: isMobile ? 8 : 12, marginBottom: 14 }}>
         <StatCard label="Streak" value={`🔥 ${data?.streak?.current ?? 0}`} sub="Days in a row" V={V} />
-        <StatCard label="Hours Logged" value={`${data?.totalHours ?? 0}h`} sub={`+${data?.totalXP ?? 0} XP total`} V={V} />
+        <StatCard label="Hours Logged" value={`${data?.totalHours ?? 0}h`} sub={`+${data?.totalXP ?? 0} XP`} V={V} />
         <StatCard label="Words Learned" value={data?.wordsMastered ?? 0} sub="Mastered (SM-2)" V={V} />
         <StatCard label="Drill Accuracy" value={`${data?.drillAccuracy ?? 0}%`} sub="Last 50 drills" color={V.green} V={V} />
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: 14 }}>
         <Card V={V}>
           <CardTitle V={V}>CEFR Progress</CardTitle>
           <div style={{ display: 'flex', gap: 8, marginBottom: 14 }}>
@@ -903,6 +987,7 @@ function Dashboard({ user, V, onNavigate }) {
 function Lessons({ V }) {
   const [lessons, setLessons] = useState([]);
   const [filter, setFilter] = useState('ALL');
+  const isMobile = useIsMobile();
   const [openLesson, setOpenLesson] = useState(null);
   const [lessonData, setLessonData] = useState(null);
   const [tab, setTab] = useState('learn');
@@ -980,16 +1065,16 @@ function Lessons({ V }) {
 
   if (openLesson && lessonData && content2) {
     return (
-      <div style={{ padding: '24px 32px' }}>
-        <button onClick={() => { setOpenLesson(null); setLessonData(null); }} style={{ background: 'none', border: `1px solid ${V.border}`, borderRadius: 8, padding: '7px 14px', color: V.text2, cursor: 'pointer', fontSize: 13, marginBottom: 20, fontFamily: 'inherit' }}>← Back to Lessons</button>
+      <div style={{ padding: isMobile ? '14px' : '24px 32px' }}>
+        <button onClick={() => { setOpenLesson(null); setLessonData(null); }} style={{ background: 'none', border: `1px solid ${V.border}`, borderRadius: 8, padding: '10px 14px', color: V.text2, cursor: 'pointer', fontSize: 13, marginBottom: 16, fontFamily: 'inherit', minHeight: 44 }}>← Back to Lessons</button>
         <div style={{ marginBottom: 24 }}>
           <span style={{ fontSize: 9, fontWeight: 700, textTransform: 'uppercase', padding: '3px 8px', borderRadius: 4, background: `${LEVEL_COLOR[lessonData.level]}22`, color: LEVEL_COLOR[lessonData.level], letterSpacing: '1px' }}>{lessonData.level}</span>
           <div style={{ fontSize: 26, fontWeight: 700, color: V.text, fontFamily: 'Georgia, serif', marginTop: 8 }}>{lessonData.title}</div>
           <div style={{ fontSize: 14, color: V.text2, marginTop: 4 }}>{lessonData.description}</div>
         </div>
-        <div style={{ display: 'flex', gap: 3, background: V.bg3, borderRadius: 8, padding: 3, marginBottom: 24, width: 'fit-content' }}>
+        <div className="fmh-pill-row" style={{ background: V.bg3, borderRadius: 8, padding: 3, marginBottom: 20, width: isMobile ? '100%' : 'fit-content' }}>
           {[['learn', '📖 Learn'], ['exercises', '✏️ Exercises'], ['quiz', '🎯 Quiz']].map(([id, label]) => (
-            <button key={id} onClick={() => setTab(id)} style={{ padding: '8px 18px', borderRadius: 6, fontSize: 13, cursor: 'pointer', border: 'none', background: tab === id ? V.surface : 'transparent', color: tab === id ? V.text : V.text2, fontWeight: tab === id ? 500 : 400, fontFamily: 'inherit' }}>{label}</button>
+            <button key={id} onClick={() => setTab(id)} style={{ flex: isMobile ? 1 : 'none', padding: '10px 18px', borderRadius: 6, fontSize: 13, cursor: 'pointer', border: 'none', background: tab === id ? V.surface : 'transparent', color: tab === id ? V.text : V.text2, fontWeight: tab === id ? 500 : 400, fontFamily: 'inherit', minHeight: 44 }}>{label}</button>
           ))}
         </div>
 
@@ -1006,8 +1091,8 @@ function Lessons({ V }) {
                 {sec.explanation && <div style={{ background: V.bg3, borderRadius: 8, padding: 12, marginBottom: 14, fontSize: 13, color: V.text2, lineHeight: 1.7 }}>{sec.explanation}</div>}
                 {sec.rules?.map((r, ri) => (
                   <div key={ri} style={{ borderBottom: `0.5px solid ${V.border}`, paddingBottom: 14, marginBottom: 14 }}>
-                    <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12, flexWrap: 'wrap' }}>
-                      <div style={{ minWidth: 200, fontSize: 13, fontWeight: 600, color: V.accent }}>{r.rule}</div>
+                    <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12, flexWrap: 'wrap', flexDirection: isMobile ? 'column' : 'row' }}>
+                      <div style={{ minWidth: isMobile ? 0 : 200, width: isMobile ? '100%' : 'auto', fontSize: 13, fontWeight: 600, color: V.accent }}>{r.rule}</div>
                       <div style={{ flex: 1 }}>
                         {r.example && <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
                           <span style={{ fontFamily: 'Georgia, serif', fontSize: 15, color: V.text }}>{r.example}</span>
@@ -1020,7 +1105,7 @@ function Lessons({ V }) {
                   </div>
                 ))}
                 {sec.items?.map((item, ii) => (
-                  <div key={ii} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr auto', gap: 10, alignItems: 'center', borderBottom: `0.5px solid ${V.border}`, padding: '10px 0' }}>
+                  <div key={ii} style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr 1fr' : '1fr 1fr auto', gap: isMobile ? 6 : 10, alignItems: 'center', borderBottom: `0.5px solid ${V.border}`, padding: '10px 0' }}>
                     <div>
                       <div style={{ fontSize: 15, fontWeight: 600, color: V.text, fontFamily: 'Georgia, serif' }}>{item.fr}</div>
                       {item.pron && <div style={{ fontSize: 11, color: V.text3, fontStyle: 'italic', marginTop: 2 }}>/{item.pron}/</div>}
@@ -1029,7 +1114,7 @@ function Lessons({ V }) {
                       <div style={{ fontSize: 13, color: V.text2 }}>{item.en}</div>
                       {item.note && <div style={{ fontSize: 11, color: V.text3, marginTop: 2 }}>{item.note}</div>}
                     </div>
-                    <button onClick={() => speak(item.fr.split('/')[0].split('→')[0].trim())} style={{ background: V.bg3, border: 'none', borderRadius: 6, padding: '5px 10px', fontSize: 11, cursor: 'pointer', color: V.text2, fontFamily: 'inherit' }}>▶ Play</button>
+                    {!isMobile && <button onClick={() => speak(item.fr.split('/')[0].split('→')[0].trim())} style={{ background: V.bg3, border: 'none', borderRadius: 6, padding: '5px 10px', fontSize: 11, cursor: 'pointer', color: V.text2, fontFamily: 'inherit' }}>▶ Play</button>}
                   </div>
                 ))}
                 {sec.lines?.map((line, li) => (
@@ -1084,14 +1169,14 @@ function Lessons({ V }) {
                     {chosen === null && <button onClick={checkTranslate} style={{ marginTop: 10, padding: '10px 20px', background: V.accent, color: '#fff', border: 'none', borderRadius: 8, fontSize: 13, cursor: 'pointer', fontFamily: 'inherit' }}>Check Answer</button>}
                   </div>
                 ) : (
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: 10 }}>
                     {ex.options.map((opt, i) => {
                       let bg = V.surface, color = V.text, border = V.border;
                       if (chosen !== null) {
                         if (i === ex.correct) { bg = 'rgba(74,222,128,0.1)'; color = V.green; border = V.green; }
                         else if (i === chosen && !exResult) { bg = 'rgba(248,113,113,0.1)'; color = V.red; border = V.red; }
                       }
-                      return <button key={i} onClick={() => checkAnswer(i)} style={{ padding: '12px 16px', background: bg, border: `1px solid ${border}`, borderRadius: 8, fontSize: 14, cursor: chosen !== null ? 'default' : 'pointer', textAlign: 'left', color, fontFamily: 'inherit', lineHeight: 1.4 }}>{opt}</button>;
+                      return <button key={i} onClick={() => checkAnswer(i)} style={{ padding: '14px 16px', background: bg, border: `1px solid ${border}`, borderRadius: 8, fontSize: 14, cursor: chosen !== null ? 'default' : 'pointer', textAlign: 'left', color, fontFamily: 'inherit', lineHeight: 1.4, minHeight: 48 }}>{opt}</button>;
                     })}
                   </div>
                 )}
@@ -1127,14 +1212,14 @@ function Lessons({ V }) {
                   </div>
                   <div style={{ background: V.surface, border: `1px solid ${V.border}`, borderRadius: 12, padding: 24 }}>
                     <div style={{ fontSize: 16, color: V.text, marginBottom: 20, lineHeight: 1.6, fontFamily: 'Georgia, serif' }}>{q.question}</div>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: 10 }}>
                       {q.options.map((opt, i) => {
                         let bg = V.surface, color = V.text, border = V.border;
                         if (quizChosen !== null) {
                           if (i === q.correct) { bg = 'rgba(74,222,128,0.1)'; color = V.green; border = V.green; }
                           else if (i === quizChosen) { bg = 'rgba(248,113,113,0.1)'; color = V.red; border = V.red; }
                         }
-                        return <button key={i} onClick={() => answerQuiz(i)} style={{ padding: '12px 16px', background: bg, border: `1px solid ${border}`, borderRadius: 8, fontSize: 14, cursor: quizChosen !== null ? 'default' : 'pointer', textAlign: 'left', color, fontFamily: 'inherit' }}>{opt}</button>;
+                        return <button key={i} onClick={() => answerQuiz(i)} style={{ padding: '14px 16px', background: bg, border: `1px solid ${border}`, borderRadius: 8, fontSize: 14, cursor: quizChosen !== null ? 'default' : 'pointer', textAlign: 'left', color, fontFamily: 'inherit', minHeight: 48 }}>{opt}</button>;
                       })}
                     </div>
                     {quizChosen !== null && (
@@ -1167,14 +1252,14 @@ function Lessons({ V }) {
   }
 
   return (
-    <div style={{ padding: '28px 32px' }}>
+    <div style={{ padding: isMobile ? '16px' : '28px 32px' }}>
       <PageHeader title="All Lessons" sub={`${lessons.length} progressive lessons · A1 to B2 · Click any lesson to begin`} V={V} />
-      <div style={{ display: 'flex', gap: 3, background: V.bg3, borderRadius: 8, padding: 3, marginBottom: 24, width: 'fit-content' }}>
+      <div className="fmh-pill-row" style={{ background: V.bg3, borderRadius: 8, padding: 3, marginBottom: 20 }}>
         {['ALL','A1','A2','B1','B2'].map(lvl => (
-          <button key={lvl} onClick={() => setFilter(lvl)} style={{ padding: '7px 16px', borderRadius: 6, fontSize: 13, cursor: 'pointer', border: 'none', background: filter === lvl ? V.surface : 'transparent', color: filter === lvl ? V.text : V.text2, fontWeight: filter === lvl ? 500 : 400, fontFamily: 'inherit' }}>{lvl}</button>
+          <button key={lvl} onClick={() => setFilter(lvl)} style={{ padding: '10px 16px', borderRadius: 6, fontSize: 13, cursor: 'pointer', border: 'none', background: filter === lvl ? V.surface : 'transparent', color: filter === lvl ? V.text : V.text2, fontWeight: filter === lvl ? 500 : 400, fontFamily: 'inherit', minHeight: 44 }}>{lvl}</button>
         ))}
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 12 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3,1fr)', gap: isMobile ? 8 : 12 }}>
         {filtered.map(l => (
           <div key={l.id} onClick={() => openLes(l.id)}
             onMouseEnter={e => e.currentTarget.style.borderColor = V.accent}
@@ -1201,6 +1286,7 @@ function Vocab({ V }) {
   const [stats, setStats] = useState({});
   const [idx, setIdx] = useState(0);
   const [flipped, setFlipped] = useState(false);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     api('/vocab/due').then(d => setCards(d.cards || []));
@@ -1218,7 +1304,7 @@ function Vocab({ V }) {
   const done = idx >= cards.length;
 
   return (
-    <div style={{ padding: '28px 32px' }}>
+    <div style={{ padding: isMobile ? '16px' : '28px 32px' }}>
       <PageHeader title="Vocabulary Flashcards" sub="Anki-style spaced repetition · SM-2 algorithm" V={V} />
 
       <div style={{ display: 'flex', gap: 12, marginBottom: 24, justifyContent: 'center' }}>
@@ -1256,7 +1342,7 @@ function Vocab({ V }) {
 
           <div style={{ display: 'flex', gap: 12, width: '100%', maxWidth: 480 }}>
             {[['😓 Hard', 'hard', 'rgba(248,113,113,0.15)', V.red], ['😐 Okay', 'okay', 'rgba(251,191,36,0.15)', V.gold], ['😄 Easy', 'easy', 'rgba(74,222,128,0.15)', V.green]].map(([label, r, bg, c]) => (
-              <button key={r} onClick={() => rate(r)} style={{ flex: 1, padding: '10px 0', background: bg, color: c, border: `1px solid ${c}33`, borderRadius: 8, fontSize: 13, cursor: 'pointer', fontFamily: 'inherit', fontWeight: 500 }}>{label}</button>
+              <button key={r} onClick={() => rate(r)} style={{ flex: 1, padding: isMobile ? '14px 0' : '10px 0', background: bg, color: c, border: `1px solid ${c}33`, borderRadius: 8, fontSize: isMobile ? 14 : 13, cursor: 'pointer', fontFamily: 'inherit', fontWeight: 500, minHeight: 52 }}>{label}</button>
             ))}
           </div>
           <div style={{ fontSize: 12, color: V.text3 }}>Card {Math.min(idx + 1, cards.length)} of {cards.length}</div>
@@ -1271,6 +1357,7 @@ function Vocab({ V }) {
 // ── Grammar ───────────────────────────────────────────────────────────────────
 function Grammar({ V }) {
   const [drills, setDrills] = useState([]);
+  const isMobile = useIsMobile();
   const [idx, setIdx] = useState(0);
   const [chosen, setChosen] = useState(null);
   const [result, setResult] = useState(null);
@@ -1297,23 +1384,23 @@ function Grammar({ V }) {
   const options = drill?.options ? JSON.parse(drill.options) : [];
 
   return (
-    <div style={{ padding: '28px 32px' }}>
+    <div style={{ padding: isMobile ? '16px' : '28px 32px' }}>
       <PageHeader title="Grammar Drills" sub="Fill-in-the-blank · Explanations · Track your weak spots" V={V} />
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
-        <div style={{ display: 'flex', gap: 3, background: V.bg3, borderRadius: 8, padding: 3 }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, gap: 10, flexWrap: 'wrap' }}>
+        <div className="fmh-pill-row" style={{ background: V.bg3, borderRadius: 8, padding: 3, flex: 1 }}>
           {[['', 'All'], ['articles', 'Articles'], ['verbs', 'Être/Avoir'], ['pronouns', 'Pronouns'], ['negation', 'Negation'], ['past', 'Past'], ['future', 'Future']].map(([val, label]) => (
-            <button key={val} onClick={() => load(val)} style={{ padding: '6px 12px', borderRadius: 6, fontSize: 12, cursor: 'pointer', border: 'none', background: category === val ? V.surface : 'transparent', color: category === val ? V.text : V.text2, whiteSpace: 'nowrap' }}>{label}</button>
+            <button key={val} onClick={() => load(val)} style={{ padding: '8px 12px', borderRadius: 6, fontSize: 12, cursor: 'pointer', border: 'none', background: category === val ? V.surface : 'transparent', color: category === val ? V.text : V.text2, minHeight: 40 }}>{label}</button>
           ))}
         </div>
-        <div style={{ fontSize: 13, color: V.text2 }}>Score: <span style={{ color: V.green, fontWeight: 600 }}>{score.c}/{score.t}</span></div>
+        <div style={{ fontSize: 13, color: V.text2, flexShrink: 0 }}>Score: <span style={{ color: V.green, fontWeight: 600 }}>{score.c}/{score.t}</span></div>
       </div>
 
       {drill ? (
         <Card V={V}>
           <div style={{ fontSize: 11, color: V.text3, textTransform: 'uppercase', letterSpacing: '0.8px', marginBottom: 10 }}>Question {idx + 1} of {drills.length}</div>
-          <div style={{ fontSize: 18, color: V.text, marginBottom: 4 }}>{drill.question}</div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginTop: 16 }}>
+          <div style={{ fontSize: isMobile ? 16 : 18, color: V.text, marginBottom: 4, lineHeight: 1.5 }}>{drill.question}</div>
+          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: 8, marginTop: 16 }}>
             {options.map((opt, i) => {
               let bg = V.surface, color = V.text, border = V.border;
               if (chosen !== null) {
@@ -1321,7 +1408,7 @@ function Grammar({ V }) {
                 else if (i === chosen && !result?.is_correct) { bg = 'rgba(248,113,113,0.1)'; color = V.red; border = V.red; }
               }
               return (
-                <button key={i} onClick={() => choose(i)} style={{ padding: '10px 14px', background: bg, border: `1px solid ${border}`, borderRadius: 8, fontSize: 14, cursor: chosen !== null ? 'default' : 'pointer', textAlign: 'left', color, fontFamily: 'inherit' }}>{opt}</button>
+                <button key={i} onClick={() => choose(i)} style={{ padding: '14px', background: bg, border: `1px solid ${border}`, borderRadius: 8, fontSize: 14, cursor: chosen !== null ? 'default' : 'pointer', textAlign: 'left', color, fontFamily: 'inherit', minHeight: 48 }}>{opt}</button>
               );
             })}
           </div>
@@ -1353,6 +1440,7 @@ function Grammar({ V }) {
 // ── Reading ───────────────────────────────────────────────────────────────────
 function Reading({ V }) {
   const [level, setLevel] = useState('A1');
+  const isMobile = useIsMobile();
   const [passages, setPassages] = useState([]);
   const [current, setCurrent] = useState(0);
   const [answers, setAnswers] = useState({});
@@ -1396,7 +1484,7 @@ function Reading({ V }) {
   }
 
   return (
-    <div style={{ padding: '28px 32px' }}>
+    <div style={{ padding: isMobile ? '16px' : '28px 32px' }}>
       <PageHeader title="Reading Practice" sub="Oakville & Canadian context · A1 to B2 · 5 questions per passage" V={V} />
 
       <div style={{ display: 'flex', gap: 3, background: V.bg3, borderRadius: 8, padding: 3, marginBottom: 20, width: 'fit-content' }}>
@@ -1427,7 +1515,7 @@ function Reading({ V }) {
             {passage.questions.map((q, qi) => (
               <div key={qi} style={{ marginBottom: 20 }}>
                 <div style={{ fontSize: 14, color: V.text, marginBottom: 10, fontWeight: 500 }}>{qi + 1}. {q.q}</div>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+                <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: 8 }}>
                   {q.options.map((opt, oi) => {
                     let bg = V.surface, color = V.text, border = V.border;
                     if (submitted) {
@@ -1437,7 +1525,7 @@ function Reading({ V }) {
                       bg = 'rgba(108,99,255,0.1)'; border = V.accent; color = V.accent;
                     }
                     return (
-                      <button key={oi} onClick={() => answer(qi, oi)} style={{ padding: '10px 14px', background: bg, border: `1px solid ${border}`, borderRadius: 8, fontSize: 13, cursor: submitted ? 'default' : 'pointer', textAlign: 'left', color, fontFamily: 'inherit', lineHeight: 1.4 }}>{opt}</button>
+                      <button key={oi} onClick={() => answer(qi, oi)} style={{ padding: '12px 14px', background: bg, border: `1px solid ${border}`, borderRadius: 8, fontSize: 13, cursor: submitted ? 'default' : 'pointer', textAlign: 'left', color, fontFamily: 'inherit', lineHeight: 1.4, minHeight: 48 }}>{opt}</button>
                     );
                   })}
                 </div>
@@ -1469,6 +1557,7 @@ function Reading({ V }) {
 // ── Listening ─────────────────────────────────────────────────────────────────
 function Listening({ V }) {
   const [level, setLevel] = useState('A1');
+  const isMobile = useIsMobile();
   const [tracks, setTracks] = useState([]);
   const [current, setCurrent] = useState(0);
   const [showScript, setShowScript] = useState(false);
@@ -1513,7 +1602,7 @@ function Listening({ V }) {
   const score = track ? track.questions.filter((q, i) => answers[i] === q.correct).length : 0;
 
   return (
-    <div style={{ padding: '28px 32px' }}>
+    <div style={{ padding: isMobile ? '16px' : '28px 32px' }}>
       <PageHeader title="Listening Practice" sub="Free browser TTS · 5 questions per track · Script revealed after answering" V={V} />
 
       <div style={{ display: 'flex', gap: 3, background: V.bg3, borderRadius: 8, padding: 3, marginBottom: 20, width: 'fit-content' }}>
@@ -1559,14 +1648,14 @@ function Listening({ V }) {
             {track.questions.map((q, qi) => (
               <div key={qi} style={{ marginBottom: 18 }}>
                 <div style={{ fontSize: 14, color: V.text, marginBottom: 8, fontWeight: 500 }}>{qi + 1}. {q.q}</div>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+                <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: 8 }}>
                   {q.options.map((opt, oi) => {
                     let bg = V.surface, color = V.text, border = V.border;
                     if (submitted) {
                       if (oi === q.correct) { bg = 'rgba(74,222,128,0.1)'; color = V.green; border = V.green; }
                       else if (oi === answers[qi] && oi !== q.correct) { bg = 'rgba(248,113,113,0.1)'; color = V.red; border = V.red; }
                     } else if (answers[qi] === oi) { bg = 'rgba(108,99,255,0.1)'; border = V.accent; color = V.accent; }
-                    return <button key={oi} onClick={() => answer(qi, oi)} style={{ padding: '10px 12px', background: bg, border: `1px solid ${border}`, borderRadius: 8, fontSize: 13, cursor: submitted ? 'default' : 'pointer', textAlign: 'left', color, fontFamily: 'inherit' }}>{opt}</button>;
+                    return <button key={oi} onClick={() => answer(qi, oi)} style={{ padding: '12px', background: bg, border: `1px solid ${border}`, borderRadius: 8, fontSize: 13, cursor: submitted ? 'default' : 'pointer', textAlign: 'left', color, fontFamily: 'inherit', minHeight: 48 }}>{opt}</button>;
                   })}
                 </div>
               </div>
@@ -1589,6 +1678,7 @@ function Listening({ V }) {
 // ── Writing ───────────────────────────────────────────────────────────────────
 function Writing({ V }) {
   const [level, setLevel] = useState('A1');
+  const isMobile = useIsMobile();
   const [prompts, setPrompts] = useState([]);
   const [promptIdx, setPromptIdx] = useState(0);
   const [text, setText] = useState('');
@@ -1620,7 +1710,7 @@ function Writing({ V }) {
   }
 
   return (
-    <div style={{ padding: '28px 32px' }}>
+    <div style={{ padding: isMobile ? '16px' : '28px 32px' }}>
       <PageHeader title="Writing Practice" sub="10 prompts per level · Model answers · AI feedback available" V={V} />
 
       <div style={{ display: 'flex', gap: 3, background: V.bg3, borderRadius: 8, padding: 3, marginBottom: 16, width: 'fit-content' }}>
@@ -1645,13 +1735,13 @@ function Writing({ V }) {
 
       <textarea value={text} onChange={e => setText(e.target.value)} placeholder="Écrivez votre réponse ici... (Write your response here...)" style={{ width: '100%', background: V.bg3, border: `1px solid ${V.border}`, borderRadius: 8, padding: 14, fontFamily: 'inherit', fontSize: 14, color: V.text, resize: 'vertical', minHeight: 160, lineHeight: 1.6, boxSizing: 'border-box', outline: 'none' }} />
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 10, marginBottom: 16 }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: isMobile ? 'flex-start' : 'center', flexDirection: isMobile ? 'column' : 'row', gap: isMobile ? 10 : 0, marginTop: 10, marginBottom: 16 }}>
         <div style={{ fontSize: 12, color: prompt && wordCount < prompt.min_words ? V.red : V.green }}>
           {wordCount} words {prompt && `(target: ${prompt.min_words}-${prompt.max_words})`}
         </div>
-        <div style={{ display: 'flex', gap: 8 }}>
-          <button onClick={() => setShowModel(s => !s)} style={{ padding: '8px 14px', background: V.surface, border: `1px solid ${V.border}`, borderRadius: 8, fontSize: 12, cursor: 'pointer', color: V.text2, fontFamily: 'inherit' }}>{showModel ? 'Hide' : 'Show'} Model Answer</button>
-          <Btn primary onClick={getFeedback} V={V}>{loading ? '✦ Analyzing...' : '✦ Get AI Feedback'}</Btn>
+        <div style={{ display: 'flex', gap: 8, width: isMobile ? '100%' : 'auto' }}>
+          <button onClick={() => setShowModel(s => !s)} style={{ flex: isMobile ? 1 : 'none', padding: '10px 14px', background: V.surface, border: `1px solid ${V.border}`, borderRadius: 8, fontSize: 13, cursor: 'pointer', color: V.text2, fontFamily: 'inherit', minHeight: 44 }}>{showModel ? 'Hide' : 'Show'} Model Answer</button>
+          <Btn primary onClick={getFeedback} V={V} style={{ flex: isMobile ? 1 : 'none', minHeight: 44 }}>{loading ? '✦ Analyzing...' : '✦ Get AI Feedback'}</Btn>
         </div>
       </div>
 
@@ -1684,6 +1774,7 @@ function Writing({ V }) {
 // ── Speaking ──────────────────────────────────────────────────────────────────
 function Speaking({ V }) {
   const [level, setLevel] = useState('A1');
+  const isMobile = useIsMobile();
   const [prompts, setPrompts] = useState([]);
   const [promptIdx, setPromptIdx] = useState(0);
   const [recording, setRecording] = useState(false);
@@ -1728,7 +1819,7 @@ function Speaking({ V }) {
   }
 
   return (
-    <div style={{ padding: '28px 32px' }}>
+    <div style={{ padding: isMobile ? '16px' : '28px 32px' }}>
       <PageHeader title="Speaking Practice" sub="10 prompts per level · Model answers · TEF oral format" V={V} />
 
       <div style={{ display: 'flex', gap: 3, background: V.bg3, borderRadius: 8, padding: 3, marginBottom: 20, width: 'fit-content' }}>
@@ -1798,6 +1889,7 @@ function Speaking({ V }) {
 // ── Progress ──────────────────────────────────────────────────────────────────
 function Progress({ user, V }) {
   const [data, setData] = useState(null);
+  const isMobile = useIsMobile();
   const [weak, setWeak] = useState([]);
 
   useEffect(() => {
@@ -1806,16 +1898,16 @@ function Progress({ user, V }) {
   }, []);
 
   return (
-    <div style={{ padding: '28px 32px' }}>
+    <div style={{ padding: isMobile ? '16px' : '28px 32px' }}>
       <PageHeader title="Progress Dashboard" sub="CEFR tracking · Hours logged · Weak areas" V={V} />
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 12, marginBottom: 16 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr 1fr' : 'repeat(4,1fr)', gap: isMobile ? 8 : 12, marginBottom: 14 }}>
         <StatCard label="Current Level" value="A1" sub="Foundation" color={V.accent} V={V} />
         <StatCard label="Total Hours" value={`${data?.totalHours ?? 0}h`} sub="Since start" V={V} />
         <StatCard label="Lessons Done" value={`${data?.lessonsCompleted ?? 0}/${data?.lessonsTotal ?? 46}`} sub={`${Math.round(((data?.lessonsCompleted ?? 0) / (data?.lessonsTotal ?? 46)) * 100)}% complete`} V={V} />
         <StatCard label="XP Points" value={data?.totalXP ?? 0} sub="Total earned" color={V.gold} V={V} />
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: 14 }}>
         <Card V={V}>
           <CardTitle V={V}>Skill Breakdown</CardTitle>
           {weak.map(s => (
@@ -1857,6 +1949,7 @@ function Progress({ user, V }) {
 // ── Planner ───────────────────────────────────────────────────────────────────
 function Planner({ V }) {
   const [tasks, setTasks] = useState([]);
+  const isMobile = useIsMobile();
 
   useEffect(() => { api('/planner').then(setTasks).catch(() => {}); }, []);
 
@@ -1871,7 +1964,7 @@ function Planner({ V }) {
   function exportICS() { window.open('/api/calendar/export.ics', '_blank'); }
 
   return (
-    <div style={{ padding: '28px 32px' }}>
+    <div style={{ padding: isMobile ? '16px' : '28px 32px' }}>
       <PageHeader title="Daily Study Planner" sub="Personalized for your schedule · Export to Google Calendar" V={V} />
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
