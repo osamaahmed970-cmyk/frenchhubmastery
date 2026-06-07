@@ -46,14 +46,24 @@ app.get('/api/health', (req, res) => res.json({
   timestamp: new Date().toISOString()
 }));
 
-// ── Serve React build in production ──────────────────────────────────────────
-if (IS_PROD) {
-  const buildPath = path.join(__dirname, '..', 'dist');
-  app.use(express.static(buildPath));
-  // All non-API routes serve the React app
+// ── Serve React build ────────────────────────────────────────────────────────
+// Always serve dist/ when it exists — not gated on IS_PROD/NODE_ENV so it
+// works on Railway regardless of whether NODE_ENV is forwarded at runtime.
+const buildPath = path.join(__dirname, '..', 'dist');
+const indexHtml = path.join(buildPath, 'index.html');
+if (fs.existsSync(indexHtml)) {
+  app.use(express.static(buildPath, { index: false }));
+  app.get('*', (req, res) => {
+    if (req.path.startsWith('/api')) {
+      return res.status(404).json({ error: 'API route not found' });
+    }
+    res.sendFile(indexHtml);
+  });
+} else if (IS_PROD) {
+  // dist not found in production — surface the problem clearly
   app.get('*', (req, res) => {
     if (!req.path.startsWith('/api')) {
-      res.sendFile(path.join(buildPath, 'index.html'));
+      res.status(503).send('Frontend build not found. Run: npm run build');
     }
   });
 }
