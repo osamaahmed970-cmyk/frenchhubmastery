@@ -1,1230 +1,1022 @@
 // server/db/seed.js
-// FULL DETAILED LESSONS — A1 to B2
-// Each lesson has: theory, pronunciation, rules, exceptions, examples, exercises, quiz, TEF tips
+// Seeded from Osama's actual class notes (A1 → prepositions)
 
 const DB = require('./database');
 
 function seedIfEmpty() {
   if (DB.findAll('lessons').length > 0) return;
-  console.log('🌱 Seeding full detailed lessons...');
+  console.log('🌱 Seeding Osama\'s class notes as lessons...');
 
   const lessons = [
 
-// ═══════════════════════════════════════════════════════════════════
-// A1 LESSONS
-// ═══════════════════════════════════════════════════════════════════
-
+// ─────────────────────────────────────────────────────────────────
+// LESSON 1 — Greetings & Identity
+// ─────────────────────────────────────────────────────────────────
 {
-  level: 'A1', sort_order: 1, duration_min: 30, xp_reward: 50,
-  title: 'Greetings & Introductions',
-  description: 'Learn how to greet people and introduce yourself in French — essential for any real conversation.',
+  level: 'A1', sort_order: 1, duration_min: 25, xp_reward: 50,
+  title: 'Greetings & Identity',
+  description: 'Salutations, how to introduce yourself, ask/answer identity questions.',
   content: JSON.stringify({
-    intro: `In French, choosing the right greeting depends on the situation — formal (work, strangers, officials) or informal (friends, family, peers). Getting this right matters on the TEF/TCF oral exam. In Canada, French is used in federal government services, IRCC offices, and across Ontario's bilingual institutions.`,
+    intro: `The first things you need in any French conversation: how to say hello, goodbye, introduce yourself, and answer basic questions about who you are. These also appear in every TEF/TCF oral exam opener.`,
     sections: [
       {
         type: 'vocabulary',
-        title: 'Core Greetings',
+        title: 'Salutations',
         items: [
-          { fr: 'Bonjour', en: 'Hello / Good day', pron: 'bon-ZHOOR', note: 'Use any time of day — most common greeting', formal: true },
-          { fr: 'Bonsoir', en: 'Good evening', pron: 'bon-SWAHR', note: 'Use after ~6pm', formal: true },
-          { fr: 'Salut', en: 'Hi / Hey', pron: 'sa-LÜ', note: 'Informal only — never use with strangers or officials', formal: false },
-          { fr: 'Allô', en: 'Hello (on phone)', pron: 'a-LO', note: 'Used specifically when answering the phone', formal: false },
-          { fr: 'Au revoir', en: 'Goodbye', pron: 'oh ruh-VWAHR', note: 'Standard goodbye, formal and informal', formal: true },
-          { fr: 'À bientôt', en: 'See you soon', pron: 'ah byan-TOH', note: 'When you expect to see the person again', formal: true },
-          { fr: 'À demain', en: 'See you tomorrow', pron: 'ah duh-MAN', note: 'Specific to next day', formal: true },
-          { fr: 'Bonne journée', en: 'Have a good day', pron: 'bon zhoor-NAY', note: 'Said when parting during the day', formal: true },
-          { fr: 'Bonne soirée', en: 'Have a good evening', pron: 'bon swah-RAY', note: 'Said when parting in the evening', formal: true },
+          { fr: 'Bonjour', en: 'Hello / Good day', pron: 'bohn-zhoor', note: 'Formal & informal — any time of day' },
+          { fr: 'Bonsoir', en: 'Good evening', pron: 'bohn-swar', note: 'Use after ~6pm' },
+          { fr: 'Salut', en: 'Hi / Bye (informal)', pron: 'sah-loo', note: 'Friends only — never with strangers or officials' },
+          { fr: 'Au revoir', en: 'Goodbye', pron: 'oh ruh-vwahr', note: 'Any context' },
+          { fr: 'À bientôt', en: 'See you soon', pron: 'ah bee-en-toe', note: '' },
+          { fr: 'Bonne nuit', en: 'Good night', pron: 'bun nwee', note: 'Before bed' },
+          { fr: 'À demain', en: 'See you tomorrow', pron: 'ah duh-man', note: '' },
+          { fr: 'Enchanté(e)', en: 'Nice to meet you', pron: 'ahn-shahn-tay', note: 'Add -e if you are female' },
         ]
       },
       {
         type: 'grammar',
-        title: 'How to Ask Someone\'s Name',
+        title: 'Identity Questions & Answers',
         rules: [
-          { rule: 'Formal (to a stranger, official, elder)', example: 'Comment vous appelez-vous?', translation: 'What is your name?', breakdown: 'comment (how) + vous appelez-vous (do you call yourself)' },
-          { rule: 'Informal (to a friend, child, peer)', example: 'Comment tu t\'appelles?', translation: 'What\'s your name?', breakdown: 'comment (how) + tu t\'appelles (do you call yourself)' },
-          { rule: 'Reply (always the same)', example: 'Je m\'appelle Osama.', translation: 'My name is Osama.', breakdown: 'je (I) + m\'appelle (call myself) + name' },
-        ]
-      },
-      {
-        type: 'grammar',
-        title: 'How to Ask "How Are You?"',
-        rules: [
-          { rule: 'Formal', example: 'Comment allez-vous?', translation: 'How are you?', breakdown: 'comment (how) + allez-vous (are you going)' },
-          { rule: 'Informal', example: 'Comment vas-tu? / Ça va?', translation: 'How are you? / How\'s it going?', breakdown: 'Ça va is the most common informal option' },
-          { rule: 'Replies', example: 'Très bien, merci. / Bien, merci. / Pas mal.', translation: 'Very well, thanks. / Fine, thanks. / Not bad.', breakdown: 'Always add "et vous?" (formal) or "et toi?" (informal) = "and you?"' },
+          { rule: 'What is your name?', example: 'Comment tu t\'appelles ? → Je m\'appelle Osama.', translation: '', breakdown: 'Formal version: Comment vous appelez-vous ?' },
+          { rule: 'How are you?', example: 'Comment ça va ? → Ça va bien, merci. / Pas mal.', translation: '', breakdown: 'Formal: Comment allez-vous ? → Je vais bien, merci.' },
+          { rule: 'Where are you from?', example: 'D\'où viens-tu ? → Je viens du Canada.', translation: '', breakdown: '' },
+          { rule: 'What is your nationality?', example: 'Quelle est ta nationalité ? → Je suis canadien(ne).', translation: '', breakdown: 'Nationalities are lowercase in French' },
+          { rule: 'How old are you?', example: 'Quel âge as-tu ? → J\'ai vingt ans.', translation: '', breakdown: '⚠️ Use AVOIR not être. Never say "Je suis vingt ans".' },
+          { rule: 'What do you do?', example: 'Qu\'est-ce que tu fais ? → Je suis étudiant(e).', translation: '', breakdown: '' },
         ]
       },
       {
         type: 'vocabulary',
-        title: 'Polite Phrases — Essential for TEF',
+        title: 'Nationalities (change ending for feminine)',
         items: [
-          { fr: 'S\'il vous plaît', en: 'Please (formal)', pron: 'seel voo PLAY', note: 'Use with strangers, officials, services', formal: true },
-          { fr: 'S\'il te plaît', en: 'Please (informal)', pron: 'seel tuh PLAY', note: 'Use with friends and family', formal: false },
-          { fr: 'Merci', en: 'Thank you', pron: 'mair-SEE', note: 'Works in all situations', formal: true },
-          { fr: 'Merci beaucoup', en: 'Thank you very much', pron: 'mair-SEE bo-KOO', note: 'More emphatic thanks', formal: true },
-          { fr: 'De rien', en: 'You\'re welcome', pron: 'duh RYAN', note: 'Standard response to merci', formal: true },
-          { fr: 'Avec plaisir', en: 'With pleasure', pron: 'ah-VEK play-ZEER', note: 'More warm/elegant response to merci', formal: true },
-          { fr: 'Excusez-moi', en: 'Excuse me (formal)', pron: 'ex-küz-ay MWAH', note: 'To get attention or apologize formally', formal: true },
-          { fr: 'Pardon', en: 'Sorry / Pardon', pron: 'par-DON', note: 'When bumping into someone or didn\'t hear', formal: true },
-          { fr: 'Je suis désolé(e)', en: 'I\'m sorry', pron: 'zhuh swee day-zo-LAY', note: 'Genuine apology. Add -e if you are female', formal: true },
-          { fr: 'Enchanté(e)', en: 'Pleased to meet you', pron: 'on-shon-TAY', note: 'Said when meeting someone for the first time. Add -e if female', formal: true },
-        ]
-      },
-      {
-        type: 'grammar',
-        title: 'Formal vs Informal — The Key Rule',
-        explanation: `French has two "registers" — formal (vouvoyer, using "vous") and informal (tutoyer, using "tu"). This is one of the most important distinctions in French.`,
-        rules: [
-          { rule: 'Use VOUS (formal) with:', example: 'Strangers, people older than you, bosses, officials, IRCC officers, doctors, teachers', translation: '', breakdown: '' },
-          { rule: 'Use TU (informal) with:', example: 'Friends, family, children, peers your own age who invite it', translation: '', breakdown: '' },
-          { rule: 'When in doubt:', example: 'Always start with VOUS. Wait for the other person to say "On peut se tutoyer?" (Can we use tu?)', translation: '', breakdown: '' },
-        ]
-      },
-      {
-        type: 'dialogue',
-        title: 'Full Dialogue — At an IRCC Office in Mississauga',
-        lines: [
-          { speaker: 'Agent', fr: 'Bonjour, comment puis-je vous aider?', en: 'Hello, how can I help you?' },
-          { speaker: 'Vous', fr: 'Bonjour. Je m\'appelle Osama Al-Ahmed. J\'ai un rendez-vous à dix heures.', en: 'Hello. My name is Osama Al-Ahmed. I have an appointment at ten o\'clock.' },
-          { speaker: 'Agent', fr: 'Très bien. Comment allez-vous aujourd\'hui?', en: 'Very good. How are you today?' },
-          { speaker: 'Vous', fr: 'Très bien, merci. Et vous?', en: 'Very well, thank you. And you?' },
-          { speaker: 'Agent', fr: 'Bien, merci. Asseyez-vous, s\'il vous plaît.', en: 'Fine, thank you. Please have a seat.' },
-          { speaker: 'Vous', fr: 'Merci beaucoup.', en: 'Thank you very much.' },
-        ]
-      },
-      {
-        type: 'tips',
-        title: 'TEF/TCF Exam Tips',
-        tips: [
-          'In the oral exam, always greet the examiner with "Bonjour" + "Comment allez-vous?" — never "Salut"',
-          'End your oral response with "Merci" or "C\'est tout" (That\'s all) to signal you\'re done',
-          'Using "vous" instead of "tu" with the examiner shows language awareness — it\'s always correct',
-          'Enchaîner (linking) greetings shows fluency: "Bonjour, je m\'appelle Osama, enchanté de vous rencontrer"',
-          '"Bonjour" is used all day in Quebec and Ontario — not just in the morning like in English',
-        ]
-      },
-      {
-        type: 'pronunciation',
-        title: 'Pronunciation Guide — Common Mistakes',
-        notes: [
-          { word: 'Bonjour', tip: 'The "j" is like the "s" in "measure" or "pleasure" — NOT like English "j" in "jump"' },
-          { word: 'Merci', tip: 'The "r" is a soft gargle from the back of the throat — not a rolled r' },
-          { word: 'Enchanté', tip: 'The "en" is a nasal sound — air goes through your nose. Like "on" in "song" but with lips forward' },
-          { word: 'Vous', tip: '"Voo" — the "s" is silent. Never say "vooz" unless the next word starts with a vowel (liaison)' },
-          { word: 'S\'il vous plaît', tip: 'Often said fast: "seel-voo-PLAY" — the "t" at the end of plaît is silent' },
-        ]
-      }
-    ],
-    exercises: [
-      {
-        type: 'multiple_choice',
-        question: 'You arrive at an IRCC office at 2pm. You see an officer. What do you say first?',
-        options: ['Salut!', 'Bonjour!', 'Bonsoir!', 'Allô!'],
-        correct: 1,
-        explanation: '"Bonjour" is correct — it\'s formal and used all day. "Salut" is too informal for an official. "Bonsoir" is only for evenings. "Allô" is only for phone calls.'
-      },
-      {
-        type: 'multiple_choice',
-        question: 'An officer asks "Comment allez-vous?" You reply "Très bien, merci." What should you add to be polite?',
-        options: ['Au revoir!', 'Et vous?', 'S\'il vous plaît', 'Pardon'],
-        correct: 1,
-        explanation: 'Always bounce the question back with "Et vous?" (formal) or "Et toi?" (informal). This shows politeness and conversational awareness — important on TEF oral.'
-      },
-      {
-        type: 'multiple_choice',
-        question: 'Your French colleague (same age, same level) says "On peut se tutoyer?" What does this mean?',
-        options: ['Can we speak French?', 'Can we use "tu" with each other?', 'Can we meet tomorrow?', 'Can we eat together?'],
-        correct: 1,
-        explanation: '"Se tutoyer" means to use the informal "tu" with each other. When someone asks this, they are inviting a more informal relationship.'
-      },
-      {
-        type: 'fill_blank',
-        question: 'Complete: "Bonjour, je _______ appelle Osama."',
-        options: ['me', 'm\'', 'te', 'se'],
-        correct: 1,
-        explanation: '"Je m\'appelle" — the verb is "s\'appeler" (to be called). Before a vowel, "me" contracts to "m\'". This is called elision.'
-      },
-      {
-        type: 'fill_blank',
-        question: 'You meet someone for the first time. You say: "Bonjour, je m\'appelle Osama. _______!"',
-        options: ['Au revoir', 'Enchanté', 'Pardon', 'Salut'],
-        correct: 1,
-        explanation: '"Enchanté" means "pleased to meet you" and is said when meeting someone for the first time. If you are female, say "Enchantée" (with an extra -e, though it sounds the same).'
-      },
-      {
-        type: 'multiple_choice',
-        question: 'Someone says "Merci beaucoup!" to you. What is the most elegant response?',
-        options: ['Bonjour', 'Pardon', 'Avec plaisir', 'Bonsoir'],
-        correct: 2,
-        explanation: '"Avec plaisir" (with pleasure) is a warm, elegant response. "De rien" also works. Both are more refined than simply repeating "merci".'
-      },
-      {
-        type: 'translate',
-        question: 'Translate to French: "Good evening, my name is Osama, pleased to meet you."',
-        answer: 'Bonsoir, je m\'appelle Osama, enchanté de vous rencontrer.',
-        alternatives: ['Bonsoir, je m\'appelle Osama, enchanté.'],
-        explanation: '"Bonsoir" for evening. "Je m\'appelle" for my name is. "Enchanté de vous rencontrer" = pleased to meet you (formal). Using "vous" is correct here as you are meeting someone new.'
-      },
-      {
-        type: 'multiple_choice',
-        question: 'It is 8pm. You are leaving a restaurant. What do you say to the waiter?',
-        options: ['Bonne journée!', 'Bonne soirée!', 'À demain!', 'Bonjour!'],
-        correct: 1,
-        explanation: '"Bonne soirée" (good evening / enjoy your evening) is correct for departing in the evening. "Bonne journée" is for departing during the day. "À demain" only if you\'ll see them tomorrow.'
-      }
-    ],
-    quiz: [
-      { question: 'Which greeting is appropriate at 3pm with a bank manager?', options: ['Salut', 'Bonjour', 'Allô', 'Coucou'], correct: 1, explanation: 'Bonjour is formal and used all day.' },
-      { question: 'How do you formally ask someone\'s name?', options: ['Comment tu t\'appelles?', 'T\'as quel nom?', 'Comment vous appelez-vous?', 'C\'est quoi ton nom?'], correct: 2, explanation: 'Formal = vous form: Comment vous appelez-vous?' },
-      { question: 'Someone says "Ça va?" You reply...', options: ['Bonjour', 'Ça va bien, merci. Et toi?', 'Au revoir', 'Enchanté'], correct: 1, explanation: 'Reply with your state + bounce the question back with "Et toi?" (informal) or "Et vous?" (formal).' },
-      { question: 'What does "Enchanté" mean?', options: ['Goodbye', 'Thank you', 'Pleased to meet you', 'Excuse me'], correct: 2, explanation: 'Enchanté(e) = pleased to meet you. Said when meeting someone for the first time.' },
-      { question: '"Je suis désolée" — the speaker is...', options: ['Male', 'Female', 'Could be either', 'A child'], correct: 1, explanation: 'The extra -e at the end of désolée indicates the speaker is female. Désolé (no e) = male speaker.' },
-    ]
-  })
-},
-
-{
-  level: 'A1', sort_order: 2, duration_min: 30, xp_reward: 50,
-  title: 'Numbers 1–100',
-  description: 'Master French numbers for prices, addresses, phone numbers, ages, and dates — all essential for daily life in Canada.',
-  content: JSON.stringify({
-    intro: `Numbers are used constantly in French — at the grocery store, giving your address to IRCC, stating your phone number, discussing prices, or saying your age. French numbers have some quirks (especially 70-99) that English speakers find tricky. Master these and you will handle any real-life situation in Ontario.`,
-    sections: [
-      {
-        type: 'vocabulary',
-        title: 'Numbers 1–20 (Must Memorize)',
-        items: [
-          { fr: '1 — un/une', en: 'one', pron: 'uhn / ün', note: 'un = masculine, une = feminine (un enfant, une personne)' },
-          { fr: '2 — deux', en: 'two', pron: 'duh', note: 'The x is silent' },
-          { fr: '3 — trois', en: 'three', pron: 'twah', note: '' },
-          { fr: '4 — quatre', en: 'four', pron: 'KAT-ruh', note: '' },
-          { fr: '5 — cinq', en: 'five', pron: 'sank', note: 'The q is pronounced' },
-          { fr: '6 — six', en: 'six', pron: 'sees', note: 'x is silent alone; pronounced before a vowel' },
-          { fr: '7 — sept', en: 'seven', pron: 'set', note: 'The p and t are both pronounced' },
-          { fr: '8 — huit', en: 'eight', pron: 'weet', note: '' },
-          { fr: '9 — neuf', en: 'nine', pron: 'nuhf', note: 'f is pronounced; before "heures" it sounds like "nuv"' },
-          { fr: '10 — dix', en: 'ten', pron: 'dees', note: '' },
-          { fr: '11 — onze', en: 'eleven', pron: 'onz', note: 'No liaison before onze' },
-          { fr: '12 — douze', en: 'twelve', pron: 'dooz', note: '' },
-          { fr: '13 — treize', en: 'thirteen', pron: 'trez', note: '' },
-          { fr: '14 — quatorze', en: 'fourteen', pron: 'ka-TORZ', note: '' },
-          { fr: '15 — quinze', en: 'fifteen', pron: 'kanz', note: '' },
-          { fr: '16 — seize', en: 'sixteen', pron: 'sez', note: '' },
-          { fr: '17 — dix-sept', en: 'seventeen', pron: 'dee-SET', note: 'Compound: dix + sept' },
-          { fr: '18 — dix-huit', en: 'eighteen', pron: 'deez-WEET', note: 'Liaison: dix-z-huit' },
-          { fr: '19 — dix-neuf', en: 'nineteen', pron: 'deez-NUHF', note: '' },
-          { fr: '20 — vingt', en: 'twenty', pron: 'van', note: 'The gt is silent alone; pronounced in 21-29' },
-        ]
-      },
-      {
-        type: 'grammar',
-        title: 'Numbers 21–69 — The Easy Part',
-        rules: [
-          { rule: '21', example: 'vingt et un', translation: 'twenty and one', breakdown: 'Note: "et" (and) is used ONLY in 21, 31, 41, 51, 61, 71' },
-          { rule: '22–29', example: 'vingt-deux, vingt-trois... vingt-neuf', translation: 'twenty-two to twenty-nine', breakdown: 'Hyphen between vingt and the unit. No "et".' },
-          { rule: '30', example: 'trente', translation: 'thirty', breakdown: '' },
-          { rule: '40', example: 'quarante', translation: 'forty', breakdown: '' },
-          { rule: '50', example: 'cinquante', translation: 'fifty', breakdown: '' },
-          { rule: '60', example: 'soixante', translation: 'sixty', breakdown: '' },
-          { rule: '65', example: 'soixante-cinq', translation: 'sixty-five', breakdown: 'soixante + hyphen + unit number' },
-        ]
-      },
-      {
-        type: 'grammar',
-        title: '70–99 — The Tricky Part (Very Important!)',
-        explanation: 'French counts differently from 70 onwards. Instead of "seventy", French says "sixty-ten" (soixante-dix). Instead of "eighty", it says "four-twenties" (quatre-vingts). This trips up many learners.',
-        rules: [
-          { rule: '70', example: 'soixante-dix', translation: 'sixty-ten (= 70)', breakdown: 'NOT septante (that\'s Belgian/Swiss French)' },
-          { rule: '71', example: 'soixante et onze', translation: 'sixty and eleven', breakdown: '"et" is used here too — soixante ET onze' },
-          { rule: '72–79', example: 'soixante-douze... soixante-dix-neuf', translation: '72 to 79', breakdown: 'soixante + 12, 13, 14... 19' },
-          { rule: '80', example: 'quatre-vingts', translation: 'four-twenties (= 80)', breakdown: 'Note the s on vingts when standing alone' },
-          { rule: '81–89', example: 'quatre-vingt-un... quatre-vingt-neuf', translation: '81 to 89', breakdown: 'No s on vingt when followed by another number. No "et".' },
-          { rule: '90', example: 'quatre-vingt-dix', translation: 'four-twenty-ten (= 90)', breakdown: '' },
-          { rule: '91–99', example: 'quatre-vingt-onze... quatre-vingt-dix-neuf', translation: '91 to 99', breakdown: '' },
-        ]
-      },
-      {
-        type: 'grammar',
-        title: '100 and Beyond',
-        rules: [
-          { rule: '100', example: 'cent', translation: 'one hundred', breakdown: 'Just "cent" — not "un cent"' },
-          { rule: '101–199', example: 'cent un, cent deux... cent quatre-vingt-dix-neuf', translation: '101 to 199', breakdown: 'cent + number, no hyphen, no "et"' },
-          { rule: '200', example: 'deux cents', translation: 'two hundred', breakdown: 's on cents when it ends the number' },
-          { rule: '201', example: 'deux cent un', translation: 'two hundred and one', breakdown: 'No s when followed by another number' },
-          { rule: '1000', example: 'mille', translation: 'one thousand', breakdown: 'Never "un mille" — just "mille". Never has an s.' },
-          { rule: '1,000,000', example: 'un million', translation: 'one million', breakdown: 'Takes "un" and can have an s: deux millions' },
-        ]
-      },
-      {
-        type: 'dialogue',
-        title: 'Real Life — Giving Your Phone Number in French',
-        explanation: 'In French, phone numbers are read in pairs. The Canadian number 905-849-3271 would be said: neuf zéro cinq, huit quarante-neuf, trente-deux, soixante et onze.',
-        lines: [
-          { speaker: 'Réceptionniste', fr: 'Quel est votre numéro de téléphone?', en: 'What is your phone number?' },
-          { speaker: 'Vous', fr: 'C\'est le neuf cent cinq, huit quarante-neuf, trente-deux, soixante et onze.', en: 'It\'s 905-849-32-71.' },
-          { speaker: 'Réceptionniste', fr: 'Et votre code postal?', en: 'And your postal code?' },
-          { speaker: 'Vous', fr: 'L six J, deux B trois.', en: 'L6J 2B3.' },
-        ]
-      },
-      {
-        type: 'tips',
-        title: 'Canadian Context — Numbers in Daily Life',
-        tips: [
-          'Prices: "Ça coûte vingt-quatre dollars quatre-vingt-dix-neuf" = $24.99',
-          'Ages: "J\'ai trente-cinq ans" — always use AVOIR (to have) for age, never être',
-          'Addresses: "J\'habite au quatre-vingt-deux, rue Lakeshore" = 82 Lakeshore Rd',
-          'Postal codes are read letter by letter, number by number in French',
-          'On TEF, you may hear numbers in a listening passage — 70-99 are the most commonly tested',
-        ]
-      }
-    ],
-    exercises: [
-      { type: 'multiple_choice', question: 'How do you say 75 in French?', options: ['septante-cinq', 'soixante-quinze', 'soixante-cinq', 'soixante-dix-cinq'], correct: 1, explanation: '75 = soixante (60) + quinze (15) = soixante-quinze. "Septante" is Belgian/Swiss French, not used in Canada.' },
-      { type: 'multiple_choice', question: 'How do you say 81 in French?', options: ['quatre-vingts-un', 'quatre-vingt-et-un', 'quatre-vingt-un', 'huitante-un'], correct: 2, explanation: '81 = quatre-vingt-un. No "s" on vingt (because a number follows). No "et" (et is only for 21, 31, 41, 51, 61, 71).' },
-      { type: 'multiple_choice', question: 'How old is someone who says "J\'ai quarante-deux ans"?', options: ['32', '42', '52', '22'], correct: 1, explanation: 'Quarante-deux = 42. Quarante = 40, deux = 2.' },
-      { type: 'fill_blank', question: 'Complete: "Le bus coûte trois dollars _______-cinq cents." (The bus costs $3.95)', options: ['soixante', 'quatre-vingt', 'quatre-vingt-dix', 'septante'], correct: 2, explanation: '95 = quatre-vingt-quinze. So $3.95 = trois dollars quatre-vingt-quinze cents.' },
-      { type: 'multiple_choice', question: 'How do you say 100 in French?', options: ['un cent', 'cent', 'cents', 'uno cent'], correct: 1, explanation: 'Just "cent" — no "un" before it. "Un" is only added before million/milliard.' },
-      { type: 'multiple_choice', question: 'What is "quatre-vingts" as a number?', options: ['74', '79', '80', '84'], correct: 2, explanation: 'Quatre-vingts = four × twenty = 80. This is one of the most tested numbers on TEF.' },
-      { type: 'multiple_choice', question: 'How do you say your age in French? (You are 35)', options: ['Je suis trente-cinq ans', 'J\'ai trente-cinq ans', 'J\'habite trente-cinq', 'Je fais trente-cinq ans'], correct: 1, explanation: 'Age always uses AVOIR: J\'ai [number] ans. Never "je suis [age]" — that\'s a very common mistake.' },
-      { type: 'translate', question: 'Translate: "I live at 92 Lakeshore Road, Oakville."', answer: 'J\'habite au quatre-vingt-douze, rue Lakeshore, à Oakville.', alternatives: ['J\'habite au 92, rue Lakeshore, Oakville.'], explanation: '92 = quatre-vingt-douze. "Au" before the number = at the [number]. "Rue" = road/street.' },
-    ],
-    quiz: [
-      { question: 'What is soixante-dix-sept?', options: ['67', '77', '87', '97'], correct: 1, explanation: 'soixante (60) + dix-sept (17) = 77' },
-      { question: 'How do you say 91?', options: ['quatre-vingt-onze', 'quatre-vingts-onze', 'soixante-onze', 'quatre-vingt-et-onze'], correct: 0, explanation: 'quatre-vingt-onze = 80 + 11 = 91. No s, no et.' },
-      { question: 'J\'ai _______ ans. (I am 28)', options: ['vingt-huit', 'vingt-et-huit', 'vingts-huit', 'deux-vingt'], correct: 0, explanation: 'vingt-huit = 28. No et between vingt and 2-9.' },
-      { question: 'Deux cents = ?', options: ['20', '200', '2000', '202'], correct: 1, explanation: 'cent = 100, deux cents = 200.' },
-      { question: 'Which is correct for 71?', options: ['soixante-onze', 'soixante et onze', 'septante-un', 'soixante-dix-un'], correct: 1, explanation: '71 = soixante ET onze. "et" is used here because 71 ends in 1.' },
-    ]
-  })
-},
-
-{
-  level: 'A1', sort_order: 3, duration_min: 35, xp_reward: 60,
-  title: 'Definite Articles: le, la, l\', les',
-  description: 'Every French noun has a gender. The definite article (the) changes based on gender and number — master this foundation.',
-  content: JSON.stringify({
-    intro: `In English, "the" works for everything. In French, "the" has four forms: le, la, l', and les. Which one you use depends on the gender (masculine or feminine) and number (singular or plural) of the noun. This is one of the most fundamental rules in French — and one of the most commonly tested on TEF/TCF. Getting articles wrong affects your score even when everything else is correct.`,
-    sections: [
-      {
-        type: 'grammar',
-        title: 'The Four Forms of "The"',
-        rules: [
-          { rule: 'LE — masculine singular', example: 'le parc, le café, le bus, le lac', translation: 'the park, the café, the bus, the lake', breakdown: 'Used before masculine nouns starting with a consonant' },
-          { rule: 'LA — feminine singular', example: 'la rue, la ville, la maison, la bibliothèque', translation: 'the street, the city, the house, the library', breakdown: 'Used before feminine nouns starting with a consonant' },
-          { rule: 'L\' — before a vowel or silent h', example: 'l\'école, l\'hôpital, l\'université, l\'enfant', translation: 'the school, the hospital, the university, the child', breakdown: 'Replaces le OR la when the noun starts with a vowel (a,e,i,o,u) or silent h. Gender still matters for agreement later.' },
-          { rule: 'LES — all plurals', example: 'les parcs, les rues, les enfants, les maisons', translation: 'the parks, the streets, the children, the houses', breakdown: 'Used for ALL plural nouns — masculine and feminine. Always les.' },
-        ]
-      },
-      {
-        type: 'grammar',
-        title: 'How to Know the Gender of a Noun',
-        explanation: 'There are no perfect rules, but these patterns help. When in doubt, learn the article WITH the word.',
-        rules: [
-          { rule: 'Usually MASCULINE:', example: '-age (le voyage), -ment (le gouvernement), -isme (le tourisme), most languages (le français), days/months/seasons', translation: '', breakdown: '' },
-          { rule: 'Usually FEMININE:', example: '-tion (la nation), -sion (la décision), -té (la liberté), -ure (la voiture), -ette (la baguette), most countries ending in -e (la France, la Chine)', translation: '', breakdown: '' },
-          { rule: 'Canada is masculine:', example: 'le Canada, le Québec, l\'Ontario', translation: 'Exception: la France BUT le Canada', breakdown: '' },
-          { rule: 'BEST STRATEGY:', example: 'Always learn words with their article: "le parc" not just "parc"', translation: '', breakdown: 'This is what native speakers do from childhood' },
-        ]
-      },
-      {
-        type: 'vocabulary',
-        title: 'Essential Nouns with Articles — Oakville Context',
-        items: [
-          { fr: 'le lac', en: 'the lake (Lake Ontario)', pron: 'luh LAK', note: 'masculine' },
-          { fr: 'le parc', en: 'the park', pron: 'luh PARK', note: 'masculine' },
-          { fr: 'le bus', en: 'the bus (GO Transit)', pron: 'luh BÜS', note: 'masculine' },
-          { fr: 'le train', en: 'the train', pron: 'luh TRAN', note: 'masculine' },
-          { fr: 'le travail', en: 'the work / job', pron: 'luh tra-VY', note: 'masculine' },
-          { fr: 'le gouvernement', en: 'the government', pron: 'luh goov-ern-MON', note: 'masculine — important for immigration' },
-          { fr: 'le formulaire', en: 'the form (document)', pron: 'luh form-ü-LAIR', note: 'masculine — IRCC forms' },
-          { fr: 'la ville', en: 'the city / town', pron: 'lah VEEL', note: 'feminine' },
-          { fr: 'la rue', en: 'the street', pron: 'lah RÜ', note: 'feminine' },
-          { fr: 'la maison', en: 'the house', pron: 'lah may-ZON', note: 'feminine' },
-          { fr: 'la bibliothèque', en: 'the library', pron: 'lah bib-lee-oh-TEK', note: 'feminine' },
-          { fr: 'la famille', en: 'the family', pron: 'lah fa-MEE', note: 'feminine' },
-          { fr: 'la demande', en: 'the application / request', pron: 'lah duh-MOND', note: 'feminine — important for IRCC' },
-          { fr: 'l\'école (f)', en: 'the school', pron: 'leh-KOL', note: 'feminine — l\' before vowel' },
-          { fr: 'l\'hôpital (m)', en: 'the hospital', pron: 'loh-pee-TAL', note: 'masculine — l\' before silent h' },
-          { fr: 'l\'aéroport (m)', en: 'the airport', pron: 'lair-oh-POR', note: 'masculine — l\' before vowel' },
-          { fr: 'les enfants', en: 'the children', pron: 'lez-on-FON', note: 'plural — liaison: les-z-enfants' },
-          { fr: 'les magasins', en: 'the stores', pron: 'lay ma-ga-ZAN', note: 'plural masculine' },
-        ]
-      },
-      {
-        type: 'grammar',
-        title: 'Contractions with Articles — À and De',
-        explanation: 'When le or les follows the prepositions "à" (at/to) or "de" (of/from), they CONTRACT. This is mandatory — you cannot avoid it.',
-        rules: [
-          { rule: 'à + le = AU', example: 'Je vais au parc. (NOT à le parc)', translation: 'I go to the park.', breakdown: 'à + le → au. Always.' },
-          { rule: 'à + les = AUX', example: 'Je parle aux enfants. (NOT à les enfants)', translation: 'I speak to the children.', breakdown: 'à + les → aux. Always.' },
-          { rule: 'à + la = à la (no change)', example: 'Je vais à la bibliothèque.', translation: 'I go to the library.', breakdown: 'à + la stays as à la.' },
-          { rule: 'à + l\' = à l\' (no change)', example: 'Je vais à l\'école.', translation: 'I go to the school.', breakdown: 'à + l\' stays as à l\'.' },
-          { rule: 'de + le = DU', example: 'Je viens du Canada. (NOT de le Canada)', translation: 'I come from Canada.', breakdown: 'de + le → du. Always.' },
-          { rule: 'de + les = DES', example: 'Les prix des magasins.', translation: 'The prices of the stores.', breakdown: 'de + les → des. (Different from indefinite des!)' },
-        ]
-      },
-      {
-        type: 'dialogue',
-        title: 'Dialogue — In Oakville',
-        lines: [
-          { speaker: 'Ami', fr: 'Tu vas où ce weekend?', en: 'Where are you going this weekend?' },
-          { speaker: 'Vous', fr: 'Je vais au parc avec les enfants. Et après, à la bibliothèque.', en: 'I\'m going to the park with the children. And after, to the library.' },
-          { speaker: 'Ami', fr: 'Le parc du lac Ontario?', en: 'The Lake Ontario park?' },
-          { speaker: 'Vous', fr: 'Oui, c\'est le plus beau parc de la ville!', en: 'Yes, it\'s the most beautiful park in the city!' },
+          { fr: 'canadien / canadienne', en: 'Canadian', pron: '', note: '' },
+          { fr: 'français / française', en: 'French', pron: '', note: 'Lowercase when used as adjective' },
+          { fr: 'anglais / anglaise', en: 'English', pron: '', note: '' },
+          { fr: 'marocain / marocaine', en: 'Moroccan', pron: '', note: '' },
+          { fr: 'espagnol / espagnole', en: 'Spanish', pron: '', note: '' },
         ]
       },
       {
         type: 'tips',
         title: 'TEF/TCF Tips',
         tips: [
-          'Article errors are heavily penalized on TEF written production — check every noun',
-          'When you learn a new noun, ALWAYS memorize it with its article: "le formulaire", not just "formulaire"',
-          'Plural is always "les" — you never need to guess gender for plurals',
-          'l\' hides the gender — watch for agreement elsewhere (adjectives, past participles)',
-          'The contractions au/aux/du/des are not optional — using "à le" or "de le" is a serious error',
+          'Always greet the examiner with "Bonjour" + "Comment allez-vous?" — never "Salut"',
+          'Age uses AVOIR: J\'ai vingt ans — this is a classic exam trap',
+          'Nationalities are lowercase as adjectives: je suis canadien — but uppercase as nouns: un Canadien',
+          'Bounce questions back: "Très bien, merci. Et vous?" shows conversational awareness',
         ]
       }
     ],
     exercises: [
-      { type: 'multiple_choice', question: 'Choose the correct article: "___ gouvernement canadien"', options: ['La', 'Le', 'Les', 'L\''], correct: 1, explanation: '"Gouvernement" ends in -ment → masculine → le gouvernement.' },
-      { type: 'multiple_choice', question: 'Choose: "___ école est fermée aujourd\'hui."', options: ['Le', 'La', 'L\'', 'Les'], correct: 2, explanation: '"École" starts with a vowel → l\'école. Even though école is feminine, we use l\' before the vowel.' },
-      { type: 'multiple_choice', question: '"Je vais ___ parc." Choose the correct form.', options: ['à le', 'au', 'à la', 'aux'], correct: 1, explanation: 'à + le (parc is masculine) = AU. "à le" is NEVER correct — it must contract to "au".' },
-      { type: 'multiple_choice', question: '"Les prix ___ magasins sont élevés." Choose the correct form.', options: ['du', 'de la', 'de les', 'des'], correct: 3, explanation: 'de + les = DES. "de les" is never correct — it must contract.' },
-      { type: 'fill_blank', question: 'Complete: "Je viens ___ Canada et j\'habite dans ___ ville d\'Oakville."', options: ['du / la', 'de la / le', 'du / une', 'de / la'], correct: 0, explanation: '"du Canada" = de + le Canada (masculine). "la ville" = feminine noun.' },
-      { type: 'multiple_choice', question: 'Which noun is feminine?', options: ['le formulaire', 'le train', 'la demande', 'le lac'], correct: 2, explanation: '"La demande" is feminine. The -ande ending and the article "la" confirm it. Important word for IRCC applications.' },
-      { type: 'multiple_choice', question: '"___ enfants jouent au parc."', options: ['Le', 'La', 'L\'', 'Les'], correct: 3, explanation: '"Enfants" is plural → always "les". Never mind the gender for plurals.' },
-      { type: 'translate', question: 'Translate: "The hospital is near the park."', answer: 'L\'hôpital est près du parc.', alternatives: ['L\'hôpital est près le parc.'], explanation: 'L\'hôpital (masculine, silent h → l\'). du parc = de + le parc (contraction required).' },
+      { type: 'multiple_choice', question: 'You meet your French teacher for the first time. You say:', options: ['Salut!', 'Bonjour, enchanté(e)!', 'Coucou!', 'Hey!'], correct: 1, explanation: '"Bonjour, enchanté(e)" is formal and appropriate for a first meeting. "Salut" is too informal.' },
+      { type: 'multiple_choice', question: 'How do you say "How old are you?" in French?', options: ['Tu es combien d\'ans?', 'Quel âge es-tu?', 'Quel âge as-tu?', 'Tu as quel année?'], correct: 2, explanation: 'French uses AVOIR (to have) for age: Quel âge as-tu? Never use être.' },
+      { type: 'fill_blank', question: 'Complete: "Bonjour, je _______ appelle Osama."', options: ['me', 'm\'', 'te', 'se'], correct: 1, explanation: '"Je m\'appelle" — me contracts to m\' before the vowel in appelle (elision).' },
+      { type: 'multiple_choice', question: 'A colleague asks "Comment ça va?" You reply "Bien, merci." What should you add?', options: ['Au revoir!', 'Et toi?', 'Bonjour!', 'Pardon'], correct: 1, explanation: 'Always bounce the question back with "Et toi?" (informal) or "Et vous?" (formal).' },
+      { type: 'translate', question: 'Translate: "My name is Osama, I am from Canada."', answer: 'Je m\'appelle Osama, je viens du Canada.', alternatives: ['Je m\'appelle Osama et je viens du Canada.'], explanation: 'Je m\'appelle = my name is. Je viens de + country = I am from.' },
+      { type: 'multiple_choice', question: 'It\'s 8pm. You leave a meeting. You say:', options: ['Bonne journée!', 'Bonjour!', 'Bonne soirée!', 'À demain!'], correct: 2, explanation: '"Bonne soirée" is the correct parting phrase in the evening. "Bonne journée" is for daytime.' },
     ],
     quiz: [
-      { question: 'What is the article for "bibliothèque" (library)?', options: ['le', 'la', 'l\'', 'les'], correct: 1, explanation: 'La bibliothèque — feminine noun starting with consonant.' },
-      { question: 'Complete: "Je parle ___ professeur." (I speak to the teacher — masculine)', options: ['à le', 'au', 'à la', 'à l\''], correct: 1, explanation: 'à + le professeur = au professeur. Mandatory contraction.' },
-      { question: 'Which sentence is correct?', options: ['Je vais à le marché', 'Je vais au marché', 'Je vais à la marché', 'Je vais aux marché'], correct: 1, explanation: 'au marché — à + le marché (masculine) = au.' },
-      { question: '"___ université est grande." Choose the correct article.', options: ['Le', 'La', 'L\'', 'Les'], correct: 2, explanation: 'Université starts with a vowel → l\'université (feminine but still l\').' },
-      { question: 'Complete: "Les prix ___ restaurants sont chers."', options: ['du', 'des', 'de la', 'de les'], correct: 1, explanation: 'de + les restaurants = des restaurants. "de les" is never used.' },
+      { question: 'How do you say "I am 30 years old" in French?', options: ['Je suis trente ans.', 'J\'ai trente ans.', 'J\'ai trente années.', 'Je suis âgé trente.'], correct: 1, explanation: 'Age uses AVOIR: J\'ai trente ans.' },
+      { question: '"Enchanté(e)" means:', options: ['Goodbye', 'Please', 'Nice to meet you', 'Excuse me'], correct: 2, explanation: 'Enchanté(e) = pleased/nice to meet you. Said when meeting someone for the first time.' },
+      { question: 'Nationalities in French are:', options: ['Always capitalised', 'Never capitalised', 'Capitalised as adjectives only', 'Capitalised as nouns only'], correct: 3, explanation: 'Lowercase as adjectives (je suis canadien), uppercase as nouns (un Canadien).' },
+      { question: '"D\'où viens-tu?" means:', options: ['Where do you work?', 'Where are you going?', 'Where are you from?', 'Where do you live?'], correct: 2, explanation: 'D\'où = from where. Viens-tu = do you come. → Where are you from?' },
+      { question: 'Which is the formal version of "Comment tu t\'appelles?"', options: ['Comment vous appelez-vous?', 'C\'est quoi ton nom?', 'Tu as quel nom?', 'Comment t\'appelles-tu vous?'], correct: 0, explanation: 'Formal = vous form: Comment vous appelez-vous?' },
     ]
   })
 },
 
+// ─────────────────────────────────────────────────────────────────
+// LESSON 2 — Days of the Week
+// ─────────────────────────────────────────────────────────────────
+{
+  level: 'A1', sort_order: 2, duration_min: 20, xp_reward: 40,
+  title: 'Days of the Week',
+  description: 'Les jours de la semaine — names, spelling, and how to use them in sentences.',
+  content: JSON.stringify({
+    intro: `Days of the week are used constantly — in dates, appointments, schedules, and conversation. In French they are never capitalised and work differently from English in some situations.`,
+    sections: [
+      {
+        type: 'vocabulary',
+        title: 'Les jours de la semaine',
+        items: [
+          { fr: 'lundi', en: 'Monday', pron: 'lun-dee', note: 'Never capitalised in French' },
+          { fr: 'mardi', en: 'Tuesday', pron: 'mar-dee', note: '' },
+          { fr: 'mercredi', en: 'Wednesday', pron: 'mehr-cruh-dee', note: '' },
+          { fr: 'jeudi', en: 'Thursday', pron: 'zhuh-dee', note: '' },
+          { fr: 'vendredi', en: 'Friday', pron: 'von-druh-dee', note: '' },
+          { fr: 'samedi', en: 'Saturday', pron: 'sam-dee', note: 'Mon jour préféré !' },
+          { fr: 'dimanche', en: 'Sunday', pron: 'dee-monsh', note: '' },
+        ]
+      },
+      {
+        type: 'grammar',
+        title: 'How to use days in sentences',
+        rules: [
+          { rule: 'Say what day it is today', example: 'Aujourd\'hui, c\'est lundi.', translation: 'Today is Monday.', breakdown: '' },
+          { rule: 'Day before / after', example: 'Quel jour vient avant samedi ? → vendredi', translation: 'Which day comes before Saturday?', breakdown: '' },
+          { rule: 'Favourite day', example: 'Quel est ton jour préféré ? → Mon jour préféré est samedi.', translation: '', breakdown: '' },
+          { rule: 'On a specific day (no article)', example: 'Le cours est lundi.', translation: 'The class is on Monday.', breakdown: 'No "on" translation needed — just say the day' },
+          { rule: 'Every week on that day (use le)', example: 'Le cours est le lundi.', translation: 'The class is every Monday.', breakdown: 'Le + day = every/each that day' },
+        ]
+      },
+      {
+        type: 'tips',
+        title: 'Key Rules',
+        tips: [
+          'Days are NEVER capitalised in French: lundi not Lundi',
+          'No article for a single occurrence: "Je travaille lundi" = I work on Monday',
+          '"Le lundi" (with article) = every Monday / Mondays in general',
+          'The week starts on Monday (lundi) in France, not Sunday',
+        ]
+      }
+    ],
+    exercises: [
+      { type: 'multiple_choice', question: 'Quel jour vient après mardi ?', options: ['lundi', 'mercredi', 'jeudi', 'vendredi'], correct: 1, explanation: 'The order is: lundi, mardi, MERCREDI, jeudi, vendredi, samedi, dimanche.' },
+      { type: 'multiple_choice', question: 'How do you write "Today is Friday" in French?', options: ['Aujourd\'hui, c\'est Vendredi.', 'Aujourd\'hui, c\'est vendredi.', 'Aujourd\'hui est vendredi.', 'Aujourd\'hui, vendredi.'], correct: 1, explanation: 'Days are not capitalised. The correct phrase is "Aujourd\'hui, c\'est vendredi."' },
+      { type: 'translate', question: 'Translate: "My favourite day is Saturday."', answer: 'Mon jour préféré est samedi.', alternatives: ['Mon jour préféré, c\'est samedi.'], explanation: 'Mon jour préféré = my favourite day. est = is. samedi = Saturday (not capitalised).' },
+      { type: 'multiple_choice', question: '"Le lundi, je travaille." means:', options: ['On Monday I work (just once)', 'I work every Monday', 'I worked last Monday', 'I will work on Monday'], correct: 1, explanation: '"Le" + day = every/each occurrence of that day. Without "le" it refers to a single Monday.' },
+      { type: 'multiple_choice', question: 'Quel jour vient avant mercredi ?', options: ['jeudi', 'vendredi', 'mardi', 'lundi'], correct: 2, explanation: 'The order is: lundi, MARDI, mercredi. So mardi comes before mercredi.' },
+    ],
+    quiz: [
+      { question: 'How do you write "Wednesday" in French?', options: ['Mercredi', 'mercredi', 'mercrédi', 'Mercredi'], correct: 1, explanation: 'Days are never capitalised in French: mercredi.' },
+      { question: '"Dimanche" is which day?', options: ['Saturday', 'Sunday', 'Friday', 'Monday'], correct: 1, explanation: 'Dimanche = Sunday.' },
+      { question: 'Which day comes after jeudi?', options: ['mercredi', 'samedi', 'vendredi', 'lundi'], correct: 2, explanation: 'jeudi → VENDREDI → samedi.' },
+      { question: '"Le mardi, elle a cours de français." means:', options: ['She had class last Tuesday', 'She has French class every Tuesday', 'She will have class on a Tuesday', 'She has class on Tuesday (just once)'], correct: 1, explanation: '"Le" + day = every occurrence of that day.' },
+      { question: 'How many days are in the French week starting from Monday?', options: ['5', '6', '7', '8'], correct: 2, explanation: '7 days: lundi, mardi, mercredi, jeudi, vendredi, samedi, dimanche.' },
+    ]
+  })
+},
+
+// ─────────────────────────────────────────────────────────────────
+// LESSON 3 — Numbers 1–100
+// ─────────────────────────────────────────────────────────────────
+{
+  level: 'A1', sort_order: 3, duration_min: 30, xp_reward: 55,
+  title: 'Numbers 1–100',
+  description: 'Les chiffres — including the tricky 70s, 80s and 90s. Essential for dates, age, prices.',
+  content: JSON.stringify({
+    intro: `Numbers are used everywhere — age, prices, addresses, dates, times. The 70–99 range is uniquely French and trips up every beginner. Master the logic and you'll never forget it.`,
+    sections: [
+      {
+        type: 'vocabulary',
+        title: 'Numbers 1–20 (must memorise individually)',
+        items: [
+          { fr: 'un / une', en: '1', pron: 'uh(n)', note: 'Masculine / feminine' },
+          { fr: 'deux', en: '2', pron: 'duh', note: '' },
+          { fr: 'trois', en: '3', pron: 'trwah', note: '' },
+          { fr: 'quatre', en: '4', pron: 'katr', note: '' },
+          { fr: 'cinq', en: '5', pron: 'sank', note: '' },
+          { fr: 'six', en: '6', pron: 'sees', note: '' },
+          { fr: 'sept', en: '7', pron: 'set', note: '' },
+          { fr: 'huit', en: '8', pron: 'weet', note: '' },
+          { fr: 'neuf', en: '9', pron: 'nuhf', note: '' },
+          { fr: 'dix', en: '10', pron: 'dees', note: '' },
+          { fr: 'onze', en: '11', pron: 'onz', note: '' },
+          { fr: 'douze', en: '12', pron: 'dooz', note: '' },
+          { fr: 'treize', en: '13', pron: 'trehz', note: '' },
+          { fr: 'quatorze', en: '14', pron: 'ka-torz', note: '' },
+          { fr: 'quinze', en: '15', pron: 'kanz', note: '' },
+          { fr: 'seize', en: '16', pron: 'sehz', note: '' },
+          { fr: 'dix-sept', en: '17', pron: 'dees-set', note: '10+7' },
+          { fr: 'dix-huit', en: '18', pron: 'dees-wheet', note: '10+8' },
+          { fr: 'dix-neuf', en: '19', pron: 'dees-nuhf', note: '10+9' },
+          { fr: 'vingt', en: '20', pron: 'van', note: '' },
+        ]
+      },
+      {
+        type: 'grammar',
+        title: 'Tens 30–60 (regular pattern)',
+        rules: [
+          { rule: '30', example: 'trente — trente et un, trente-deux…', translation: '', breakdown: '' },
+          { rule: '40', example: 'quarante — quarante et un…', translation: '', breakdown: '' },
+          { rule: '50', example: 'cinquante', translation: '', breakdown: '' },
+          { rule: '60', example: 'soixante — soixante et un…', translation: '', breakdown: '' },
+        ]
+      },
+      {
+        type: 'grammar',
+        title: '⚠️ The tricky part: 70–99',
+        rules: [
+          { rule: '70 = 60 + 10', example: 'soixante-dix', translation: '70', breakdown: '71 = soixante et onze, 72 = soixante-douze … 79 = soixante-dix-neuf' },
+          { rule: '80 = 4 × 20', example: 'quatre-vingts', translation: '80', breakdown: '81 = quatre-vingt-un (no "et"!), 82 = quatre-vingt-deux…' },
+          { rule: '90 = 80 + 10', example: 'quatre-vingt-dix', translation: '90', breakdown: '91 = quatre-vingt-onze … 99 = quatre-vingt-dix-neuf' },
+          { rule: '100', example: 'cent', translation: '100', breakdown: '' },
+        ]
+      },
+      {
+        type: 'tips',
+        title: 'Memory tricks',
+        tips: [
+          '70s: think "sixty-ten, sixty-eleven…" — soixante + the teens',
+          '80s: think "four-twenties" — quatre-vingts (like "four score" in old English)',
+          '90s: think "four-twenties-ten, four-twenties-eleven…"',
+          'No "et" in 81, 91 — only trente et un, quarante et un, etc. have "et"',
+          '80 (quatre-vingts) has an s. 81+ (quatre-vingt-un…) drops the s.',
+        ]
+      }
+    ],
+    exercises: [
+      { type: 'multiple_choice', question: 'How do you say 75 in French?', options: ['soixante-cinq', 'soixante-quinze', 'septante-cinq', 'quatre-vingt-cinq'], correct: 1, explanation: '75 = 60 + 15 = soixante-quinze.' },
+      { type: 'multiple_choice', question: 'How do you say 80 in French?', options: ['huitante', 'octante', 'quatre-vingts', 'quatre-vingt'], correct: 2, explanation: '80 = quatre-vingts (4 × 20). Note the -s at the end.' },
+      { type: 'multiple_choice', question: 'How do you say 91 in French?', options: ['quatre-vingt-onze', 'quatre-vingt-et-onze', 'nonante-un', 'soixante-dix-onze'], correct: 0, explanation: '91 = 80 + 11 = quatre-vingt-onze. No "et" after vingt.' },
+      { type: 'translate', question: 'Write the number 67 in French words.', answer: 'soixante-sept', alternatives: [], explanation: '67 = 60 + 7 = soixante-sept.' },
+      { type: 'multiple_choice', question: '"J\'ai quatre-vingt-deux ans." means:', options: ['I am 72 years old.', 'I am 82 years old.', 'I am 92 years old.', 'I am 80 years old.'], correct: 1, explanation: 'quatre-vingt-deux = 4×20+2 = 82.' },
+      { type: 'translate', question: 'Write 99 in French words.', answer: 'quatre-vingt-dix-neuf', alternatives: [], explanation: '99 = 80 + 19 = quatre-vingt-dix-neuf.' },
+    ],
+    quiz: [
+      { question: 'What is "soixante-dix" in numbers?', options: ['60', '67', '70', '76'], correct: 2, explanation: 'soixante-dix = 60 + 10 = 70.' },
+      { question: 'How do you say 81 in French?', options: ['quatre-vingts-un', 'quatre-vingt-et-un', 'quatre-vingt-un', 'huitante-un'], correct: 2, explanation: '81 = quatre-vingt-un. No "s" on vingt when followed by a number, no "et".' },
+      { question: 'Which number is "quatre-vingt-quinze"?', options: ['85', '90', '95', '99'], correct: 2, explanation: 'quatre-vingt-quinze = 80 + 15 = 95.' },
+      { question: '"trente et un" is:', options: ['13', '30', '31', '41'], correct: 2, explanation: 'trente = 30, et un = and one → 31.' },
+      { question: '100 in French is:', options: ['mille', 'cent', 'centi', 'cents'], correct: 1, explanation: '100 = cent.' },
+    ]
+  })
+},
+
+// ─────────────────────────────────────────────────────────────────
+// LESSON 4 — Articles & Gender
+// ─────────────────────────────────────────────────────────────────
 {
   level: 'A1', sort_order: 4, duration_min: 30, xp_reward: 55,
-  title: 'Indefinite Articles: un, une, des',
-  description: 'Learn when to use "a / an / some" in French — and the important cases where articles disappear entirely.',
+  title: 'Articles & Gender',
+  description: 'le, la, l\', les, un, une, des — and how to work out the gender of French nouns.',
   content: JSON.stringify({
-    intro: `While definite articles (le, la, les) refer to specific, known things ("the park"), indefinite articles (un, une, des) refer to non-specific things ("a park", "some parks"). In French, every countable noun needs an article — you cannot drop it like in English. Understanding when to use indefinite vs definite articles is crucial for TEF writing and speaking.`,
+    intro: `Every French noun has a gender — masculine or feminine — and this affects the article you use. There is no perfect rule, but there are patterns. Mastering articles is foundational for everything else in French grammar.`,
     sections: [
       {
         type: 'grammar',
-        title: 'The Three Indefinite Articles',
+        title: 'Definite Articles — "the"',
         rules: [
-          { rule: 'UN — masculine singular', example: 'un parc, un café, un formulaire, un appartement', translation: 'a park, a café, a form, an apartment', breakdown: '"A/an" for masculine nouns' },
-          { rule: 'UNE — feminine singular', example: 'une maison, une ville, une demande, une carte', translation: 'a house, a city, an application, a card', breakdown: '"A/an" for feminine nouns' },
-          { rule: 'DES — all plurals', example: 'des parcs, des maisons, des formulaires, des enfants', translation: 'some parks, some houses, some forms, some children', breakdown: '"Some" or just a plural. Used for both genders. Often not translated in English.' },
+          { rule: 'le', example: 'le livre', translation: 'the book (masculine singular)', breakdown: '' },
+          { rule: 'la', example: 'la table', translation: 'the table (feminine singular)', breakdown: '' },
+          { rule: 'l\'', example: 'l\'hôtel / l\'arbre', translation: 'the hotel / the tree (before vowel or mute h)', breakdown: '' },
+          { rule: 'les', example: 'les livres', translation: 'the books (plural — all genders)', breakdown: '' },
         ]
       },
       {
         type: 'grammar',
-        title: 'Indefinite Articles After NEGATION — Critical Rule!',
-        explanation: 'After a negation (ne...pas, ne...plus, ne...jamais), un/une/des ALL change to "de" (or "d\'" before a vowel). This is one of the most tested grammar rules on TEF.',
+        title: 'Indefinite Articles — "a / an / some"',
         rules: [
-          { rule: 'Positive → Negative', example: 'J\'ai un appartement. → Je n\'ai pas d\'appartement.', translation: 'I have an apartment. → I don\'t have an apartment.', breakdown: 'un → de (before vowel: d\')' },
-          { rule: 'Positive → Negative', example: 'J\'ai une voiture. → Je n\'ai pas de voiture.', translation: 'I have a car. → I don\'t have a car.', breakdown: 'une → de' },
-          { rule: 'Positive → Negative', example: 'J\'ai des enfants. → Je n\'ai pas d\'enfants.', translation: 'I have children. → I don\'t have children.', breakdown: 'des → de (before vowel: d\')' },
-          { rule: 'EXCEPTION: être (to be)', example: 'Ce n\'est pas un problème.', translation: 'It\'s not a problem.', breakdown: 'After être in negation, the article does NOT change to de.' },
+          { rule: 'un', example: 'un stylo', translation: 'a pen (masculine singular)', breakdown: '' },
+          { rule: 'une', example: 'une table', translation: 'a table (feminine singular)', breakdown: '' },
+          { rule: 'des', example: 'des livres', translation: 'some books (plural)', breakdown: '' },
         ]
       },
       {
         type: 'grammar',
-        title: 'When Articles Disappear — Professions and Nationalities',
-        explanation: 'In French, after the verb "être" (to be), no article is used before professions, nationalities, or religions. This surprises English learners.',
+        title: 'Gender patterns (helpful but not perfect)',
         rules: [
-          { rule: 'Profession (no article)', example: 'Je suis médecin. / Elle est avocate.', translation: 'I am a doctor. / She is a lawyer.', breakdown: 'No article! NOT "je suis un médecin" (that\'s incorrect)' },
-          { rule: 'Nationality (no article)', example: 'Il est canadien. / Je suis marocain.', translation: 'He is Canadian. / I am Moroccan.', breakdown: 'No article. Also note: lowercase for nationalities as adjectives.' },
-          { rule: 'BUT with adjective — article returns', example: 'C\'est un bon médecin.', translation: 'He is a good doctor.', breakdown: 'When you add an adjective, the article comes back.' },
+          { rule: 'Often feminine', example: 'Words ending in -e: table, maison, bouteille', translation: '', breakdown: '' },
+          { rule: 'Often feminine', example: 'Words ending in -tion: nation, organisation', translation: '', breakdown: '' },
+          { rule: 'Often masculine', example: 'Words ending in -age: voyage, fromage', translation: '', breakdown: '' },
+          { rule: 'Use l\' before vowel or mute h', example: 'l\'été (summer), l\'hôpital (hospital)', translation: '', breakdown: 'Even if feminine: l\'école (feminine)' },
         ]
       },
       {
         type: 'vocabulary',
-        title: 'Key Words with Indefinite Articles — Immigration Context',
+        title: 'Common nouns with articles (drinks & objects from notes)',
         items: [
-          { fr: 'un permis de travail', en: 'a work permit', pron: 'uhn pehr-mee duh tra-VY', note: 'masculine' },
-          { fr: 'un passeport', en: 'a passport', pron: 'uhn pass-POR', note: 'masculine' },
-          { fr: 'un rendez-vous', en: 'an appointment', pron: 'uhn ron-day-VOO', note: 'masculine' },
-          { fr: 'un emploi', en: 'a job', pron: 'uhn om-PLWAH', note: 'masculine' },
-          { fr: 'une résidence', en: 'a residence', pron: 'ün ray-zee-DONS', note: 'feminine' },
-          { fr: 'une adresse', en: 'an address', pron: 'ün a-DRESS', note: 'feminine' },
-          { fr: 'une pièce d\'identité', en: 'a piece of ID', pron: 'ün pee-ess dee-don-tee-TAY', note: 'feminine' },
-          { fr: 'des documents', en: 'documents', pron: 'day dok-ü-MON', note: 'plural' },
-        ]
-      },
-      {
-        type: 'dialogue',
-        title: 'Dialogue — At an IRCC Appointment',
-        lines: [
-          { speaker: 'Agent', fr: 'Avez-vous un passeport valide?', en: 'Do you have a valid passport?' },
-          { speaker: 'Vous', fr: 'Oui, j\'ai un passeport canadien et un permis de travail.', en: 'Yes, I have a Canadian passport and a work permit.' },
-          { speaker: 'Agent', fr: 'Avez-vous des enfants?', en: 'Do you have children?' },
-          { speaker: 'Vous', fr: 'Oui, j\'ai deux enfants.', en: 'Yes, I have two children.' },
-          { speaker: 'Agent', fr: 'Avez-vous une adresse permanente au Canada?', en: 'Do you have a permanent address in Canada?' },
-          { speaker: 'Vous', fr: 'Oui, j\'habite au quatre-vingt-deux, rue Lakeshore, à Oakville.', en: 'Yes, I live at 82 Lakeshore Road, in Oakville.' },
-        ]
-      }
-    ],
-    exercises: [
-      { type: 'multiple_choice', question: 'Complete: "J\'ai ___ appartement à Oakville."', options: ['un', 'une', 'des', 'de'], correct: 0, explanation: '"Appartement" is masculine singular → un appartement.' },
-      { type: 'multiple_choice', question: 'Complete: "Je n\'ai pas ___ voiture." (I don\'t have a car)', options: ['une', 'un', 'de', 'des'], correct: 2, explanation: 'After negation, une → de. Je n\'ai pas DE voiture.' },
-      { type: 'multiple_choice', question: 'Complete: "Il est ___ ingénieur." (He is an engineer)', options: ['un', 'une', 'des', 'no article needed'], correct: 3, explanation: 'After être + profession, no article is used. "Il est ingénieur." NOT "il est un ingénieur".' },
-      { type: 'multiple_choice', question: 'Complete: "J\'ai ___ documents à vous donner."', options: ['un', 'une', 'des', 'de'], correct: 2, explanation: '"Documents" is plural → des documents.' },
-      { type: 'fill_blank', question: 'Je n\'ai pas ___ passeport. (I don\'t have a passport)', options: ['un', 'de', 'd\'', 'une'], correct: 2, explanation: 'After negation: pas de. Before vowel (passeport starts with p — consonant so it\'s "de", not "d\'"). Actually: pas de passeport.' },
-      { type: 'multiple_choice', question: 'Which sentence is correct?', options: ['Elle est une médecin.', 'Elle est médecin.', 'Elle est la médecin.', 'Elle est des médecins.'], correct: 1, explanation: 'Profession after être: no article. "Elle est médecin." is correct.' },
-      { type: 'multiple_choice', question: 'Complete: "C\'est ___ bon médecin." (He\'s a good doctor)', options: ['no article', 'un', 'une', 'des'], correct: 1, explanation: 'When an adjective is added, the article returns: "C\'est un bon médecin." (With adjective → article required)' },
-    ],
-    quiz: [
-      { question: 'Complete: "Elle a ___ fille et ___ fils."', options: ['un/une', 'une/un', 'des/des', 'un/un'], correct: 1, explanation: '"Fille" is feminine → une. "Fils" is masculine → un.' },
-      { question: 'Complete: "Je n\'ai pas ___ enfants."', options: ['des', 'de', 'd\'', 'les'], correct: 2, explanation: 'After negation: des → de. Before vowel (enfants): de → d\'. Je n\'ai pas d\'enfants.' },
-      { question: '"Il est ___." (He is a lawyer)', options: ['un avocat', 'avocat', 'l\'avocat', 'des avocat'], correct: 1, explanation: 'Profession after être = no article. "Il est avocat."' },
-      { question: 'Complete: "J\'ai ___ rendez-vous à l\'IRCC."', options: ['une', 'des', 'un', 'de'], correct: 2, explanation: '"Rendez-vous" is masculine singular → un rendez-vous.' },
-      { question: 'Complete: "Ce n\'est pas ___ problème." (It\'s not a problem)', options: ['de', 'd\'', 'un', 'une'], correct: 2, explanation: 'Exception: after "être" in negation, the article does NOT change. "Ce n\'est pas UN problème."' },
-    ]
-  })
-},
-
-{
-  level: 'A1', sort_order: 5, duration_min: 25, xp_reward: 45,
-  title: 'Personal Pronouns',
-  description: 'Master the subject pronouns je, tu, il, elle, nous, vous, ils, elles — the foundation of every French sentence.',
-  content: JSON.stringify({
-    intro: `Every French sentence needs a subject pronoun. Unlike English, French pronouns change the form of the verb — so knowing which pronoun to use is critical. French has distinct formal and informal "you" forms, which we covered in Lesson 1. Now we look at the complete system.`,
-    sections: [
-      {
-        type: 'grammar',
-        title: 'The 8 French Subject Pronouns',
-        rules: [
-          { rule: 'JE', example: 'Je parle français.', translation: 'I speak French.', breakdown: 'First person singular. Becomes "j\'" before a vowel: J\'habite à Oakville.' },
-          { rule: 'TU', example: 'Tu parles français?', translation: 'Do you speak French?', breakdown: 'Second person singular INFORMAL. Use with friends, family, children, peers.' },
-          { rule: 'IL', example: 'Il travaille à Burlington.', translation: 'He works in Burlington.', breakdown: 'Third person masculine singular. Also used for masculine things: Le bus — il est en retard.' },
-          { rule: 'ELLE', example: 'Elle habite à Oakville.', translation: 'She lives in Oakville.', breakdown: 'Third person feminine singular. Also for feminine things: La ville — elle est belle.' },
-          { rule: 'ON', example: 'On mange à midi.', translation: 'We eat at noon. / One eats at noon.', breakdown: 'Very common in spoken French instead of "nous". Always uses il/elle verb form.' },
-          { rule: 'NOUS', example: 'Nous habitons au Canada.', translation: 'We live in Canada.', breakdown: 'First person plural. More formal than "on" in speech.' },
-          { rule: 'VOUS', example: 'Vous parlez très bien français!', translation: 'You speak French very well!', breakdown: 'Second person plural OR formal singular. Use with strangers, officials, elders.' },
-          { rule: 'ILS', example: 'Ils travaillent à Toronto.', translation: 'They work in Toronto.', breakdown: 'Third person MASCULINE plural. Also used for mixed groups (male+female together).' },
-          { rule: 'ELLES', example: 'Elles sont médecins.', translation: 'They are doctors.', breakdown: 'Third person FEMININE plural. ONLY for all-female groups.' },
-        ]
-      },
-      {
-        type: 'grammar',
-        title: 'The ON Pronoun — Very Important for Spoken French',
-        explanation: 'In spoken and informal written French, "on" is used instead of "nous" about 90% of the time. On TEF oral, using "on" sounds natural. Using only "nous" sounds very formal.',
-        rules: [
-          { rule: 'On = nous (we) in conversation', example: 'On va au parc. (= Nous allons au parc.)', translation: 'We\'re going to the park.', breakdown: 'Same meaning, more natural in speech' },
-          { rule: 'On = general "people" / "one"', example: 'En France, on mange à 20h.', translation: 'In France, people eat at 8pm.', breakdown: 'Like "you" or "one" in English generalizations' },
-          { rule: 'Verb form with on', example: 'On parle, on mange, on est... (same as il/elle)', translation: '', breakdown: 'On always uses third-person singular verb form' },
-        ]
-      },
-      {
-        type: 'grammar',
-        title: 'ILS vs ELLES — The Mixed Group Rule',
-        rules: [
-          { rule: '1 man + 99 women = ILS', example: 'Paul et Marie → Ils sont contents.', translation: 'Paul and Marie → They are happy.', breakdown: 'Any group with at least one male → ILS. French grammar is masculine-dominant.' },
-          { rule: 'All women = ELLES', example: 'Marie, Sophie et Fatima → Elles sont médecins.', translation: 'Marie, Sophie and Fatima → They are doctors.', breakdown: 'ELLES only when the entire group is female.' },
-        ]
-      },
-      {
-        type: 'vocabulary',
-        title: 'Pronoun Usage in Real Sentences',
-        items: [
-          { fr: 'Je m\'appelle Osama.', en: 'My name is Osama.', pron: 'zhuh ma-PEL o-ZA-ma', note: 'j\' before vowel in j\'habite, j\'ai, etc.' },
-          { fr: 'Tu as quel âge?', en: 'How old are you? (informal)', pron: 'tü ah kel azh', note: 'tu = informal you' },
-          { fr: 'Il / Elle est médecin.', en: 'He / She is a doctor.', pron: 'eel / el ay may-duh-SAN', note: 'No article after être + profession' },
-          { fr: 'On habite à Oakville.', en: 'We live in Oakville.', pron: 'on a-BEET ah oak-VEEL', note: 'on = we in casual speech' },
-          { fr: 'Vous avez un passeport?', en: 'Do you have a passport? (formal)', pron: 'vooz a-VAY uhn pass-POR', note: 'Liaison: vous-z-avez' },
-          { fr: 'Ils viennent du Maroc.', en: 'They come from Morocco.', pron: 'eel vee-EN dü ma-ROK', note: 'ils = they (mixed or all-male)' },
+          { fr: 'un stylo', en: 'a pen', pron: 'stee-lo', note: 'masculine' },
+          { fr: 'un livre', en: 'a book', pron: 'leev-ruh', note: 'masculine' },
+          { fr: 'une table', en: 'a table', pron: 'tah-bluh', note: 'feminine' },
+          { fr: 'une chaise', en: 'a chair', pron: 'shez', note: 'feminine' },
+          { fr: 'l\'eau (de l\'eau)', en: 'water', pron: 'oh', note: 'feminine — de l\'eau' },
+          { fr: 'un café', en: 'a coffee', pron: 'kah-fay', note: 'masculine' },
+          { fr: 'un thé', en: 'a tea', pron: 'tay', note: 'masculine' },
+          { fr: 'du lait', en: 'milk', pron: 'lay', note: 'masculine (partitive du)' },
+          { fr: 'du vin', en: 'wine', pron: 'van', note: 'masculine (partitive du)' },
+          { fr: 'une bière', en: 'a beer', pron: 'byair', note: 'feminine' },
+          { fr: 'un croissant', en: 'a croissant', pron: 'kwa-sahn', note: 'masculine' },
+          { fr: 'une maison', en: 'a house', pron: 'meh-zon', note: 'feminine' },
         ]
       },
       {
         type: 'tips',
-        title: 'TEF/TCF Tips',
+        title: 'Tips',
         tips: [
-          'On the oral exam, use "on" naturally instead of "nous" — it sounds more fluent',
-          '"Vous" can be singular (formal) or plural — context makes it clear',
-          'Never forget: "ils" for any mixed group, "elles" only for all-female',
-          'Je becomes j\' before a vowel: j\'ai, j\'habite, j\'étudie — never "je ai"',
-          'In writing (TEF), use "nous" for formal essays — "on" is more for informal/spoken',
+          'Always learn the article WITH the noun — not "livre" but "un livre"',
+          'l\' is used before any vowel sound regardless of gender',
+          'The gender of a noun never changes — it\'s fixed',
+          'des (plural indefinite) disappears after negation: Je n\'ai pas de livres.',
         ]
       }
     ],
     exercises: [
-      { type: 'multiple_choice', question: 'Your boss asks you a question. You reply "_____ travaille depuis cinq ans ici." Which pronoun?', options: ['Tu', 'Je', 'Il', 'On'], correct: 1, explanation: 'You are talking about yourself → Je travaille depuis cinq ans ici.' },
-      { type: 'multiple_choice', question: 'Paul and Marie go to the park. You say "___ vont au parc."', options: ['Elles', 'Elle', 'Ils', 'Il'], correct: 2, explanation: 'Mixed group (one male + one female) → ILS. Any male in the group = ils.' },
-      { type: 'multiple_choice', question: 'In spoken French, instead of "Nous allons au marché" you would say:', options: ['Vous allons au marché', 'On va au marché', 'Tu vas au marché', 'Ils vont au marché'], correct: 1, explanation: 'On va = we go. In spoken French, "on" replaces "nous" most of the time. Note: on va (not on allons).' },
-      { type: 'multiple_choice', question: '"Je" becomes "_____" before a vowel.', options: ['je', 'j\'', 'jé', 'ja'], correct: 1, explanation: 'Before a vowel or silent h, "je" drops the "e" and adds an apostrophe: j\'ai, j\'habite, j\'étudie.' },
-      { type: 'multiple_choice', question: 'Three sisters — Sophie, Marie, and Fatima. Which pronoun?', options: ['Ils', 'On', 'Elles', 'Vous'], correct: 2, explanation: 'All three are female → ELLES. "Elles sont trois sœurs."' },
-      { type: 'multiple_choice', question: 'You are speaking formally to a bank manager (one person). Which "you"?', options: ['tu', 'vous', 'on', 'ils'], correct: 1, explanation: '"Vous" is used for formal singular (one person you respect) AND plural (multiple people). Always "vous" with officials.' },
+      { type: 'multiple_choice', question: 'Which article goes with "hôtel"?', options: ['le', 'la', 'l\'', 'un'], correct: 2, explanation: 'Hôtel starts with a vowel sound → l\'hôtel. (It\'s also masculine, so definite = l\'hôtel, indefinite = un hôtel.)' },
+      { type: 'multiple_choice', question: 'Which article is correct? "___ table est grande."', options: ['Le', 'La', 'L\'', 'Les'], correct: 1, explanation: '"Table" is feminine → La table.' },
+      { type: 'fill_blank', question: 'Choose the correct article: "J\'ai ___ stylo."', options: ['un', 'une', 'des', 'le'], correct: 0, explanation: '"Stylo" is masculine singular → un stylo (indefinite article).' },
+      { type: 'multiple_choice', question: 'Words ending in -tion in French are usually:', options: ['masculine', 'feminine', 'neuter', 'it depends'], correct: 1, explanation: '-tion endings are almost always feminine: nation, organisation, information.' },
+      { type: 'translate', question: 'Translate: "I have a book and some chairs."', answer: 'J\'ai un livre et des chaises.', alternatives: [], explanation: 'un livre (masc. singular), des chaises (plural indefinite).' },
     ],
     quiz: [
-      { question: 'Which pronoun replaces "Marie et Paul"?', options: ['elles', 'ils', 'elle', 'on'], correct: 1, explanation: 'Mixed group → ils.' },
-      { question: 'In spoken French, "nous mangeons" becomes:', options: ['vous mangez', 'on mange', 'ils mangent', 'tu manges'], correct: 1, explanation: 'On mange = nous mangeons in casual speech.' },
-      { question: 'Complete: "___ habite à Oakville." (I live in Oakville)', options: ['Je', 'J\'', 'Tu', 'Il'], correct: 1, explanation: 'Before "habite" (starts with h — silent), je → j\'.' },
-      { question: 'Which pronoun is ONLY for all-female groups?', options: ['Ils', 'Elles', 'Vous', 'On'], correct: 1, explanation: 'ELLES is used only when every person in the group is female.' },
-      { question: 'A stranger asks you something. You use _____ to address them.', options: ['tu', 'on', 'vous', 'ils'], correct: 2, explanation: 'Stranger = formal → vous.' },
+      { question: 'What is the article for "école" (school)?', options: ['le', 'la', 'l\'', 'les'], correct: 2, explanation: 'École starts with a vowel → l\'école (also feminine).' },
+      { question: '"Les" is used for:', options: ['masculine singular', 'feminine singular', 'any plural', 'before vowels'], correct: 2, explanation: '"Les" is the definite article for all plural nouns regardless of gender.' },
+      { question: 'Which ending is usually feminine?', options: ['-age', '-eur', '-tion', '-ment'], correct: 2, explanation: 'Words ending in -tion are almost always feminine.' },
+      { question: 'Correct sentence?', options: ['J\'ai un eau.', 'Je bois de l\'eau.', 'Je bois le eau.', 'J\'ai une eau.'], correct: 1, explanation: '"Eau" is feminine and uses the partitive "de l\'" for an unspecified quantity: de l\'eau.' },
+      { question: '"Un" is used for:', options: ['feminine singular nouns', 'masculine singular nouns', 'all plural nouns', 'nouns starting with a vowel'], correct: 1, explanation: '"Un" is the masculine singular indefinite article.' },
     ]
   })
 },
 
-// A1 lessons 6-13 (abbreviated structure — same pattern)
+// ─────────────────────────────────────────────────────────────────
+// LESSON 5 — Possessive Adjectives
+// ─────────────────────────────────────────────────────────────────
 {
-  level: 'A1', sort_order: 6, duration_min: 30, xp_reward: 60,
-  title: 'Adjectives: Gender & Agreement',
-  description: 'French adjectives change form to match the gender and number of the noun they describe — learn the rules and most common adjectives.',
+  level: 'A1', sort_order: 5, duration_min: 25, xp_reward: 50,
+  title: 'Possessive Adjectives',
+  description: 'Mon, ma, mes, ton, ta, tes… Agree with the NOUN, not the owner.',
   content: JSON.stringify({
-    intro: `In French, adjectives must AGREE with the noun they describe in gender (masculine/feminine) and number (singular/plural). This means the same adjective can have up to 4 forms. Adjective agreement errors are among the most common mistakes on TEF/TCF written tests.`,
+    intro: `Possessive adjectives (my, your, his/her…) in French agree with the gender of the NOUN they describe — not the gender of the owner. This is the most important rule and the most common mistake.`,
     sections: [
       {
         type: 'grammar',
-        title: 'The 4 Forms of a Regular Adjective',
+        title: 'The full possessive adjective table',
         rules: [
-          { rule: 'Masculine singular (base form)', example: 'un grand lac', translation: 'a big lake', breakdown: 'Base form — no changes' },
-          { rule: 'Feminine singular (+e)', example: 'une grande ville', translation: 'a big city', breakdown: 'Add -e to masculine form' },
-          { rule: 'Masculine plural (+s)', example: 'des grands lacs', translation: 'big lakes', breakdown: 'Add -s to masculine form' },
-          { rule: 'Feminine plural (+es)', example: 'des grandes villes', translation: 'big cities', breakdown: 'Add -es to masculine form' },
+          { rule: 'Je (I)', example: 'mon (masc) / ma (fem) / mes (plural)', translation: 'my', breakdown: 'mon before any vowel: mon amie (not ma amie)' },
+          { rule: 'Tu (you)', example: 'ton / ta / tes', translation: 'your (informal)', breakdown: 'ton before vowel: ton adresse' },
+          { rule: 'Il/Elle (he/she)', example: 'son / sa / ses', translation: 'his / her', breakdown: 'son/sa = same form regardless of owner\'s gender' },
+          { rule: 'Nous (we)', example: 'notre / notre / nos', translation: 'our', breakdown: '' },
+          { rule: 'Vous (you pl.)', example: 'votre / votre / vos', translation: 'your (formal/plural)', breakdown: '' },
+          { rule: 'Ils/Elles (they)', example: 'leur / leur / leurs', translation: 'their', breakdown: 'leurs (with s) for plural nouns' },
         ]
       },
       {
         type: 'grammar',
-        title: 'Special Patterns — Irregular Adjectives',
+        title: 'The vowel rule — critical!',
         rules: [
-          { rule: 'Already ends in -e: no change', example: 'un livre rouge / une voiture rouge', translation: 'a red book / a red car', breakdown: 'If masculine already ends in -e, feminine is identical' },
-          { rule: 'Ends in -x: feminine = -se', example: 'heureux → heureuse', translation: 'happy (m) → happy (f)', breakdown: 'Also: dangereux→dangereuse, délicieux→délicieuse' },
-          { rule: 'Ends in -er: feminine = -ère', example: 'premier → première', translation: 'first (m) → first (f)', breakdown: 'Also: dernier→dernière, étranger→étrangère' },
-          { rule: 'Ends in -eur: feminine = -euse or -rice', example: 'travailleur→travailleuse, créateur→créatrice', translation: 'hardworking, creative', breakdown: '' },
-          { rule: 'Ends in -f: feminine = -ve', example: 'actif → active, sportif → sportive', translation: 'active, sporty', breakdown: 'Also: naïf→naïve' },
-          { rule: 'Doubles consonant + e', example: 'bon→bonne, gros→grosse, bas→basse', translation: 'good, big, low', breakdown: '' },
-        ]
-      },
-      {
-        type: 'grammar',
-        title: 'BANGS Adjectives — Come BEFORE the Noun',
-        explanation: 'Most French adjectives come AFTER the noun (une voiture rouge). But a small group of common adjectives come BEFORE. Remember them with BANGS: Beauty, Age, Number, Goodness, Size.',
-        rules: [
-          { rule: 'Beauty', example: 'un beau lac, une belle ville, un joli parc', translation: 'a beautiful lake, a beautiful city, a pretty park', breakdown: '' },
-          { rule: 'Age', example: 'un vieux quartier, une jeune femme, un ancien collègue', translation: 'an old neighbourhood, a young woman, a former colleague', breakdown: '' },
-          { rule: 'Number (ordinal)', example: 'le premier janvier, la deuxième page', translation: 'January first, the second page', breakdown: '' },
-          { rule: 'Goodness', example: 'un bon médecin, une mauvaise idée', translation: 'a good doctor, a bad idea', breakdown: '' },
-          { rule: 'Size', example: 'un grand parc, une petite maison, un long chemin', translation: 'a big park, a small house, a long road', breakdown: '' },
+          { rule: 'Before feminine noun starting with vowel or mute h', example: 'mon amie (not ma amie)', translation: 'my (female) friend', breakdown: 'Use mon/ton/son even for feminine nouns before a vowel' },
+          { rule: 'Before feminine noun starting with vowel or mute h', example: 'ton adresse', translation: 'your address', breakdown: 'adresse is feminine but starts with a vowel → ton, not ta' },
         ]
       },
       {
         type: 'vocabulary',
-        title: 'Essential Adjectives with All Forms',
+        title: 'Examples from notes',
         items: [
-          { fr: 'grand / grande / grands / grandes', en: 'big, tall', pron: 'gron / grond', note: 'Very common — BANGS adjective (size) → before noun' },
-          { fr: 'petit / petite / petits / petites', en: 'small, short', pron: 'puh-TEE / puh-TEET', note: 'BANGS (size) → before noun' },
-          { fr: 'bon / bonne / bons / bonnes', en: 'good', pron: 'bon / bun', note: 'BANGS (goodness) → before noun. Doubles the n.' },
-          { fr: 'mauvais / mauvaise', en: 'bad', pron: 'mo-VEH / mo-VEZ', note: 'BANGS → before noun' },
-          { fr: 'beau / belle / beaux / belles', en: 'beautiful, handsome', pron: 'bo / bell', note: 'BANGS → before noun. Irregular!' },
-          { fr: 'nouveau / nouvelle', en: 'new', pron: 'noo-VO / noo-VEL', note: 'BANGS → before noun. Like beau/belle.' },
-          { fr: 'vieux / vieille', en: 'old', pron: 'vyuh / vyay', note: 'BANGS → before noun. Irregular!' },
-          { fr: 'rouge / rouge', en: 'red (m & f same)', pron: 'roozh', note: 'After noun. Already ends in -e.' },
-          { fr: 'bleu / bleue / bleus / bleues', en: 'blue', pron: 'bluh / bluh', note: 'After noun.' },
-          { fr: 'canadien / canadienne', en: 'Canadian', pron: 'ka-na-DYAN / ka-na-DYEN', note: 'After noun. Doubles n in feminine.' },
-          { fr: 'francophone / francophone', en: 'French-speaking', pron: 'fron-ko-FON', note: 'Same form m&f. Very useful for Canada context.' },
-          { fr: 'bilingue / bilingue', en: 'bilingual', pron: 'bee-LANG', note: 'Same form m&f. Key for Canadian job applications.' },
+          { fr: 'mon livre', en: 'my book', pron: '', note: 'livre is masculine → mon' },
+          { fr: 'ma maison', en: 'my house', pron: '', note: 'maison is feminine → ma' },
+          { fr: 'mes livres', en: 'my books', pron: '', note: 'plural → mes' },
+          { fr: 'mon école', en: 'my school', pron: '', note: 'école is feminine but starts with vowel → mon' },
+          { fr: 'son père', en: 'his/her father', pron: '', note: 'père is masculine → son (regardless of owner\'s gender)' },
+          { fr: 'leur maison', en: 'their house', pron: '', note: 'singular noun → leur' },
+          { fr: 'leurs enfants', en: 'their children', pron: '', note: 'plural noun → leurs (with s)' },
         ]
       }
     ],
     exercises: [
-      { type: 'multiple_choice', question: '"Une ___ femme" — which form of "jeune" (young)?', options: ['jeune', 'jeunes', 'jeun', 'jeunesse'], correct: 0, explanation: '"Jeune" already ends in -e, so masculine and feminine are identical: un jeune homme, une jeune femme.' },
-      { type: 'multiple_choice', question: 'Where does the adjective go? "une ville ___" or "___ une ville"? (belle — beautiful)', options: ['une ville belle', 'une belle ville', 'both are correct', 'belle une ville'], correct: 1, explanation: '"Belle" is a BANGS adjective (Beauty) → it goes BEFORE the noun: une belle ville.' },
-      { type: 'multiple_choice', question: '"Des voitures ___" (red cars) — correct form of rouge?', options: ['rouge', 'rouges', 'rougs', 'rouge-s'], correct: 1, explanation: 'Plural → add -s. "rouge" → "rouges". Since rouge already ends in -e, feminine is same. Plural adds -s.' },
-      { type: 'fill_blank', question: '"Il est ___." (He is active — actif)', options: ['active', 'actif', 'actifs', 'actives'], correct: 1, explanation: '"Il" = masculine singular → actif. Feminine would be "active" (-f → -ve).' },
-      { type: 'multiple_choice', question: '"Une ___ idée" — which form of "bon"?', options: ['bon', 'bonne', 'bons', 'bonnes'], correct: 1, explanation: '"Idée" is feminine → bonne. Bon doubles the n in feminine: bon → bonne.' },
+      { type: 'multiple_choice', question: 'Fill in: "___ livre" (my book — livre is masculine)', options: ['ma', 'mon', 'mes', 'sa'], correct: 1, explanation: 'Livre is masculine singular → mon.' },
+      { type: 'multiple_choice', question: 'Fill in: "___ enfants" (their children — plural)', options: ['leur', 'leurs', 'son', 'ses'], correct: 1, explanation: 'Plural noun → leurs (with s).' },
+      { type: 'multiple_choice', question: 'Fill in: "___ amie" (my female friend — amie starts with a vowel)', options: ['ma', 'mon', 'mes', 'sa'], correct: 1, explanation: 'Even though amie is feminine, it starts with a vowel → mon (not ma).' },
+      { type: 'fill_blank', question: '"___ père travaille." Complete with "his/her father" (père = masculine).', options: ['Sa', 'Son', 'Ses', 'Leur'], correct: 1, explanation: 'Père is masculine → son père. Note: son = his OR her (no difference in French).' },
+      { type: 'translate', question: 'Translate: "my house, your books, their school"', answer: 'ma maison, tes livres, leur école', alternatives: ['ma maison, vos livres, leur école'], explanation: 'maison (fem) = ma, livres (plural) = tes or vos, école (starts with vowel, fem) = leur.' },
     ],
     quiz: [
-      { question: 'Which adjective form is correct: "des ___ enfants" (happy children — heureux)?', options: ['heureux', 'heureuse', 'heureuses', 'heureux (same)'], correct: 3, explanation: 'Adjectives ending in -x do not add -s in the plural: des enfants heureux.' },
-      { question: 'Where does "grand" go?', options: ['after the noun', 'before the noun', 'either position', 'never with nouns'], correct: 1, explanation: '"Grand" is a BANGS adjective (Size) → before the noun: un grand appartement.' },
-      { question: '"Une femme ___" (creative — créateur)', options: ['créateur', 'créatrice', 'créateure', 'créatrices'], correct: 1, explanation: 'créateur → créatrice (feminine). -eur → -rice for this type.' },
-      { question: '"Le gouvernement ___." (new — nouveau)', options: ['nouveau', 'nouvelle', 'nouveaux', 'nouvelles'], correct: 0, explanation: '"Gouvernement" is masculine singular → nouveau.' },
-      { question: 'Complete: "C\'est une ___ ville." (beautiful)', options: ['beau', 'belle', 'beaux', 'belles'], correct: 1, explanation: '"Ville" is feminine → belle. (beau→belle, irregular)' },
+      { question: 'What is "her book" in French? (livre = masculine)', options: ['sa livre', 'son livre', 'ses livres', 'leur livre'], correct: 1, explanation: 'Livre is masculine → son. In French, son can mean his OR her.' },
+      { question: '"Nos enfants" means:', options: ['Your children', 'Their children', 'Our children', 'My children'], correct: 2, explanation: 'nos = our (plural noun). Nous → nos.' },
+      { question: 'Why do we say "mon amie" not "ma amie"?', options: ['amie is masculine', 'amie starts with a vowel', 'amie is plural', 'ma is only for objects'], correct: 1, explanation: 'Before a feminine noun starting with a vowel or mute h, use mon/ton/son instead of ma/ta/sa.' },
+      { question: '"Vos" is the possessive for:', options: ['nous — plural nouns', 'vous — plural nouns', 'ils — plural nouns', 'tu — plural nouns'], correct: 1, explanation: 'Vous → votre (singular noun) / vos (plural noun).' },
+      { question: '"Sa maison" — the owner is:', options: ['definitely male', 'definitely female', 'could be male or female', 'always plural'], correct: 2, explanation: 'Sa = his or her. French possessives agree with the noun, not the owner.' },
     ]
   })
 },
 
+// ─────────────────────────────────────────────────────────────────
+// LESSON 6 — Months, Seasons & Dates
+// ─────────────────────────────────────────────────────────────────
 {
-  level: 'A1', sort_order: 7, duration_min: 20, xp_reward: 40,
-  title: 'Days, Months & Dates',
-  description: 'Learn to say days of the week, months of the year, and full dates — essential for making appointments and discussing schedules.',
+  level: 'A1', sort_order: 6, duration_min: 25, xp_reward: 50,
+  title: 'Months, Seasons & Dates',
+  description: 'Les mois, les saisons, les dates — essential for any date-related question on TEF/TCF.',
   content: JSON.stringify({
-    intro: `Dates and times appear constantly in real life — booking appointments at IRCC, discussing work schedules, filling in forms. In French, dates follow a different format than English, and days/months are written in lowercase.`,
+    intro: `Dates, birthdays, appointments — you need these in every real-life context. Key rule: months and seasons are lowercase in French, and dates use a different format from English.`,
     sections: [
       {
         type: 'vocabulary',
-        title: 'Days of the Week — Les Jours de la Semaine',
+        title: 'Les mois (months)',
         items: [
-          { fr: 'lundi', en: 'Monday', pron: 'luhn-DEE', note: 'All days lowercase in French. Week starts Monday.' },
-          { fr: 'mardi', en: 'Tuesday', pron: 'mar-DEE', note: '' },
-          { fr: 'mercredi', en: 'Wednesday', pron: 'mair-kruh-DEE', note: '' },
-          { fr: 'jeudi', en: 'Thursday', pron: 'zhuh-DEE', note: '' },
-          { fr: 'vendredi', en: 'Friday', pron: 'von-druh-DEE', note: '' },
-          { fr: 'samedi', en: 'Saturday', pron: 'sam-DEE', note: '' },
-          { fr: 'dimanche', en: 'Sunday', pron: 'dee-MONSH', note: '' },
-        ]
-      },
-      {
-        type: 'grammar',
-        title: 'Using Days — Important Patterns',
-        rules: [
-          { rule: 'A specific day (this Monday)', example: 'Lundi, je vais à l\'IRCC.', translation: 'On Monday, I\'m going to IRCC.', breakdown: 'No article — just the day name.' },
-          { rule: 'Every week (every Monday)', example: 'Le lundi, je travaille à domicile.', translation: 'On Mondays (every Monday), I work from home.', breakdown: 'Add "le" before the day for habitual action.' },
-          { rule: 'Next/Last + day', example: 'lundi prochain / lundi dernier', translation: 'next Monday / last Monday', breakdown: 'prochain = next, dernier = last. Adjective AFTER the day.' },
+          { fr: 'janvier', en: 'January', pron: 'zhon-vyay', note: 'Never capitalised' },
+          { fr: 'février', en: 'February', pron: 'fay-vryay', note: '' },
+          { fr: 'mars', en: 'March', pron: 'mars', note: '' },
+          { fr: 'avril', en: 'April', pron: 'ah-vreel', note: '' },
+          { fr: 'mai', en: 'May', pron: 'may', note: '' },
+          { fr: 'juin', en: 'June', pron: 'zhwan', note: '' },
+          { fr: 'juillet', en: 'July', pron: 'zhwee-yay', note: '' },
+          { fr: 'août', en: 'August', pron: 'oot', note: '' },
+          { fr: 'septembre', en: 'September', pron: 'sep-tom-bruh', note: '' },
+          { fr: 'octobre', en: 'October', pron: 'ok-to-bruh', note: '' },
+          { fr: 'novembre', en: 'November', pron: 'no-vom-bruh', note: '' },
+          { fr: 'décembre', en: 'December', pron: 'day-som-bruh', note: '' },
         ]
       },
       {
         type: 'vocabulary',
-        title: 'Months of the Year — Les Mois de l\'Année',
+        title: 'Les saisons (seasons)',
         items: [
-          { fr: 'janvier', en: 'January', pron: 'zhon-VYAY', note: 'All months lowercase' },
-          { fr: 'février', en: 'February', pron: 'fayv-RYAY', note: '' },
-          { fr: 'mars', en: 'March', pron: 'MARS', note: '' },
-          { fr: 'avril', en: 'April', pron: 'a-VREEL', note: '' },
-          { fr: 'mai', en: 'May', pron: 'MAY', note: '' },
-          { fr: 'juin', en: 'June', pron: 'ZHWAN', note: '' },
-          { fr: 'juillet', en: 'July', pron: 'zhwee-AY', note: '' },
-          { fr: 'août', en: 'August', pron: 'OOT or OO', note: 'The t may or may not be pronounced' },
-          { fr: 'septembre', en: 'September', pron: 'sep-TOM-bruh', note: '' },
-          { fr: 'octobre', en: 'October', pron: 'ok-TO-bruh', note: '' },
-          { fr: 'novembre', en: 'November', pron: 'no-VOM-bruh', note: '' },
-          { fr: 'décembre', en: 'December', pron: 'day-SOM-bruh', note: '' },
+          { fr: 'le printemps', en: 'spring', pron: '', note: 'au printemps' },
+          { fr: 'l\'été', en: 'summer', pron: '', note: 'en été' },
+          { fr: 'l\'automne', en: 'autumn', pron: '', note: 'en automne' },
+          { fr: 'l\'hiver', en: 'winter', pron: '', note: 'en hiver' },
         ]
       },
       {
         type: 'grammar',
-        title: 'How to Say Dates in French',
+        title: 'Date format & birthday questions',
         rules: [
-          { rule: 'The date format', example: 'le [number] [month] [year]', translation: '', breakdown: 'Day comes before month. Always use cardinal numbers (deux, trois...) EXCEPT for the first (premier).' },
-          { rule: 'The first of the month', example: 'le premier janvier', translation: 'January 1st', breakdown: '"Premier" (first) for the 1st. All others use regular numbers.' },
-          { rule: 'Other dates', example: 'le deux février, le quinze mars, le vingt-cinq décembre', translation: 'February 2nd, March 15th, December 25th', breakdown: 'le + number + month (+ year optional)' },
-          { rule: 'With the year', example: 'le trois mai deux mille vingt-six', translation: 'May 3rd, 2026', breakdown: '2026 = deux mille vingt-six' },
-          { rule: 'Asking the date', example: 'Quelle est la date aujourd\'hui? / On est le combien?', translation: 'What is today\'s date? / What\'s today\'s date? (informal)', breakdown: '' },
-        ]
-      },
-      {
-        type: 'vocabulary',
-        title: 'Seasons — Les Saisons',
-        items: [
-          { fr: 'le printemps', en: 'spring', pron: 'luh pran-TON', note: 'au printemps = in spring' },
-          { fr: 'l\'été', en: 'summer', pron: 'lay-TAY', note: 'en été = in summer' },
-          { fr: 'l\'automne', en: 'autumn / fall', pron: 'loh-TUN', note: 'en automne = in fall. The mn is silent.' },
-          { fr: 'l\'hiver', en: 'winter', pron: 'lee-VAIR', note: 'en hiver = in winter. Very relevant in Ontario!' },
-        ]
-      }
-    ],
-    exercises: [
-      { type: 'multiple_choice', question: 'How do you say "every Friday" in French?', options: ['Vendredi', 'Le vendredi', 'Les vendredis', 'Un vendredi'], correct: 1, explanation: '"Le vendredi" = every Friday (habitual). "Vendredi" alone = this specific Friday.' },
-      { type: 'multiple_choice', question: 'How do you write "January 1st" in French?', options: ['le un janvier', 'le premier janvier', 'le première janvier', 'le 1 janvier'], correct: 1, explanation: '"Premier" (not "un") for the first of the month: le premier janvier.' },
-      { type: 'multiple_choice', question: 'Your IRCC appointment is on March 15th, 2026. You say:', options: ['le quinze mars deux mille vingt-six', 'le quinzième mars deux mille vingt-six', 'le mars quinze deux mille vingt-six', 'quinze mars deux-mille-vingt-six'], correct: 0, explanation: '"le quinze mars deux mille vingt-six" — day + month + year. Use cardinal number (quinze), not ordinal.' },
-      { type: 'multiple_choice', question: 'How do you say "in winter" in French?', options: ['au hiver', 'en hiver', 'dans hiver', 'le hiver'], correct: 1, explanation: '"En hiver" — winter, summer and fall use "en". Spring uses "au printemps".' },
-    ],
-    quiz: [
-      { question: 'What day comes after mercredi?', options: ['mardi', 'jeudi', 'vendredi', 'lundi'], correct: 1, explanation: 'lundi, mardi, mercredi, JEUDI...' },
-      { question: 'How do you say "on Mondays" (every Monday)?', options: ['lundi', 'le lundi', 'les lundis', 'un lundi'], correct: 1, explanation: '"Le lundi" = every Monday, habitually.' },
-      { question: '"En ___" — which season uses "au" instead of "en"?', options: ['été', 'hiver', 'automne', 'printemps'], correct: 3, explanation: '"Au printemps" — spring is the only season that uses "au".' },
-      { question: 'How do you write March 2nd?', options: ['le deux mars', 'le deuxième mars', 'le second mars', 'deux mars'], correct: 0, explanation: '"le deux mars" — cardinal number, with "le" before it.' },
-      { question: 'What is "juillet"?', options: ['June', 'July', 'January', 'August'], correct: 1, explanation: 'Juillet = July. (juin = June)' },
-    ]
-  })
-},
-
-// A2 LESSONS
-{
-  level: 'A2', sort_order: 14, duration_min: 35, xp_reward: 70,
-  title: 'Être: The Verb "To Be"',
-  description: 'Master all conjugations of être — the most important verb in French, used for identity, location, descriptions, and forming past tenses.',
-  content: JSON.stringify({
-    intro: `"Être" (to be) is one of the two most important verbs in French (along with avoir). It is completely irregular — you must memorize it. Être is used for identity, profession, nationality, location, descriptions, and as an auxiliary in past tenses. Getting être wrong affects nearly every sentence you write or speak.`,
-    sections: [
-      {
-        type: 'grammar',
-        title: 'Complete Conjugation of ÊTRE — Present Tense',
-        rules: [
-          { rule: 'je suis', example: 'Je suis immigrant au Canada.', translation: 'I am an immigrant in Canada.', breakdown: 'suis = am' },
-          { rule: 'tu es', example: 'Tu es très courageux.', translation: 'You are very courageous.', breakdown: 'es = are (informal)' },
-          { rule: 'il/elle/on est', example: 'Il est médecin. / Elle est canadienne. / On est prêts.', translation: 'He is a doctor. / She is Canadian. / We are ready.', breakdown: 'est = is / are (with on)' },
-          { rule: 'nous sommes', example: 'Nous sommes une famille francophone.', translation: 'We are a French-speaking family.', breakdown: 'sommes = are' },
-          { rule: 'vous êtes', example: 'Vous êtes le responsable du dossier?', translation: 'Are you the person in charge of the file?', breakdown: 'êtes = are (formal/plural). Note the circumflex on ê.' },
-          { rule: 'ils/elles sont', example: 'Ils sont en retard. / Elles sont médecins.', translation: 'They are late. / They are doctors.', breakdown: 'sont = are (plural)' },
-        ]
-      },
-      {
-        type: 'grammar',
-        title: 'Uses of ÊTRE — When to Use It',
-        rules: [
-          { rule: '1. Identity / Profession', example: 'Je suis ingénieur. Elle est avocate.', translation: 'I am an engineer. She is a lawyer.', breakdown: 'No article before profession with être!' },
-          { rule: '2. Nationality / Origin', example: 'Je suis marocain. Nous sommes canadiens.', translation: 'I am Moroccan. We are Canadian.', breakdown: 'Lowercase, no article, must agree in gender' },
-          { rule: '3. Location', example: 'Je suis à Oakville. L\'IRCC est à Mississauga.', translation: 'I am in Oakville. IRCC is in Mississauga.', breakdown: 'Being physically located somewhere' },
-          { rule: '4. Description', example: 'La ville est belle. Il est grand.', translation: 'The city is beautiful. He is tall.', breakdown: 'Describing characteristics' },
-          { rule: '5. Date / Time', example: 'Nous sommes le lundi. Il est dix heures.', translation: 'It is Monday. It is 10 o\'clock.', breakdown: 'Nous sommes for date; il est for time' },
-          { rule: '6. Auxiliary for past tense', example: 'Je suis allé au Canada. Elle est venue hier.', translation: 'I went to Canada. She came yesterday.', breakdown: 'Used with motion/state verbs in passé composé (B1 lesson)' },
-        ]
-      },
-      {
-        type: 'grammar',
-        title: 'ÊTRE vs AVOIR for Age, Hunger, etc.',
-        explanation: 'English uses "to be" for many expressions that French handles differently with "avoir" (to have). This is a very common mistake.',
-        rules: [
-          { rule: 'Age → AVOIR', example: 'J\'ai 35 ans. (NOT je suis 35 ans)', translation: 'I am 35 years old.', breakdown: 'Literally: I HAVE 35 years' },
-          { rule: 'Hunger/Thirst → AVOIR', example: 'J\'ai faim. / J\'ai soif. (NOT je suis faim)', translation: 'I am hungry. / I am thirsty.', breakdown: 'Literally: I have hunger / I have thirst' },
-          { rule: 'Hot/Cold (person) → AVOIR', example: 'J\'ai chaud. / J\'ai froid. (NOT je suis chaud)', translation: 'I am hot. / I am cold.', breakdown: 'Literally: I have heat / I have cold' },
-          { rule: 'Weather → FAIRE or IL Y A', example: 'Il fait chaud. / Il y a du soleil.', translation: 'It is hot (weather). / It is sunny.', breakdown: 'Never "il est chaud" for weather' },
-        ]
-      },
-      {
-        type: 'dialogue',
-        title: 'Dialogue — Job Interview at a Canadian Company',
-        lines: [
-          { speaker: 'Employeur', fr: 'Bonjour, vous êtes M. Al-Ahmed?', en: 'Hello, are you Mr. Al-Ahmed?' },
-          { speaker: 'Vous', fr: 'Oui, je suis Osama Al-Ahmed. Enchanté.', en: 'Yes, I am Osama Al-Ahmed. Pleased to meet you.' },
-          { speaker: 'Employeur', fr: 'Vous êtes d\'où, originellement?', en: 'Where are you originally from?' },
-          { speaker: 'Vous', fr: 'Je suis d\'origine marocaine, mais je suis résident permanent au Canada depuis 2023.', en: 'I am of Moroccan origin, but I have been a permanent resident in Canada since 2023.' },
-          { speaker: 'Employeur', fr: 'Vous êtes bilingue?', en: 'Are you bilingual?' },
-          { speaker: 'Vous', fr: 'Oui, je suis francophone et je parle aussi anglais couramment.', en: 'Yes, I am a French speaker and I also speak English fluently.' },
-        ]
-      }
-    ],
-    exercises: [
-      { type: 'multiple_choice', question: 'Complete: "Nous _______ une famille canadienne."', options: ['sommes', 'êtes', 'sont', 'suis'], correct: 0, explanation: 'Nous → sommes. The conjugation of être for "nous" is sommes.' },
-      { type: 'multiple_choice', question: 'Complete: "J\'ai faim. Je _______ aussi fatiguée."', options: ['ai', 'avoir', 'suis', 'es'], correct: 2, explanation: 'Fatigue (being tired) uses ÊTRE: je suis fatiguée. But hunger uses avoir (j\'ai faim).' },
-      { type: 'multiple_choice', question: 'Complete: "Il _______ médecin à l\'hôpital d\'Oakville."', options: ['a', 'est', 'sont', 'suis'], correct: 1, explanation: 'Il → est. Profession after être: il est médecin (no article).' },
-      { type: 'multiple_choice', question: 'How do you say "I am 42 years old"?', options: ['Je suis 42 ans', 'J\'ai 42 ans', 'Je fais 42 ans', 'Mes ans sont 42'], correct: 1, explanation: 'Age always uses AVOIR: J\'ai 42 ans.' },
-      { type: 'multiple_choice', question: 'Complete: "Vous _______ le responsable du dossier?" (formal)', options: ['suis', 'es', 'êtes', 'sont'], correct: 2, explanation: 'Vous → êtes. Used here as formal singular (one person).' },
-      { type: 'fill_blank', question: '"On _______ le lundi 30 avril." (Today is Monday April 30th)', options: ['est', 'sommes', 'sont', 'êtes'], correct: 0, explanation: 'With "on" → est (same as il/elle). But to say the date formally: "Nous sommes le lundi 30 avril" also works.' },
-    ],
-    quiz: [
-      { question: 'What is the être form for "vous"?', options: ['sont', 'sommes', 'êtes', 'est'], correct: 2, explanation: 'vous êtes — note the circumflex accent on ê.' },
-      { question: 'Complete: "Ils _______ en retard."', options: ['est', 'suis', 'sont', 'sommes'], correct: 2, explanation: 'Ils → sont.' },
-      { question: '"J\'ai chaud" means:', options: ['I have heat (an object)', 'I am hot (temperature)', 'I am warm (personality)', 'The weather is hot'], correct: 1, explanation: '"J\'ai chaud" = I am hot/warm (as a person feeling the temperature). Uses avoir, not être.' },
-      { question: 'Which is correct for profession?', options: ['Elle est une infirmière', 'Elle est infirmière', 'Elle a infirmière', 'Elle fait infirmière'], correct: 1, explanation: 'Profession after être: no article. "Elle est infirmière."' },
-      { question: 'Complete: "Nous _______ à Oakville depuis deux ans."', options: ['sont', 'êtes', 'sommes', 'suis'], correct: 2, explanation: 'Nous → sommes.' },
-    ]
-  })
-},
-
-{
-  level: 'A2', sort_order: 15, duration_min: 35, xp_reward: 70,
-  title: 'Avoir: The Verb "To Have"',
-  description: 'Master avoir — essential for possession, age, expressions, and forming the most common past tense in French.',
-  content: JSON.stringify({
-    intro: `"Avoir" (to have) is the second most important verb in French after être. It is completely irregular and must be memorized. Avoir is used for possession, age, many common expressions, and as the auxiliary verb in the passé composé (the most common past tense). You will use avoir in almost every conversation.`,
-    sections: [
-      {
-        type: 'grammar',
-        title: 'Complete Conjugation of AVOIR — Present Tense',
-        rules: [
-          { rule: 'j\'ai', example: 'J\'ai un passeport canadien.', translation: 'I have a Canadian passport.', breakdown: 'j\'ai = I have. Note: je → j\' before ai (vowel)' },
-          { rule: 'tu as', example: 'Tu as quel âge?', translation: 'How old are you?', breakdown: 'tu as = you have' },
-          { rule: 'il/elle/on a', example: 'Il a deux enfants. / Elle a un rendez-vous.', translation: 'He has two children. / She has an appointment.', breakdown: 'a = has' },
-          { rule: 'nous avons', example: 'Nous avons une maison à Oakville.', translation: 'We have a house in Oakville.', breakdown: 'avons = have' },
-          { rule: 'vous avez', example: 'Vous avez votre permis de travail?', translation: 'Do you have your work permit?', breakdown: 'avez = have (formal/plural)' },
-          { rule: 'ils/elles ont', example: 'Ils ont trois enfants. / Elles ont des documents.', translation: 'They have three children. / They have documents.', breakdown: 'ont = have (plural). Note: t is silent alone but links in liaison.' },
-        ]
-      },
-      {
-        type: 'grammar',
-        title: 'AVOIR Expressions — Must Know for TEF',
-        rules: [
-          { rule: 'avoir [age] ans', example: 'J\'ai trente-cinq ans.', translation: 'I am 35 years old.', breakdown: 'Never "je suis 35 ans"!' },
-          { rule: 'avoir faim', example: 'J\'ai faim. On mange?', translation: 'I\'m hungry. Shall we eat?', breakdown: '' },
-          { rule: 'avoir soif', example: 'Vous avez soif? Je peux vous offrir de l\'eau.', translation: 'Are you thirsty? I can offer you some water.', breakdown: '' },
-          { rule: 'avoir chaud/froid', example: 'J\'ai froid en hiver à Oakville!', translation: 'I\'m cold in winter in Oakville!', breakdown: '' },
-          { rule: 'avoir peur (de)', example: 'Il a peur de rater l\'examen TEF.', translation: 'He is afraid of failing the TEF exam.', breakdown: '' },
-          { rule: 'avoir besoin (de)', example: 'J\'ai besoin d\'un interprète.', translation: 'I need an interpreter.', breakdown: 'Very useful at IRCC offices' },
-          { rule: 'avoir envie (de)', example: 'J\'ai envie d\'étudier le français.', translation: 'I feel like / want to study French.', breakdown: '' },
-          { rule: 'avoir l\'air', example: 'Vous avez l\'air fatigué.', translation: 'You look tired.', breakdown: 'Avoir l\'air + adjective' },
-          { rule: 'avoir lieu', example: 'L\'examen a lieu le 15 mars.', translation: 'The exam takes place on March 15th.', breakdown: 'Very useful for talking about events' },
-          { rule: 'avoir raison/tort', example: 'Vous avez raison! / Il a tort.', translation: 'You are right! / He is wrong.', breakdown: 'Never "vous êtes raison"' },
-        ]
-      },
-      {
-        type: 'dialogue',
-        title: 'Dialogue — At a Clinic in Oakville',
-        lines: [
-          { speaker: 'Médecin', fr: 'Bonjour, vous avez quel âge?', en: 'Hello, how old are you?' },
-          { speaker: 'Vous', fr: 'J\'ai quarante ans.', en: 'I am forty years old.' },
-          { speaker: 'Médecin', fr: 'Vous avez des allergies?', en: 'Do you have any allergies?' },
-          { speaker: 'Vous', fr: 'Non, je n\'ai pas d\'allergies.', en: 'No, I don\'t have any allergies.' },
-          { speaker: 'Médecin', fr: 'Vous avez besoin d\'un médicament?', en: 'Do you need a medication?' },
-          { speaker: 'Vous', fr: 'Oui, j\'ai besoin d\'un antibiotique, s\'il vous plaît.', en: 'Yes, I need an antibiotic, please.' },
-        ]
-      }
-    ],
-    exercises: [
-      { type: 'multiple_choice', question: 'Complete: "Vous _______ votre carte d\'identité?"', options: ['ai', 'as', 'avez', 'ont'], correct: 2, explanation: 'Vous → avez.' },
-      { type: 'multiple_choice', question: '"I need a form" in French:', options: ['Je suis besoin d\'un formulaire', 'J\'ai besoin d\'un formulaire', 'Je veux besoin d\'un formulaire', 'J\'ai besoins d\'un formulaire'], correct: 1, explanation: '"Avoir besoin de" = to need. J\'ai besoin d\'un formulaire.' },
-      { type: 'multiple_choice', question: 'Complete: "Ils _______ trois enfants."', options: ['a', 'ont', 'avons', 'avez'], correct: 1, explanation: 'Ils → ont.' },
-      { type: 'multiple_choice', question: '"You are right!" in French:', options: ['Vous êtes raison!', 'Vous avez raison!', 'Vous faites raison!', 'Vous êtes correct!'], correct: 1, explanation: '"Avoir raison" = to be right. Vous avez raison!' },
-      { type: 'fill_blank', question: '"J\'_______ peur de l\'examen." (I am afraid of the exam)', options: ['suis', 'ai', 'est', 'fait'], correct: 1, explanation: '"Avoir peur" = to be afraid. J\'ai peur.' },
-    ],
-    quiz: [
-      { question: 'What is the avoir form for "nous"?', options: ['ont', 'avez', 'avons', 'ai'], correct: 2, explanation: 'nous avons' },
-      { question: '"She has an appointment" in French:', options: ['Elle est un rendez-vous', 'Elle a un rendez-vous', 'Elle avoir un rendez-vous', 'Elle ont un rendez-vous'], correct: 1, explanation: 'elle a = she has' },
-      { question: '"I am thirsty" in French:', options: ['Je suis soif', 'J\'ai soif', 'Je fais soif', 'J\'être soif'], correct: 1, explanation: '"Avoir soif" = to be thirsty. J\'ai soif.' },
-      { question: '"The exam takes place on Friday" — which expression?', options: ['avoir lieu', 'avoir faim', 'avoir besoin', 'avoir l\'air'], correct: 0, explanation: '"Avoir lieu" = to take place. L\'examen a lieu vendredi.' },
-      { question: 'Complete: "Tu _______ quel âge?"', options: ['ai', 'es', 'as', 'ont'], correct: 2, explanation: 'tu as — asking age informally.' },
-    ]
-  })
-},
-
-{
-  level: 'A2', sort_order: 16, duration_min: 40, xp_reward: 75,
-  title: 'Present Tense: -ER Verbs',
-  description: 'Learn to conjugate the most common French verb group — over 90% of new verbs in French are -ER verbs.',
-  content: JSON.stringify({
-    intro: `-ER verbs are the largest and most regular group in French. If you master this pattern, you can conjugate thousands of words. This is the foundation of French grammar and heavily tested on TEF at all levels — even B2 tests basic accuracy.`,
-    sections: [
-      {
-        type: 'grammar',
-        title: 'The -ER Verb Pattern',
-        explanation: 'To conjugate: remove -er from the infinitive, then add the correct ending.',
-        rules: [
-          { rule: 'je → -e', example: 'je parle, je mange, je travaille', translation: 'I speak, I eat, I work', breakdown: 'Drop -er, add -e. Silent ending.' },
-          { rule: 'tu → -es', example: 'tu parles, tu manges, tu travailles', translation: 'you speak, you eat, you work', breakdown: 'Drop -er, add -es. Silent ending.' },
-          { rule: 'il/elle/on → -e', example: 'il parle, elle mange, on travaille', translation: 'he speaks, she eats, we work', breakdown: 'Same as je — silent ending.' },
-          { rule: 'nous → -ons', example: 'nous parlons, nous mangeons, nous travaillons', translation: 'we speak, we eat, we work', breakdown: 'The -ons IS pronounced.' },
-          { rule: 'vous → -ez', example: 'vous parlez, vous mangez, vous travaillez', translation: 'you speak, you eat, you work', breakdown: 'The -ez IS pronounced (like "ay").' },
-          { rule: 'ils/elles → -ent', example: 'ils parlent, elles mangent, ils travaillent', translation: 'they speak, they eat, they work', breakdown: '-ent is SILENT — exactly like the singular forms.' },
-        ]
-      },
-      {
-        type: 'grammar',
-        title: 'Spelling Changes — Important Exceptions',
-        rules: [
-          { rule: 'Verbs ending in -ger (manger, voyager)', example: 'nous mangeons (NOT mangjons)', translation: 'we eat', breakdown: 'Add -e before -ons to keep the soft g sound.' },
-          { rule: 'Verbs ending in -cer (commencer, avancer)', example: 'nous commençons (NOT commençons with hard c)', translation: 'we start/begin', breakdown: 'Cedilla (ç) before -ons to keep soft c sound.' },
-          { rule: 'Verbs ending in -yer (payer, nettoyer)', example: 'je paie / tu paies / ils paient (y → i)', translation: 'I pay / you pay / they pay', breakdown: 'y changes to i in je/tu/il/ils forms.' },
-          { rule: 'Verbs like acheter (e → è)', example: 'j\'achète / tu achètes / il achète', translation: 'I buy / you buy / he buys', breakdown: 'Accent grave on è in je/tu/il/ils forms.' },
-          { rule: 'Verbs like appeler (double l)', example: 'j\'appelle / tu appelles / il appelle', translation: 'I call / you call / he calls', breakdown: 'Double the l in je/tu/il/ils forms.' },
-        ]
-      },
-      {
-        type: 'vocabulary',
-        title: 'Essential -ER Verbs — Memorize These',
-        items: [
-          { fr: 'parler', en: 'to speak', pron: 'par-LAY', note: 'Je parle français. Very common.' },
-          { fr: 'habiter', en: 'to live (reside)', pron: 'a-bee-TAY', note: 'J\'habite à Oakville.' },
-          { fr: 'travailler', en: 'to work', pron: 'tra-vye-YAY', note: 'Je travaille à Burlington.' },
-          { fr: 'manger', en: 'to eat', pron: 'mon-ZHAY', note: 'Nous mangeons (spelling change!)' },
-          { fr: 'étudier', en: 'to study', pron: 'ay-tüd-YAY', note: 'J\'étudie le français.' },
-          { fr: 'chercher', en: 'to look for', pron: 'shair-SHAY', note: 'Je cherche un emploi.' },
-          { fr: 'aimer', en: 'to like / love', pron: 'ay-MAY', note: 'J\'aime le Canada.' },
-          { fr: 'acheter', en: 'to buy', pron: 'ash-TAY', note: 'J\'achète (è in singular)' },
-          { fr: 'demander', en: 'to ask for', pron: 'duh-mon-DAY', note: 'Je demande un formulaire.' },
-          { fr: 'donner', en: 'to give', pron: 'do-NAY', note: 'Vous donnez votre passeport.' },
-          { fr: 'payer', en: 'to pay', pron: 'pay-YAY', note: 'Je paie par carte. (y→i)' },
-          { fr: 'rester', en: 'to stay / remain', pron: 'res-TAY', note: 'Je reste au Canada.' },
-          { fr: 'voyager', en: 'to travel', pron: 'vwah-ya-ZHAY', note: 'Nous voyageons (spelling change!)' },
-          { fr: 'commencer', en: 'to begin / start', pron: 'ko-mon-SAY', note: 'Nous commençons (ç!)' },
-          { fr: 'porter', en: 'to wear / carry', pron: 'por-TAY', note: 'Elle porte un manteau.' },
-        ]
-      },
-      {
-        type: 'dialogue',
-        title: 'Dialogue — Talking About Daily Life',
-        lines: [
-          { speaker: 'Collègue', fr: 'Vous habitez où?', en: 'Where do you live?' },
-          { speaker: 'Vous', fr: 'J\'habite à Oakville. Je travaille à Burlington.', en: 'I live in Oakville. I work in Burlington.' },
-          { speaker: 'Collègue', fr: 'Vous voyagez en bus?', en: 'Do you travel by bus?' },
-          { speaker: 'Vous', fr: 'Non, je prends le train GO. Je cherche aussi un appartement plus proche du bureau.', en: 'No, I take the GO Train. I\'m also looking for an apartment closer to the office.' },
-          { speaker: 'Collègue', fr: 'Vous parlez très bien français!', en: 'You speak French very well!' },
-          { speaker: 'Vous', fr: 'Merci! J\'étudie le français depuis deux ans. J\'aime beaucoup cette langue.', en: 'Thank you! I\'ve been studying French for two years. I love this language very much.' },
-        ]
-      }
-    ],
-    exercises: [
-      { type: 'multiple_choice', question: 'Conjugate "parler" for "vous": "Vous _______ français?"', options: ['parle', 'parles', 'parlez', 'parlent'], correct: 2, explanation: 'Vous → -ez ending: vous parlez. The -ez is pronounced "ay".' },
-      { type: 'multiple_choice', question: 'Conjugate "manger" for "nous": "Nous _______ à midi."', options: ['mangons', 'mangeons', 'mangez', 'mangent'], correct: 1, explanation: 'Nous + -ger verb → insert e: nous mangeons (to keep the soft g sound).' },
-      { type: 'multiple_choice', question: '"They work at Loblaws" — ils _______ chez Loblaws.', options: ['travaille', 'travailles', 'travaillons', 'travaillent'], correct: 3, explanation: 'Ils → -ent ending: ils travaillent. The -ent is completely silent!' },
-      { type: 'multiple_choice', question: '"I\'m looking for a job" in French:', options: ['Je cherche un emploi', 'Je cherches un emploi', 'Je cherchons un emploi', 'Je cherchez un emploi'], correct: 0, explanation: 'Je → -e ending: je cherche. No -s after je.' },
-      { type: 'fill_blank', question: '"J\'_______ le français depuis un an." (I study French — étudier)', options: ['étudies', 'étudie', 'étudions', 'étudiez'], correct: 1, explanation: 'Je + étudier → j\'étudie. Je → -e ending. (j\' because next word starts with é)' },
-      { type: 'multiple_choice', question: 'Which is the correct nous form of "commencer"?', options: ['commençons', 'commençons', 'commençons', 'commencons'], correct: 0, explanation: 'Nous commençons — the ç (cedilla) is required before -ons to maintain the soft c sound.' },
-    ],
-    quiz: [
-      { question: 'What ending do ils/elles take for -ER verbs?', options: ['-e', '-es', '-ons', '-ent'], correct: 3, explanation: '-ent for ils/elles. Crucially, -ent is completely silent.' },
-      { question: 'Complete: "Il _______ à Oakville." (habiter)', options: ['habitons', 'habites', 'habite', 'habitent'], correct: 2, explanation: 'il → -e: il habite.' },
-      { question: 'What is special about "manger" in the nous form?', options: ['Nothing special', 'Add an e before -ons', 'Change to -ger', 'Drop the g'], correct: 1, explanation: 'nous mangeons — e inserted to keep soft g sound.' },
-      { question: 'Complete: "Vous _______ un appartement?" (chercher)', options: ['cherche', 'cherches', 'cherchez', 'cherchent'], correct: 2, explanation: 'vous → -ez: vous cherchez.' },
-      { question: 'Which form is silent at the end?', options: ['nous parlons', 'vous parlez', 'ils parlent', 'je parle'], correct: 2, explanation: 'ils parlent — the -ent ending is completely silent. Sounds like il parle.' },
-    ]
-  })
-},
-
-// B1 LESSONS
-{
-  level: 'B1', sort_order: 26, duration_min: 45, xp_reward: 90,
-  title: 'Passé Composé with Avoir',
-  description: 'Learn the most common past tense in French — how to talk about completed events using avoir as the auxiliary verb.',
-  content: JSON.stringify({
-    intro: `The passé composé is the main past tense used in spoken French and informal writing. It describes completed actions in the past. On the TEF/TCF, you must know when to use passé composé vs imparfait — this is one of the most heavily tested distinctions at B1-B2 level. This lesson covers passé composé with avoir (most verbs). The next lesson covers passé composé with être (motion/state verbs).`,
-    sections: [
-      {
-        type: 'grammar',
-        title: 'How to Form the Passé Composé',
-        explanation: 'Passé composé = AVOIR or ÊTRE (present tense) + PAST PARTICIPLE. This lesson focuses on verbs that use AVOIR.',
-        rules: [
-          { rule: 'Step 1: Conjugate avoir in present', example: 'j\'ai, tu as, il a, nous avons, vous avez, ils ont', translation: '', breakdown: '' },
-          { rule: 'Step 2: Form the past participle', example: '-ER verbs: parler → parlé | -IR verbs: finir → fini | -RE verbs: vendre → vendu', translation: '', breakdown: 'Remove infinitive ending, add the past participle ending' },
-          { rule: 'Step 3: Combine them', example: 'J\'ai parlé. / Il a fini. / Nous avons vendu.', translation: 'I spoke. / He finished. / We sold.', breakdown: 'avoir form + past participle' },
-        ]
-      },
-      {
-        type: 'grammar',
-        title: 'Regular Past Participles',
-        rules: [
-          { rule: '-ER verbs → -É', example: 'parler→parlé, manger→mangé, travailler→travaillé, étudier→étudié', translation: 'spoken, eaten, worked, studied', breakdown: 'Remove -er, add -é. Very straightforward.' },
-          { rule: '-IR verbs → -I', example: 'finir→fini, choisir→choisi, réussir→réussi', translation: 'finished, chosen, succeeded', breakdown: 'Remove -ir, add -i.' },
-          { rule: '-RE verbs → -U', example: 'vendre→vendu, répondre→répondu, attendre→attendu', translation: 'sold, answered, waited', breakdown: 'Remove -re, add -u.' },
-        ]
-      },
-      {
-        type: 'grammar',
-        title: 'Irregular Past Participles — Must Memorize',
-        rules: [
-          { rule: 'avoir → eu', example: 'J\'ai eu un rendez-vous.', translation: 'I had an appointment.', breakdown: '' },
-          { rule: 'être → été', example: 'J\'ai été médecin au Maroc.', translation: 'I was a doctor in Morocco.', breakdown: 'Note: être uses avoir as auxiliary here!' },
-          { rule: 'faire → fait', example: 'Il a fait une demande.', translation: 'He submitted an application.', breakdown: 'Very common!' },
-          { rule: 'prendre → pris', example: 'J\'ai pris le bus GO.', translation: 'I took the GO bus.', breakdown: '' },
-          { rule: 'mettre → mis', example: 'Elle a mis les documents dans l\'enveloppe.', translation: 'She put the documents in the envelope.', breakdown: '' },
-          { rule: 'voir → vu', example: 'Nous avons vu l\'agent d\'IRCC.', translation: 'We saw the IRCC officer.', breakdown: '' },
-          { rule: 'lire → lu', example: 'J\'ai lu le formulaire.', translation: 'I read the form.', breakdown: '' },
-          { rule: 'écrire → écrit', example: 'Il a écrit une lettre.', translation: 'He wrote a letter.', breakdown: '' },
-          { rule: 'recevoir → reçu', example: 'J\'ai reçu une lettre d\'IRCC.', translation: 'I received a letter from IRCC.', breakdown: 'Very useful for immigration!' },
-          { rule: 'pouvoir → pu', example: 'Il n\'a pas pu venir.', translation: 'He couldn\'t come.', breakdown: '' },
-          { rule: 'vouloir → voulu', example: 'J\'ai voulu expliquer.', translation: 'I wanted to explain.', breakdown: '' },
-          { rule: 'savoir → su', example: 'Elle a su la réponse.', translation: 'She knew the answer.', breakdown: '' },
-          { rule: 'devoir → dû', example: 'J\'ai dû attendre deux heures.', translation: 'I had to wait two hours.', breakdown: '' },
-          { rule: 'boire → bu', example: 'Il a bu un café.', translation: 'He drank a coffee.', breakdown: '' },
-          { rule: 'croire → cru', example: 'Nous avons cru que...', translation: 'We believed that...', breakdown: '' },
-        ]
-      },
-      {
-        type: 'grammar',
-        title: 'Negation in Passé Composé',
-        rules: [
-          { rule: 'ne...pas wraps the auxiliary', example: 'Je n\'ai pas parlé. / Il n\'a pas fini.', translation: 'I didn\'t speak. / He didn\'t finish.', breakdown: 'ne comes before avoir, pas comes after avoir — before the past participle.' },
-          { rule: 'With other negatives', example: 'Je n\'ai jamais mangé là. / Il n\'a rien dit.', translation: 'I\'ve never eaten there. / He said nothing.', breakdown: 'jamais (never), rien (nothing), personne (nobody) — same position.' },
-        ]
-      },
-      {
-        type: 'grammar',
-        title: 'When to Use Passé Composé',
-        rules: [
-          { rule: 'Completed actions', example: 'J\'ai soumis ma demande hier.', translation: 'I submitted my application yesterday.', breakdown: 'One completed event at a specific time' },
-          { rule: 'A sequence of events', example: 'Je suis arrivé, j\'ai attendu, et j\'ai parlé à l\'agent.', translation: 'I arrived, I waited, and I spoke to the officer.', breakdown: 'Series of consecutive completed actions' },
-          { rule: 'With time markers', example: 'hier (yesterday), la semaine dernière (last week), en 2023, ce matin (this morning)', translation: '', breakdown: 'These time words signal passé composé' },
-        ]
-      },
-      {
-        type: 'dialogue',
-        title: 'Dialogue — Describing Your Day at IRCC',
-        lines: [
-          { speaker: 'Ami', fr: 'Comment s\'est passé ton rendez-vous à l\'IRCC?', en: 'How did your appointment at IRCC go?' },
-          { speaker: 'Vous', fr: 'Ça a bien marché! J\'ai pris le train GO à huit heures.', en: 'It went well! I took the GO Train at eight.' },
-          { speaker: 'Ami', fr: 'Tu as attendu longtemps?', en: 'Did you wait long?' },
-          { speaker: 'Vous', fr: 'J\'ai attendu trente minutes. Ensuite, j\'ai parlé à une agente très sympa.', en: 'I waited thirty minutes. Then I spoke to a very nice officer.' },
-          { speaker: 'Ami', fr: 'Tu as donné tous les documents?', en: 'Did you give all the documents?' },
-          { speaker: 'Vous', fr: 'Oui, j\'ai donné mon passeport, mes formulaires et j\'ai reçu un récépissé.', en: 'Yes, I gave my passport, my forms and I received a receipt.' },
-        ]
-      }
-    ],
-    exercises: [
-      { type: 'multiple_choice', question: 'Complete: "J\'_______ reçu une lettre d\'IRCC ce matin."', options: ['ai', 'suis', 'as', 'avez'], correct: 0, explanation: 'J\'ai reçu — je + avoir → j\'ai + past participle (reçu).' },
-      { type: 'multiple_choice', question: 'What is the past participle of "faire"?', options: ['faisu', 'faisé', 'fait', 'fais'], correct: 2, explanation: 'faire → fait. One of the most important irregular past participles.' },
-      { type: 'multiple_choice', question: '"He didn\'t study" in passé composé:', options: ['Il ne pas a étudié', 'Il n\'a pas étudié', 'Il n\'a pas étudier', 'Il pas a étudié'], correct: 1, explanation: 'Negation wraps the auxiliary: il n\'a pas + past participle (étudié).' },
-      { type: 'multiple_choice', question: '"We submitted the application" — Nous _______ la demande.', options: ['avons soumis', 'sommes soumis', 'avons soumettre', 'avons soumise'], correct: 0, explanation: 'soumettre → soumis. Nous avons soumis. (Uses avoir, not être.)' },
-      { type: 'fill_blank', question: '"J\'_______ lu tous les formulaires avant le rendez-vous."', options: ['ai', 'suis', 'avoir', 'a'], correct: 0, explanation: 'j\'ai lu — lire → lu. Uses avoir.' },
-      { type: 'translate', question: 'Translate: "She received her permanent residence card last week."', answer: 'Elle a reçu sa carte de résidence permanente la semaine dernière.', alternatives: ['Elle a reçu sa carte de résident permanent la semaine dernière.'], explanation: 'recevoir → reçu. Elle a (avoir for she) + reçu. "La semaine dernière" = last week.' },
-    ],
-    quiz: [
-      { question: 'What is the past participle of "prendre"?', options: ['prendu', 'pris', 'prené', 'prendé'], correct: 1, explanation: 'prendre → pris.' },
-      { question: 'Complete: "Vous _______ votre passeport?" (Did you bring...  — apporter)', options: ['avez apporté', 'êtes apporté', 'avez apporter', 'avons apporté'], correct: 0, explanation: 'apporter → apporté (-ER verb). Vous avez apporté.' },
-      { question: 'Where does "pas" go in negation?', options: ['After the past participle', 'Before "ne"', 'After the auxiliary (avoir/être)', 'Before the subject'], correct: 2, explanation: 'Je n\'ai [PAS] étudié — pas comes after avoir/être, before the past participle.' },
-      { question: '"J\'ai été..." uses which auxiliary?', options: ['être', 'avoir', 'aller', 'faire'], correct: 1, explanation: 'Être in passé composé uses avoir: j\'ai été (I was/have been).' },
-      { question: 'Which time word signals passé composé?', options: ['demain', 'maintenant', 'hier', 'bientôt'], correct: 2, explanation: '"Hier" (yesterday) signals a completed past action → passé composé.' },
-    ]
-  })
-},
-
-// B2 LESSON
-{
-  level: 'B2', sort_order: 38, duration_min: 55, xp_reward: 120,
-  title: 'Expressing Opinions & Argumentation',
-  description: 'Master the formal opinion phrases, argument structures, and connectors needed for TEF/TCF written and oral production at B2.',
-  content: JSON.stringify({
-    intro: `At B2 level, you are evaluated not just on accuracy but on the quality of your argumentation. The TEF written production and oral tasks require you to express nuanced opinions, support them with arguments, acknowledge counter-arguments, and conclude effectively. This lesson gives you the full toolkit for the TEF/TCF production sections.`,
-    sections: [
-      {
-        type: 'vocabulary',
-        title: 'Expressing Your Opinion — Formal Register',
-        items: [
-          { fr: 'À mon avis, / Selon moi,', en: 'In my opinion,', pron: 'ah mon a-VEE / suh-LON mwah', note: 'Most common. Use freely.' },
-          { fr: 'Je suis d\'avis que + indicative', en: 'I am of the opinion that', pron: '', note: 'More formal. Je suis d\'avis que le bilinguisme est essentiel.' },
-          { fr: 'Je considère que / J\'estime que', en: 'I consider that / I believe that', pron: '', note: 'Formal and weighted — use in essays' },
-          { fr: 'Il me semble que + indicative', en: 'It seems to me that', pron: '', note: 'Adds nuance — not 100% certain' },
-          { fr: 'Je suis convaincu(e) que', en: 'I am convinced that', pron: '', note: 'Strong conviction — good for TEF oral' },
-          { fr: 'Force est de constater que', en: 'One must acknowledge that', pron: '', note: 'Very formal. Excellent for B2 essays.' },
-          { fr: 'Je ne suis pas convaincu(e) que + subjunctive', en: 'I am not convinced that', pron: '', note: 'Doubt → triggers subjunctive' },
-        ]
-      },
-      {
-        type: 'vocabulary',
-        title: 'Discourse Connectors — The Key to B2 Coherence',
-        items: [
-          { fr: 'D\'une part... d\'autre part...', en: 'On one hand... on the other hand...', pron: '', note: 'Classic structure for presenting two sides' },
-          { fr: 'Premièrement / Deuxièmement / Enfin', en: 'Firstly / Secondly / Finally', pron: '', note: 'For ordered arguments' },
-          { fr: 'En outre / De plus / Qui plus est', en: 'Furthermore / Moreover / What\'s more', pron: '', note: 'Adding an argument — increasingly emphatic' },
-          { fr: 'Cependant / Néanmoins / Toutefois', en: 'However / Nevertheless / Yet', pron: '', note: 'Contrast — shows nuanced thinking' },
-          { fr: 'En revanche / Par contre', en: 'On the other hand / In contrast', pron: '', note: '"Par contre" more informal; "en revanche" preferred in writing' },
-          { fr: 'C\'est pourquoi / Par conséquent / Ainsi', en: 'That is why / Consequently / Thus', pron: '', note: 'Cause → effect. Very important for conclusions.' },
-          { fr: 'En effet / Car / Puisque / Étant donné que', en: 'Indeed / Because / Since / Given that', pron: '', note: 'Explaining reasons — vary them!' },
-          { fr: 'Bien que + subjunctive / Quoique + subjunctive', en: 'Although / Even though', pron: '', note: 'Concession — acknowledges opposing view. Requires subjunctive!' },
-          { fr: 'En somme / En conclusion / Pour conclure / Tout compte fait', en: 'In sum / In conclusion / To conclude / All things considered', pron: '', note: 'Conclusion markers — use only once, at the end' },
-        ]
-      },
-      {
-        type: 'grammar',
-        title: 'TEF Written Production Structure — The Formula',
-        explanation: 'TEF written production tasks ask you to write 160-200 words (task 1) or 200+ words (task 2). Use this structure every time.',
-        rules: [
-          { rule: 'Introduction (2-3 sentences)', example: 'Présenter le sujet + annoncer votre plan', translation: 'La question de l\'immigration au Canada suscite de nombreux débats. Dans un premier temps, j\'examinerai les avantages; ensuite, j\'aborderai les difficultés.', breakdown: 'Name the topic. Announce your plan.' },
-          { rule: 'Argument 1 (3-4 sentences)', example: 'Thèse + exemple + développement', translation: 'D\'une part, l\'immigration contribue considérablement à l\'économie canadienne. En effet, les immigrants occupent des postes essentiels dans les secteurs de la santé, de l\'éducation et du commerce.', breakdown: 'State your point. Give evidence. Develop.' },
-          { rule: 'Argument 2 / Counterargument (3-4 sentences)', example: 'Cependant / Néanmoins + nuance', translation: 'Cependant, l\'intégration linguistique représente un défi majeur. Bien que le gouvernement offre des cours de langue gratuits, de nombreux nouveaux arrivants peinent à atteindre le niveau requis.', breakdown: 'Acknowledge complexity. Show nuanced thinking.' },
-          { rule: 'Conclusion (2-3 sentences)', example: 'Synthèse + position finale', translation: 'En conclusion, l\'immigration constitue une richesse pour le Canada, à condition que les politiques d\'intégration soient renforcées. C\'est pourquoi je soutiens une approche équilibrée.', breakdown: 'Summarize. Give your final position clearly.' },
-        ]
-      },
-      {
-        type: 'vocabulary',
-        title: 'Essential B2 Vocabulary — Canadian Immigration Context',
-        items: [
-          { fr: 'l\'intégration linguistique', en: 'linguistic integration', pron: '', note: '' },
-          { fr: 'la main-d\'œuvre qualifiée', en: 'skilled workforce / labour', pron: '', note: '' },
-          { fr: 'les politiques d\'immigration', en: 'immigration policies', pron: '', note: '' },
-          { fr: 'le marché du travail', en: 'the job market / labour market', pron: '', note: '' },
-          { fr: 'la cohésion sociale', en: 'social cohesion', pron: '', note: '' },
-          { fr: 'le bilinguisme officiel', en: 'official bilingualism', pron: '', note: '' },
-          { fr: 'l\'enrichissement culturel', en: 'cultural enrichment', pron: '', note: '' },
-          { fr: 'les défis d\'adaptation', en: 'adaptation challenges', pron: '', note: '' },
-          { fr: 'la reconnaissance des diplômes', en: 'credential recognition', pron: '', note: 'Very relevant for immigrants!' },
-          { fr: 'la pénurie de main-d\'œuvre', en: 'labour shortage', pron: '', note: 'Common in Canadian news' },
+          { rule: 'Date format', example: 'le + number + month', translation: 'le quinze mars = 15 March', breakdown: 'Exception: the 1st = le premier (not le un)' },
+          { rule: 'When is your birthday?', example: 'Quand est ton anniversaire ? → Mon anniversaire est le 5 mai.', translation: '', breakdown: '' },
+          { rule: 'When were you born?', example: 'Tu es né(e) quand ? → Je suis né(e) le 10 juin 2000.', translation: '', breakdown: 'Add -e if female: née' },
+          { rule: 'In which month?', example: 'En quel mois ? → En décembre.', translation: '', breakdown: 'Use "en" before months' },
         ]
       },
       {
         type: 'tips',
-        title: 'TEF Oral Production — Scoring Tips',
+        title: 'Key rules',
         tips: [
-          'Use connectors visibly — examiners are listening for cependant, en outre, c\'est pourquoi',
-          'Always give a concrete example: "Par exemple, à Oakville, les entreprises cherchent des employés bilingues"',
-          'Never say "Je pense pas" — say "Je ne pense pas" (written exam) or at least "Je pense pas que ce soit vrai" (oral, with subjunctive)',
-          'End your oral presentation with a clear conclusion: "Pour conclure, je suis convaincu que..."',
-          'Vary your opinion phrases — don\'t say "à mon avis" 5 times. Use: je considère que / il me semble que / force est de constater que',
-          'Show register awareness — use "en revanche" not "par contre" in written production for higher marks',
+          'Months and seasons are NEVER capitalised: en janvier, not en Janvier',
+          'Use "en" before months and most seasons: en juillet, en été',
+          'Exception: spring uses "au": au printemps',
+          'Date format: le + cardinal number + month. Only the 1st uses "premier"',
         ]
       }
     ],
     exercises: [
-      { type: 'multiple_choice', question: 'Which connector introduces a contrast?', options: ['En outre', 'Cependant', 'Par conséquent', 'En effet'], correct: 1, explanation: '"Cependant" = however/nevertheless — introduces a contrasting idea. "En outre" adds, "Par conséquent" shows consequence, "En effet" explains.' },
-      { type: 'multiple_choice', question: 'Complete: "Bien que le Canada _______ une politique de bilinguisme, beaucoup de fonctionnaires ne parlent pas français."', options: ['a', 'ait', 'aura', 'avait'], correct: 1, explanation: '"Bien que" requires the SUBJUNCTIVE: ait (subjonctif of avoir). Bien que + subjunctive = although.' },
-      { type: 'multiple_choice', question: 'Which phrase is most formal and appropriate for a TEF essay?', options: ['Je pense que', 'Je crois que', 'Force est de constater que', 'Je trouve que'], correct: 2, explanation: '"Force est de constater que" is highly formal and shows B2+ register. The others are more casual/neutral.' },
-      { type: 'multiple_choice', question: 'In a TEF essay, which is better: "par contre" or "en revanche"?', options: ['par contre — it\'s clearer', 'en revanche — it\'s more formal', 'they are identical', 'neither should be used'], correct: 1, explanation: '"En revanche" is preferred in formal written French. "Par contre" is more oral/informal. Examiners notice this distinction.' },
-      { type: 'translate', question: 'Translate: "Although integration is difficult, immigrants contribute enormously to Canadian society."', answer: 'Bien que l\'intégration soit difficile, les immigrants contribuent énormément à la société canadienne.', alternatives: ['Quoique l\'intégration soit difficile, les immigrants contribuent énormément à la société canadienne.'], explanation: '"Bien que/Quoique" + subjunctive (soit = subjonctif of être). "Contribuent" = present tense of contribuer.' },
-      { type: 'multiple_choice', question: 'What is the correct conclusion connector?', options: ['D\'une part', 'En outre', 'Pour conclure', 'Cependant'], correct: 2, explanation: '"Pour conclure" = to conclude. Use at the start of your final paragraph. D\'une part introduces, en outre adds, cependant contrasts.' },
+      { type: 'multiple_choice', question: 'How do you say "in July" in French?', options: ['au juillet', 'en juillet', 'le juillet', 'de juillet'], correct: 1, explanation: 'Use "en" before months: en juillet.' },
+      { type: 'multiple_choice', question: 'How do you say "March 1st" in French?', options: ['le un mars', 'le premier mars', 'le primo mars', 'mars premier'], correct: 1, explanation: 'The 1st uses "premier" not "un": le premier mars.' },
+      { type: 'multiple_choice', question: '"En automne" means:', options: ['in spring', 'in summer', 'in autumn', 'in winter'], correct: 2, explanation: 'automne = autumn. en automne = in autumn.' },
+      { type: 'translate', question: 'Translate: "My birthday is on June 15th."', answer: 'Mon anniversaire est le 15 juin.', alternatives: ['Mon anniversaire, c\'est le 15 juin.'], explanation: 'le + number + month. Months are not capitalised.' },
+      { type: 'multiple_choice', question: '"Au printemps" means:', options: ['in summer', 'in winter', 'in spring', 'in autumn'], correct: 2, explanation: 'printemps = spring. Uniquely uses "au" (not "en").' },
     ],
     quiz: [
-      { question: 'Which connector shows a consequence?', options: ['Néanmoins', 'Par conséquent', 'D\'une part', 'Bien que'], correct: 1, explanation: '"Par conséquent" = consequently/therefore — shows cause and effect.' },
-      { question: '"Bien que" requires which verb mood?', options: ['Indicative', 'Conditional', 'Subjunctive', 'Imperative'], correct: 2, explanation: '"Bien que" always triggers the subjunctive: Bien que ce soit difficile...' },
-      { question: 'Which is NOT a way to express opinion in formal French?', options: ['À mon avis', 'Je trouve que', 'Je suis d\'avis que', 'Il me semble que'], correct: 1, explanation: '"Je trouve que" is informal/casual. The others are appropriate for TEF formal register.' },
-      { question: 'What does "force est de constater que" mean?', options: ['I strongly disagree that', 'One must acknowledge that', 'It is forced to say that', 'Consequently we note that'], correct: 1, explanation: '"Force est de constater que" = one must acknowledge/note that. A very strong, formal expression.' },
-      { question: 'In a TEF essay, where do you use "Pour conclure"?', options: ['At the beginning', 'When adding an argument', 'At the start of the final paragraph', 'When contrasting ideas'], correct: 2, explanation: '"Pour conclure" marks the conclusion paragraph — use it once, at the very end.' },
+      { question: '"Août" is which month?', options: ['June', 'July', 'August', 'September'], correct: 2, explanation: 'août = August.' },
+      { question: 'How do you say "in December"?', options: ['au décembre', 'en Décembre', 'en décembre', 'le décembre'], correct: 2, explanation: 'en + month (lowercase): en décembre.' },
+      { question: 'What is special about "le premier"?', options: ['It means Monday', 'It\'s used for the 1st of the month', 'It means morning', 'It\'s used for January'], correct: 1, explanation: '"Le premier" = the 1st. All other dates use cardinal numbers.' },
+      { question: '"Je suis née le 3 avril." — the speaker is:', options: ['male', 'female', 'could be either', 'a child'], correct: 1, explanation: '"née" (with extra e) = female. "né" (no e) = male.' },
+      { question: '"Au printemps" — why "au" and not "en"?', options: ['Printemps is masculine', 'It\'s an exception for spring only', 'All seasons use au', 'Printemps starts with a consonant'], correct: 1, explanation: 'Spring (printemps) uses "au" — it\'s an exception. All other seasons use "en".' },
+    ]
+  })
+},
+
+// ─────────────────────────────────────────────────────────────────
+// LESSON 7 — Avoir & Être
+// ─────────────────────────────────────────────────────────────────
+{
+  level: 'A1', sort_order: 7, duration_min: 30, xp_reward: 60,
+  title: 'Core Verbs: Avoir & Être',
+  description: 'The two most important verbs in French — conjugation, uses, and avoir expressions.',
+  content: JSON.stringify({
+    intro: `Avoir (to have) and être (to be) are the foundation of French. Both are irregular — you must memorise them. They are also auxiliary (helping) verbs used to form past tenses. Avoir is also used in expressions where English uses "to be".`,
+    sections: [
+      {
+        type: 'grammar',
+        title: 'Avoir — to have',
+        rules: [
+          { rule: 'Je / J\'', example: 'ai', translation: 'J\'ai un chien. (I have a dog.)', breakdown: '' },
+          { rule: 'Tu', example: 'as', translation: 'Tu as faim ? (Are you hungry?)', breakdown: '' },
+          { rule: 'Il / Elle / On', example: 'a', translation: 'Elle a vingt ans. (She is twenty.)', breakdown: '' },
+          { rule: 'Nous', example: 'avons', translation: 'Nous avons une voiture.', breakdown: '' },
+          { rule: 'Vous', example: 'avez', translation: 'Vous avez raison. (You are right.)', breakdown: '' },
+          { rule: 'Ils / Elles', example: 'ont', translation: 'Ils ont faim. (They are hungry.)', breakdown: '' },
+        ]
+      },
+      {
+        type: 'grammar',
+        title: 'Avoir expressions — learn these as fixed phrases',
+        rules: [
+          { rule: 'avoir faim', example: 'J\'ai faim.', translation: 'I am hungry.', breakdown: 'Literally: I have hunger' },
+          { rule: 'avoir soif', example: 'Tu as soif ?', translation: 'Are you thirsty?', breakdown: '' },
+          { rule: 'avoir froid', example: 'Il a froid.', translation: 'He is cold.', breakdown: '' },
+          { rule: 'avoir chaud', example: 'Nous avons chaud.', translation: 'We are hot.', breakdown: '' },
+          { rule: 'avoir raison', example: 'Vous avez raison.', translation: 'You are right.', breakdown: '' },
+          { rule: 'avoir tort', example: 'Il a tort.', translation: 'He is wrong.', breakdown: '' },
+          { rule: 'avoir ___ ans', example: 'J\'ai vingt ans.', translation: 'I am twenty years old.', breakdown: '' },
+        ]
+      },
+      {
+        type: 'grammar',
+        title: 'Être — to be',
+        rules: [
+          { rule: 'Je', example: 'suis', translation: 'Je suis étudiant. (I am a student.)', breakdown: '' },
+          { rule: 'Tu', example: 'es', translation: 'Tu es prêt ? (Are you ready?)', breakdown: '' },
+          { rule: 'Il / Elle / On', example: 'est', translation: 'Il est médecin. (He is a doctor.)', breakdown: '' },
+          { rule: 'Nous', example: 'sommes', translation: 'Nous sommes ici. (We are here.)', breakdown: '' },
+          { rule: 'Vous', example: 'êtes', translation: 'Vous êtes prêts ?', breakdown: '' },
+          { rule: 'Ils / Elles', example: 'sont', translation: 'Elles sont jolies.', breakdown: '' },
+        ]
+      },
+      {
+        type: 'tips',
+        title: 'Tips',
+        tips: [
+          'Être and avoir are both irregular — no shortcuts, must memorise',
+          'Both are auxiliary verbs used to form the passé composé (past tense)',
+          'Use avoir for age: J\'ai vingt ans — NEVER "Je suis vingt ans"',
+          'Avoir expressions use "avoir" where English uses "to be": avoir faim = to be hungry',
+        ]
+      }
+    ],
+    exercises: [
+      { type: 'multiple_choice', question: '"Nous ___ une voiture." Complete with avoir.', options: ['avons', 'avez', 'ont', 'a'], correct: 0, explanation: 'Nous → avons.' },
+      { type: 'multiple_choice', question: '"Ils ___ faim." Complete with avoir.', options: ['a', 'avons', 'ont', 'avez'], correct: 2, explanation: 'Ils/Elles → ont.' },
+      { type: 'multiple_choice', question: '"Vous ___ prêts ?" Complete with être.', options: ['sommes', 'êtes', 'est', 'sont'], correct: 1, explanation: 'Vous → êtes.' },
+      { type: 'fill_blank', question: 'Complete: "J\'___ soif." (I am thirsty)', options: ['suis', 'est', 'ai', 'as'], correct: 2, explanation: '"Avoir soif" = to be thirsty. J\'ai soif (I have thirst → I am thirsty).' },
+      { type: 'translate', question: 'Translate: "She is right and he is wrong."', answer: 'Elle a raison et il a tort.', alternatives: [], explanation: 'avoir raison = to be right, avoir tort = to be wrong. Both use avoir.' },
+      { type: 'multiple_choice', question: '"Elles ___ jolies." Complete with être.', options: ['est', 'êtes', 'suis', 'sont'], correct: 3, explanation: 'Elles → sont.' },
+    ],
+    quiz: [
+      { question: '"J\'ai vingt ans" — which verb is used?', options: ['être', 'avoir', 'aller', 'faire'], correct: 1, explanation: 'French uses avoir for age: J\'ai vingt ans.' },
+      { question: '"Nous sommes ici" — which verb is this?', options: ['avoir', 'aller', 'être', 'faire'], correct: 2, explanation: 'sommes is the nous form of être.' },
+      { question: 'What does "avoir tort" mean?', options: ['to be right', 'to be wrong', 'to be late', 'to be tired'], correct: 1, explanation: 'avoir tort = to be wrong. avoir raison = to be right.' },
+      { question: '"Vous avez" comes from which verb?', options: ['être', 'aller', 'avoir', 'faire'], correct: 2, explanation: 'avez = vous form of avoir.' },
+      { question: 'How do you say "They (feminine) are here"?', options: ['Ils sont ici.', 'Elles est ici.', 'Elles sont ici.', 'Ils est ici.'], correct: 2, explanation: 'Elles (feminine they) + sont (être, elles form).' },
+    ]
+  })
+},
+
+// ─────────────────────────────────────────────────────────────────
+// LESSON 8 — Aller & Near Future
+// ─────────────────────────────────────────────────────────────────
+{
+  level: 'A1', sort_order: 8, duration_min: 25, xp_reward: 55,
+  title: 'Aller & the Near Future',
+  description: 'To go + aller + infinitive = the near future tense. One of the most useful constructions.',
+  content: JSON.stringify({
+    intro: `Aller (to go) is irregular and essential. Beyond meaning "to go", it creates the futur proche (near future): aller + infinitive = "going to do something". This is the most commonly used future tense in spoken French.`,
+    sections: [
+      {
+        type: 'grammar',
+        title: 'Aller — to go',
+        rules: [
+          { rule: 'Je', example: 'vais', translation: 'Je vais à l\'école. (I go to school.)', breakdown: '' },
+          { rule: 'Tu', example: 'vas', translation: 'Tu vas bien ? (Are you well?)', breakdown: '' },
+          { rule: 'Il / Elle / On', example: 'va', translation: 'Elle va au café.', breakdown: '' },
+          { rule: 'Nous', example: 'allons', translation: 'Nous allons au marché.', breakdown: '' },
+          { rule: 'Vous', example: 'allez', translation: 'Vous allez où ?', breakdown: '' },
+          { rule: 'Ils / Elles', example: 'vont', translation: 'Ils vont à la banque.', breakdown: '' },
+        ]
+      },
+      {
+        type: 'grammar',
+        title: 'Near Future — aller + infinitive',
+        rules: [
+          { rule: 'Structure', example: 'aller (conjugated) + infinitive verb', translation: '= going to do something', breakdown: '' },
+          { rule: 'Example 1', example: 'Je vais manger.', translation: 'I am going to eat.', breakdown: '' },
+          { rule: 'Example 2', example: 'Nous allons partir.', translation: 'We are going to leave.', breakdown: '' },
+          { rule: 'Example 3', example: 'Elle va étudier demain.', translation: 'She is going to study tomorrow.', breakdown: '' },
+          { rule: 'Negative', example: 'Je ne vais pas travailler.', translation: 'I am not going to work.', breakdown: 'ne...pas wraps around the aller form' },
+        ]
+      }
+    ],
+    exercises: [
+      { type: 'multiple_choice', question: '"Elle ___ au café." Complete with aller.', options: ['vais', 'vas', 'va', 'vont'], correct: 2, explanation: 'Il/Elle/On → va.' },
+      { type: 'multiple_choice', question: '"Nous ___ au marché." Complete with aller.', options: ['vont', 'allez', 'allons', 'vas'], correct: 2, explanation: 'Nous → allons.' },
+      { type: 'multiple_choice', question: '"Je vais manger." means:', options: ['I ate.', 'I eat.', 'I am going to eat.', 'I was eating.'], correct: 2, explanation: 'aller + infinitive = near future: "going to do".' },
+      { type: 'translate', question: 'Translate: "We are going to study tomorrow."', answer: 'Nous allons étudier demain.', alternatives: ['On va étudier demain.'], explanation: 'allons (nous form of aller) + étudier (infinitive) + demain (tomorrow).' },
+      { type: 'multiple_choice', question: 'How do you say "I am not going to work"?', options: ['Je vais ne pas travailler.', 'Je ne vais pas travailler.', 'Je ne va pas travailler.', 'Je ne vais travailler pas.'], correct: 1, explanation: 'ne...pas wraps around the conjugated form of aller: Je ne vais pas travailler.' },
+    ],
+    quiz: [
+      { question: '"Ils vont" — which subject?', options: ['Je', 'Nous', 'Vous', 'Ils/Elles'], correct: 3, explanation: 'vont = ils/elles form of aller.' },
+      { question: 'How do you say "She is going to work"?', options: ['Elle va travailler.', 'Elle vais travailler.', 'Elle aller travailler.', 'Elle va travaille.'], correct: 0, explanation: 'Elle + va (aller conjugated) + travailler (infinitive).' },
+      { question: '"Vous allez où?" means:', options: ['You go often?', 'Where are you going?', 'When are you going?', 'How are you going?'], correct: 1, explanation: 'Où = where. Vous allez = you go/are going.' },
+      { question: '"Je ne vais pas sortir." means:', options: ['I am going out.', 'I am not going to go out.', 'I went out.', 'I don\'t like going out.'], correct: 1, explanation: 'ne...pas around vais = negation of aller. Ne vais pas sortir = not going to go out.' },
+      { question: 'Near future is formed with:', options: ['être + infinitive', 'avoir + infinitive', 'aller + infinitive', 'faire + infinitive'], correct: 2, explanation: 'aller (conjugated) + infinitive = futur proche.' },
+    ]
+  })
+},
+
+// ─────────────────────────────────────────────────────────────────
+// LESSON 9 — The Three Verb Groups
+// ─────────────────────────────────────────────────────────────────
+{
+  level: 'A1', sort_order: 9, duration_min: 30, xp_reward: 60,
+  title: 'The Three Verb Groups',
+  description: '-er, -ir, -re verbs — how they conjugate in the present tense.',
+  content: JSON.stringify({
+    intro: `French verbs are divided into three groups based on their infinitive ending. Group 1 (-er) is the largest and most regular. Groups 2 and 3 are smaller. Understanding these groups lets you conjugate hundreds of verbs from the same pattern.`,
+    sections: [
+      {
+        type: 'grammar',
+        title: 'Group 1 — Parler model (-er)',
+        rules: [
+          { rule: 'Je', example: 'parle', translation: 'I speak', breakdown: 'stem + -e' },
+          { rule: 'Tu', example: 'parles', translation: 'you speak', breakdown: 'stem + -es' },
+          { rule: 'Il / Elle', example: 'parle', translation: 'he/she speaks', breakdown: 'stem + -e' },
+          { rule: 'Nous', example: 'parlons', translation: 'we speak', breakdown: 'stem + -ons' },
+          { rule: 'Vous', example: 'parlez', translation: 'you speak', breakdown: 'stem + -ez' },
+          { rule: 'Ils / Elles', example: 'parlent', translation: 'they speak', breakdown: 'stem + -ent (SILENT!)' },
+        ]
+      },
+      {
+        type: 'grammar',
+        title: '⚠️ Manger spelling rule (-ger verbs)',
+        rules: [
+          { rule: 'Add -e before -ons', example: 'nous mangeons (NOT mangons)', translation: '', breakdown: 'Keeps the soft \'g\' sound. Same for: voyager, plonger, nager.' },
+        ]
+      },
+      {
+        type: 'grammar',
+        title: 'Group 2 — Finir model (-ir with -iss-)',
+        rules: [
+          { rule: 'Je', example: 'finis', translation: 'I finish', breakdown: '' },
+          { rule: 'Tu', example: 'finis', translation: '', breakdown: '' },
+          { rule: 'Il / Elle', example: 'finit', translation: '', breakdown: '' },
+          { rule: 'Nous', example: 'finissons', translation: '', breakdown: '-iss- inserted in plural forms' },
+          { rule: 'Vous', example: 'finissez', translation: '', breakdown: '' },
+          { rule: 'Ils / Elles', example: 'finissent', translation: '', breakdown: '' },
+        ]
+      },
+      {
+        type: 'grammar',
+        title: 'Key irregular verbs (Group 3)',
+        rules: [
+          { rule: 'Venir (to come)', example: 'viens, viens, vient, venons, venez, viennent', translation: '', breakdown: 'viennent ⚠️ (not venent)' },
+          { rule: 'Pouvoir (can)', example: 'peux, peux, peut, pouvons, pouvez, peuvent', translation: '', breakdown: '' },
+          { rule: 'Vouloir (to want)', example: 'veux, veux, veut, voulons, voulez, veulent', translation: '', breakdown: '' },
+        ]
+      }
+    ],
+    exercises: [
+      { type: 'multiple_choice', question: '"Nous mang___ ensemble." Which ending?', options: ['-ons (mangons)', '-eons (mangeons)', '-ez', '-ent'], correct: 1, explanation: '-ger verbs add an e before -ons to keep the soft g: mangeons.' },
+      { type: 'fill_blank', question: '"Ils parle___." Which ending for -er verbs with ils/elles?', options: ['-ons', '-ez', '-e', '-ent'], correct: 3, explanation: 'Ils/Elles + -er verb = -ent (silent): parlent.' },
+      { type: 'multiple_choice', question: '"Nous finiss___." Group 2 (-ir) nous ending?', options: ['-ons', '-issons', '-isons', '-issez'], correct: 1, explanation: 'Group 2 inserts -iss- in plural forms: finissons.' },
+      { type: 'multiple_choice', question: '"Ils viennent souvent." Viennent comes from:', options: ['venir', 'vouloir', 'voir', 'vendre'], correct: 0, explanation: 'viennent = ils/elles form of venir (to come). Irregular.' },
+      { type: 'translate', question: 'Conjugate "parler" for "vous".', answer: 'parlez', alternatives: [], explanation: 'Stem "parl" + -ez (vous ending for -er verbs) = parlez.' },
+      { type: 'multiple_choice', question: 'What are the endings for Group 1 (-er) verbs with "je"?', options: ['-is', '-e', '-s', '-it'], correct: 1, explanation: 'Group 1 (-er) verbs: je + stem + -e. Example: je parle, je mange.' },
+    ],
+    quiz: [
+      { question: 'The -ent ending in "ils parlent" is:', options: ['pronounced like "on"', 'silent', 'pronounced "ent"', 'pronounced "ay"'], correct: 1, explanation: 'The -ent ending for ils/elles is always silent in French.' },
+      { question: 'Which verbs add -iss- in the plural?', options: ['Group 1 (-er)', 'Group 2 (-ir)', 'Group 3 (-re)', 'All irregular verbs'], correct: 1, explanation: 'Group 2 (-ir) verbs like finir insert -iss- in plural forms: finissons, finissez, finissent.' },
+      { question: '"Nous mangeons" has an extra "e" because:', options: ['manger is irregular', 'to keep the soft g sound before -ons', 'all -ger verbs are feminine', 'it\'s a spelling mistake'], correct: 1, explanation: '-ger verbs add e before endings starting with a or o to keep the soft g.' },
+      { question: '"Ils peuvent" comes from:', options: ['pouvoir', 'pouver', 'pouler', 'peuvoir'], correct: 0, explanation: 'peuvent = ils/elles form of pouvoir (can/to be able to).' },
+      { question: 'What is the vous form of "finir"?', options: ['finissez', 'finisez', 'finissons', 'finissent'], correct: 0, explanation: 'finissez = vous form of finir (Group 2).' },
+    ]
+  })
+},
+
+// ─────────────────────────────────────────────────────────────────
+// LESSON 10 — Irregular Verbs: Faire, Boire, Dire
+// ─────────────────────────────────────────────────────────────────
+{
+  level: 'A1', sort_order: 10, duration_min: 30, xp_reward: 60,
+  title: 'Irregular Verbs: Faire, Boire, Dire',
+  description: 'Three high-frequency irregular verbs — with their notorious irregular vous forms.',
+  content: JSON.stringify({
+    intro: `Faire (to do/make), boire (to drink), and dire (to say/tell) are all irregular and appear constantly in French. Each has a surprising "vous" form that students often get wrong. Learn them carefully.`,
+    sections: [
+      {
+        type: 'grammar',
+        title: 'Faire — to do / to make',
+        rules: [
+          { rule: 'Je / J\'', example: 'fais', translation: 'Je fais mes devoirs.', breakdown: '' },
+          { rule: 'Tu', example: 'fais', translation: 'Tu fais quoi ?', breakdown: '' },
+          { rule: 'Il / Elle / On', example: 'fait', translation: 'Il fait beau aujourd\'hui.', breakdown: 'Weather expressions use faire' },
+          { rule: 'Nous', example: 'faisons', translation: 'Nous faisons un gâteau.', breakdown: '' },
+          { rule: 'Vous', example: 'faites ⚠️', translation: 'Vous faites du sport ?', breakdown: 'NOT faisez — irregular!' },
+          { rule: 'Ils / Elles', example: 'font', translation: 'Ils font la cuisine.', breakdown: '' },
+        ]
+      },
+      {
+        type: 'grammar',
+        title: 'Boire — to drink',
+        rules: [
+          { rule: 'Je / J\'', example: 'bois', translation: 'Je bois de l\'eau.', breakdown: 'stem: boi-' },
+          { rule: 'Tu', example: 'bois', translation: 'Tu bois du café ?', breakdown: '' },
+          { rule: 'Il / Elle / On', example: 'boit', translation: 'Elle boit du lait.', breakdown: '' },
+          { rule: 'Nous', example: 'buvons ⚠️', translation: 'Nous buvons du jus.', breakdown: 'Stem changes to buv-' },
+          { rule: 'Vous', example: 'buvez ⚠️', translation: 'Vous buvez quoi ?', breakdown: 'Stem changes to buv-' },
+          { rule: 'Ils / Elles', example: 'boivent', translation: 'Ils boivent du vin.', breakdown: '' },
+        ]
+      },
+      {
+        type: 'grammar',
+        title: 'Dire — to say / to tell',
+        rules: [
+          { rule: 'Je / J\'', example: 'dis', translation: 'Je dis bonjour.', breakdown: '' },
+          { rule: 'Tu', example: 'dis', translation: 'Tu dis la vérité ?', breakdown: '' },
+          { rule: 'Il / Elle / On', example: 'dit', translation: 'Il dit non.', breakdown: '' },
+          { rule: 'Nous', example: 'disons', translation: 'Nous disons merci.', breakdown: '' },
+          { rule: 'Vous', example: 'dites ⚠️', translation: 'Vous dites quoi ?', breakdown: 'NOT disez — irregular! Same pattern as faites.' },
+          { rule: 'Ils / Elles', example: 'disent', translation: 'Ils disent oui.', breakdown: '' },
+        ]
+      },
+      {
+        type: 'tips',
+        title: 'Key things to memorise',
+        tips: [
+          'faites (not faisez) — vous form of faire',
+          'dites (not disez) — vous form of dire',
+          'boire changes stem: boi- (singular & ils) vs buv- (nous & vous)',
+          'faire + weather: Il fait chaud (hot), Il fait froid (cold), Il fait beau (nice weather)',
+        ]
+      }
+    ],
+    exercises: [
+      { type: 'multiple_choice', question: '"Vous ___ du sport ?" (faire)', options: ['faisez', 'faites', 'font', 'faisons'], correct: 1, explanation: 'Vous form of faire = faites (irregular, NOT faisez).' },
+      { type: 'multiple_choice', question: '"Nous ___ du jus." (boire)', options: ['buvons', 'buvez', 'boivent', 'buvons'], correct: 0, explanation: 'Nous form of boire = buvons (stem changes to buv-).' },
+      { type: 'multiple_choice', question: '"Vous ___ quoi ?" (dire)', options: ['disez', 'dites', 'disent', 'dit'], correct: 1, explanation: 'Vous form of dire = dites (irregular, NOT disez).' },
+      { type: 'fill_blank', question: '"Il ___ beau aujourd\'hui." (faire — weather)', options: ['fais', 'faites', 'fait', 'font'], correct: 2, explanation: 'Il/Elle/On → fait. Il fait beau = the weather is nice.' },
+      { type: 'translate', question: 'Translate: "They (mixed) drink wine."', answer: 'Ils boivent du vin.', alternatives: [], explanation: 'Ils (mixed group) + boivent (ils form of boire) + du vin (partitive for wine).' },
+      { type: 'multiple_choice', question: '"Ils ___ la cuisine." (faire)', options: ['faites', 'font', 'fais', 'faisons'], correct: 1, explanation: 'Ils/Elles → font (faire).' },
+    ],
+    quiz: [
+      { question: 'What is the vous form of faire?', options: ['faisez', 'font', 'faites', 'faisont'], correct: 2, explanation: 'faites — irregular vous form of faire.' },
+      { question: '"Nous buvons" — why "buv" not "boi"?', options: ['boire is feminine', 'The stem changes for nous and vous', 'It\'s a typo', 'All -oire verbs use buv-'], correct: 1, explanation: 'Boire has two stems: boi- (singular + ils) and buv- (nous + vous).' },
+      { question: '"Il fait froid" means:', options: ['He made cold.', 'The weather is cold.', 'He is cold.', 'It will be cold.'], correct: 1, explanation: 'Il fait + weather adjective = weather expression. faire is used for weather.' },
+      { question: 'What is the vous form of dire?', options: ['disez', 'dites', 'disont', 'disons'], correct: 1, explanation: 'dites — irregular vous form of dire (same pattern as faites).' },
+      { question: '"Je dis bonjour" comes from which verb?', options: ['faire', 'boire', 'dire', 'aller'], correct: 2, explanation: 'dis = je form of dire (to say/tell).' },
+    ]
+  })
+},
+
+// ─────────────────────────────────────────────────────────────────
+// LESSON 11 — The Prendre Family
+// ─────────────────────────────────────────────────────────────────
+{
+  level: 'A1', sort_order: 11, duration_min: 25, xp_reward: 55,
+  title: 'The Prendre Family',
+  description: 'Prendre, comprendre, apprendre — one pattern covers all three.',
+  content: JSON.stringify({
+    intro: `Prendre (to take), comprendre (to understand), and apprendre (to learn) all follow the same irregular pattern. Learn prendre and you get the other two for free — just swap the prefix.`,
+    sections: [
+      {
+        type: 'grammar',
+        title: 'Prendre — to take (model verb)',
+        rules: [
+          { rule: 'Je / J\'', example: 'prends', translation: 'Je prends le bus.', breakdown: '' },
+          { rule: 'Tu', example: 'prends', translation: 'Tu prends un café ?', breakdown: '' },
+          { rule: 'Il / Elle / On', example: 'prend', translation: 'Il prend son temps.', breakdown: '' },
+          { rule: 'Nous', example: 'prenons', translation: 'Nous prenons le train.', breakdown: '' },
+          { rule: 'Vous', example: 'prenez', translation: 'Vous prenez quoi ?', breakdown: '' },
+          { rule: 'Ils / Elles', example: 'prennent ⚠️', translation: 'Ils prennent leurs livres.', breakdown: 'Double n — not prenent' },
+        ]
+      },
+      {
+        type: 'grammar',
+        title: 'Full comparison table — all three verbs',
+        rules: [
+          { rule: 'Je / J\'', example: 'prends / comprends / apprends', translation: '', breakdown: '' },
+          { rule: 'Tu', example: 'prends / comprends / apprends', translation: '', breakdown: '' },
+          { rule: 'Il / Elle', example: 'prend / comprend / apprend', translation: '', breakdown: '' },
+          { rule: 'Nous', example: 'prenons / comprenons / apprenons', translation: '', breakdown: '' },
+          { rule: 'Vous', example: 'prenez / comprenez / apprenez', translation: '', breakdown: '' },
+          { rule: 'Ils / Elles', example: 'prennent / comprennent / apprennent ⚠️', translation: '', breakdown: 'Double n in all three' },
+        ]
+      }
+    ],
+    exercises: [
+      { type: 'multiple_choice', question: '"Ils ___ leurs livres." (prendre)', options: ['prennent', 'prenent', 'prends', 'prend'], correct: 0, explanation: 'prennent — double n in the ils/elles form.' },
+      { type: 'multiple_choice', question: '"Je ___ le français." (apprendre)', options: ['apprend', 'apprends', 'apprennent', 'apprenons'], correct: 1, explanation: 'J\'apprends — je form of apprendre.' },
+      { type: 'fill_blank', question: '"Vous ___ le train." (prendre)', options: ['prenez', 'prennez', 'prenons', 'prend'], correct: 0, explanation: 'Vous → prenez.' },
+      { type: 'multiple_choice', question: '"Elle ___ bien le français." (comprendre)', options: ['comprend', 'comprends', 'comprennent', 'comprenez'], correct: 0, explanation: 'Il/Elle → comprend (no final -s).' },
+      { type: 'translate', question: 'Translate: "We are learning French together."', answer: 'Nous apprenons le français ensemble.', alternatives: ['On apprend le français ensemble.'], explanation: 'apprenons = nous form of apprendre.' },
+      { type: 'multiple_choice', question: 'What is unusual about "prennent" (ils form)?', options: ['It has no ending', 'It doubles the n', 'It drops the e', 'It adds -iss-'], correct: 1, explanation: 'The ils/elles form of prendre (and comprendre/apprendre) doubles the n: prennent, comprennent, apprennent.' },
+    ],
+    quiz: [
+      { question: 'What is the ils/elles form of prendre?', options: ['prenent', 'prends', 'prennent', 'prend'], correct: 2, explanation: 'prennent — double n. This is the irregular part.' },
+      { question: '"J\'apprends" comes from:', options: ['prendre', 'comprendre', 'apprendre', 'prends'], correct: 2, explanation: 'apprends = je form of apprendre.' },
+      { question: '"Vous comprenez la règle?" means:', options: ['Do you understand the rule?', 'Do you take the rule?', 'Do you learn the rule?', 'Do you know the rule?'], correct: 0, explanation: 'comprendre = to understand. comprenez = vous form.' },
+      { question: 'Comprendre = com + ___', options: ['venir', 'prendre', 'apprendre', 'entendre'], correct: 1, explanation: 'Comprendre = com + prendre. Apprendre = ap + prendre. Same pattern.' },
+      { question: 'Nous form of apprendre:', options: ['apprenons', 'apprennons', 'apprenez', 'apprendent'], correct: 0, explanation: 'apprenons — no double n in the nous form.' },
+    ]
+  })
+},
+
+// ─────────────────────────────────────────────────────────────────
+// LESSON 12 — Article Contractions & Places in Town
+// ─────────────────────────────────────────────────────────────────
+{
+  level: 'A1', sort_order: 12, duration_min: 25, xp_reward: 50,
+  title: 'Contractions & Places',
+  description: 'à + le = AU, de + le = DU — and how to talk about locations in town.',
+  content: JSON.stringify({
+    intro: `In French, à and de must contract with le and les — giving you au, aux, du, des. This happens automatically and is not optional. Knowing your town vocabulary alongside these contractions is essential for TEF oral and written tasks.`,
+    sections: [
+      {
+        type: 'grammar',
+        title: 'The four contractions',
+        rules: [
+          { rule: 'à + le → AU', example: 'Je vais au marché.', translation: 'I\'m going to the market.', breakdown: '' },
+          { rule: 'à + les → AUX', example: 'Je vais aux musées.', translation: 'I\'m going to the museums.', breakdown: '' },
+          { rule: 'de + le → DU', example: 'Je viens du café.', translation: 'I come from the café.', breakdown: '' },
+          { rule: 'de + les → DES', example: 'Je reviens des magasins.', translation: 'I\'m back from the shops.', breakdown: '' },
+        ]
+      },
+      {
+        type: 'grammar',
+        title: 'No contraction — these stay as-is',
+        rules: [
+          { rule: 'à + la → à la', example: 'Je vais à la banque.', translation: '', breakdown: '' },
+          { rule: 'à + l\' → à l\'', example: 'Je vais à l\'école.', translation: '', breakdown: '' },
+          { rule: 'de + la → de la', example: 'Je viens de la pharmacie.', translation: '', breakdown: '' },
+          { rule: 'de + l\' → de l\'', example: 'Je viens de l\'hôpital.', translation: '', breakdown: '' },
+        ]
+      },
+      {
+        type: 'vocabulary',
+        title: 'Places in town (with correct article)',
+        items: [
+          { fr: 'le marché', en: 'the market', pron: '', note: 'au marché / du marché' },
+          { fr: 'le café', en: 'the café', pron: '', note: 'au café / du café' },
+          { fr: 'le parc', en: 'the park', pron: '', note: 'au parc / du parc' },
+          { fr: 'la banque', en: 'the bank', pron: '', note: 'à la banque / de la banque' },
+          { fr: 'la maison', en: 'the house', pron: '', note: 'à la maison / de la maison' },
+          { fr: 'la gare', en: 'the station', pron: '', note: 'à la gare / de la gare' },
+          { fr: 'l\'école', en: 'the school', pron: '', note: 'à l\'école / de l\'école' },
+          { fr: 'l\'hôpital', en: 'the hospital', pron: '', note: 'à l\'hôpital / de l\'hôpital' },
+          { fr: 'le supermarché', en: 'the supermarket', pron: '', note: 'au supermarché / du supermarché' },
+          { fr: 'le musée', en: 'the museum', pron: '', note: 'au musée / du musée' },
+        ]
+      }
+    ],
+    exercises: [
+      { type: 'multiple_choice', question: '"Je vais ___ marché." (à + le)', options: ['à le', 'au', 'du', 'de le'], correct: 1, explanation: 'à + le = AU (mandatory contraction).' },
+      { type: 'multiple_choice', question: '"Je viens ___ café." (de + le)', options: ['de le', 'du', 'des', 'de'], correct: 1, explanation: 'de + le = DU (mandatory contraction).' },
+      { type: 'multiple_choice', question: '"Je vais ___ banque." (banque = feminine)', options: ['au', 'à la', 'à le', 'du'], correct: 1, explanation: 'à + la = à la (no contraction — la stays).' },
+      { type: 'translate', question: 'Translate: "She is going to the hospital."', answer: 'Elle va à l\'hôpital.', alternatives: [], explanation: 'à + l\' = à l\' (no contraction before l\'). Hôpital is masculine.' },
+      { type: 'multiple_choice', question: '"Je reviens ___ magasins." (de + les)', options: ['de les', 'du', 'des', 'de'], correct: 2, explanation: 'de + les = DES (mandatory contraction).' },
+      { type: 'translate', question: 'Translate: "I am going to the park and the museum."', answer: 'Je vais au parc et au musée.', alternatives: [], explanation: 'au parc = à + le parc (masc). au musée = à + le musée (masc). Both mandatory contractions.' },
+    ],
+    quiz: [
+      { question: 'à + le =', options: ['à le', 'au', 'aux', 'du'], correct: 1, explanation: 'à + le → AU. Mandatory contraction.' },
+      { question: 'de + les =', options: ['de les', 'du', 'des', 'de'], correct: 2, explanation: 'de + les → DES. Mandatory contraction.' },
+      { question: '"à + la" contracts to:', options: ['au', 'aux', 'à la (no change)', 'de la'], correct: 2, explanation: 'à + la does NOT contract. It stays as "à la".' },
+      { question: '"Je vais au parc." — parc has which article?', options: ['la', 'le', 'l\'', 'les'], correct: 1, explanation: '"Au" = à + le, so parc is masculine: le parc.' },
+      { question: '"de + l\'" contracts to:', options: ['du', 'de l\' (no change)', 'des', 'de la'], correct: 1, explanation: 'de + l\' does NOT contract. It stays as "de l\'".' },
+    ]
+  })
+},
+
+// ─────────────────────────────────────────────────────────────────
+// LESSON 13 — Prepositions
+// ─────────────────────────────────────────────────────────────────
+{
+  level: 'A1', sort_order: 13, duration_min: 30, xp_reward: 65,
+  title: 'Prepositions',
+  description: 'à, sur, avec, chez, en, de, depuis, derrière, devant, à côté de — uses and examples.',
+  content: JSON.stringify({
+    intro: `Prepositions link nouns, pronouns and phrases to other words in a sentence. French prepositions often don't translate directly to English — especially chez and depuis. Learn each one with its specific uses and examples.`,
+    sections: [
+      {
+        type: 'grammar',
+        title: 'À — to / at / in',
+        rules: [
+          { rule: 'Direction or location', example: 'Je vais à Paris.', translation: 'I\'m going to Paris.', breakdown: 'Contracts: à + le = AU, à + les = AUX' },
+          { rule: 'Time', example: 'Le cours commence à 9h.', translation: 'Class starts at 9.', breakdown: '' },
+          { rule: 'Belonging', example: 'C\'est à moi.', translation: 'It\'s mine.', breakdown: '' },
+        ]
+      },
+      {
+        type: 'grammar',
+        title: 'À côté de — next to / beside',
+        rules: [
+          { rule: 'Position relative to another thing', example: 'La banque est à côté de la pharmacie.', translation: 'The bank is next to the pharmacy.', breakdown: 'de contracts normally after: à côté du, à côté de la, à côté de l\'' },
+        ]
+      },
+      {
+        type: 'grammar',
+        title: 'Sur — on / on top of',
+        rules: [
+          { rule: 'Physical position (on top of)', example: 'Le livre est sur la table.', translation: 'The book is on the table.', breakdown: '' },
+          { rule: 'On a street', example: 'J\'habite sur la rue principale.', translation: 'I live on the main street.', breakdown: '' },
+        ]
+      },
+      {
+        type: 'grammar',
+        title: 'Avec — with',
+        rules: [
+          { rule: 'Accompaniment', example: 'Je vais au cinéma avec Sophie.', translation: 'I\'m going to the cinema with Sophie.', breakdown: 'Never contracts' },
+          { rule: 'Manner', example: 'Il travaille avec soin.', translation: 'He works with care.', breakdown: '' },
+        ]
+      },
+      {
+        type: 'grammar',
+        title: 'Chez — at the home/place of',
+        rules: [
+          { rule: 'At someone\'s home', example: 'Je suis chez Marie.', translation: 'I am at Marie\'s place.', breakdown: 'No article after chez — directly followed by a person' },
+          { rule: 'At a professional\'s', example: 'Elle va chez le médecin.', translation: 'She\'s going to the doctor\'s.', breakdown: '' },
+          { rule: 'At my place', example: 'Chez moi, on mange à 19h.', translation: 'At my place, we eat at 7pm.', breakdown: '' },
+        ]
+      },
+      {
+        type: 'grammar',
+        title: 'En — in / to (countries, months, seasons, transport)',
+        rules: [
+          { rule: 'Countries (feminine)', example: 'Je vis en France.', translation: 'I live in France.', breakdown: 'Use en for feminine countries; au for masculine' },
+          { rule: 'Months', example: 'Nous partons en juillet.', translation: 'We leave in July.', breakdown: '' },
+          { rule: 'Transport', example: 'Elle voyage en train.', translation: 'She travels by train.', breakdown: '' },
+          { rule: 'Seasons (except spring)', example: 'En été, en hiver, en automne.', translation: '', breakdown: 'Spring = au printemps' },
+        ]
+      },
+      {
+        type: 'grammar',
+        title: 'De — from / of / about',
+        rules: [
+          { rule: 'Origin', example: 'Je viens du Canada.', translation: 'I come from Canada.', breakdown: 'Contracts: de + le = DU, de + les = DES' },
+          { rule: 'Possession', example: 'Le livre de Marie.', translation: 'Marie\'s book.', breakdown: '' },
+          { rule: 'Topic', example: 'Il parle de son voyage.', translation: 'He talks about his trip.', breakdown: '' },
+        ]
+      },
+      {
+        type: 'grammar',
+        title: '⚠️ Depuis — since / for (ongoing actions)',
+        rules: [
+          { rule: 'CRITICAL: use PRESENT tense (not past)', example: 'J\'apprends le français depuis six mois.', translation: 'I have been learning French for six months.', breakdown: 'English uses past tense. French uses PRESENT tense with depuis.' },
+          { rule: 'Since a specific point', example: 'Il habite ici depuis 2019.', translation: 'He has been living here since 2019.', breakdown: '' },
+        ]
+      },
+      {
+        type: 'grammar',
+        title: 'Derrière — behind / at the back of',
+        rules: [
+          { rule: 'Physical position', example: 'Le jardin est derrière la maison.', translation: 'The garden is behind the house.', breakdown: 'Opposite of devant. Does not contract.' },
+        ]
+      },
+      {
+        type: 'grammar',
+        title: 'Devant — in front of / before',
+        rules: [
+          { rule: 'Physical position', example: 'Il attend devant l\'école.', translation: 'He waits in front of the school.', breakdown: 'Opposite of derrière. Does not contract.' },
+        ]
+      },
+      {
+        type: 'tips',
+        title: 'Key things to remember',
+        tips: [
+          'Depuis + PRESENT tense for ongoing actions (not past like in English)',
+          'Chez = at the home/place of — directly followed by a person, no article',
+          'À contracts (au, aux) but avec, en, sur, devant, derrière do NOT contract',
+          'En for feminine countries: en France, en Italie — Au for masculine: au Canada, au Maroc',
+          'Depuis vs pour: depuis = since/for ongoing | pour = for (a future duration)',
+        ]
+      }
+    ],
+    exercises: [
+      { type: 'multiple_choice', question: '"Je suis ___ Marie." (at Marie\'s place)', options: ['à', 'chez', 'avec', 'en'], correct: 1, explanation: '"Chez" = at the home/place of. Je suis chez Marie.' },
+      { type: 'multiple_choice', question: '"J\'apprends le français ___ six mois." (for, ongoing)', options: ['pour', 'depuis', 'pendant', 'il y a'], correct: 1, explanation: '"Depuis" for ongoing actions still in progress. And crucially — the verb stays in PRESENT tense.' },
+      { type: 'multiple_choice', question: '"Le livre est ___ la table." (on top of)', options: ['sous', 'devant', 'sur', 'dans'], correct: 2, explanation: '"Sur" = on / on top of. Le livre est sur la table.' },
+      { type: 'fill_blank', question: '"Je vis ___ France." (in France — feminine country)', options: ['au', 'à', 'en', 'dans'], correct: 2, explanation: '"En" is used with feminine countries: en France.' },
+      { type: 'translate', question: 'Translate: "The garden is behind the house."', answer: 'Le jardin est derrière la maison.', alternatives: [], explanation: 'derrière = behind/at the back of.' },
+      { type: 'multiple_choice', question: '"La banque est ___ la pharmacie." (next to)', options: ['devant', 'derrière', 'à côté de', 'avec'], correct: 2, explanation: '"À côté de" = next to / beside.' },
+    ],
+    quiz: [
+      { question: '"Depuis" requires which tense when describing ongoing actions?', options: ['past tense', 'future tense', 'present tense', 'conditional'], correct: 2, explanation: 'French uses the PRESENT tense with depuis for ongoing actions. English uses the past ("have been").' },
+      { question: '"Chez" is followed by:', options: ['a place name', 'a person or pronoun', 'an article + noun', 'a country name'], correct: 1, explanation: 'Chez is always directly followed by a person or pronoun: chez Marie, chez moi, chez le médecin.' },
+      { question: '"En" is used for countries that are:', options: ['masculine', 'feminine', 'plural', 'starting with a vowel'], correct: 1, explanation: 'En is used with feminine countries: en France, en Italie, en Espagne.' },
+      { question: '"Devant" means:', options: ['behind', 'beside', 'in front of', 'above'], correct: 2, explanation: 'devant = in front of / before. Opposite of derrière (behind).' },
+      { question: '"Il parle de son voyage." — de here means:', options: ['from', 'of', 'about', 'with'], correct: 2, explanation: 'de = about/on the subject of when used with verbs like parler de, rêver de, etc.' },
     ]
   })
 },
 
   ]; // end lessons array
 
-  lessons.forEach(l => DB.insert('lessons', l));
-
-  // ── VOCAB CARDS ──────────────────────────────────────────────────────────────
-  const vocab = [
+  // ── Vocab cards (from notes) ──────────────────────────────────────────────
+  const vocabCards = [
+    // Days
+    { level:'A1', word:'lundi', word_type:'noun (masc)', translation:'Monday', example_fr:'Aujourd\'hui, c\'est lundi.', example_en:'Today is Monday.' },
+    { level:'A1', word:'mercredi', word_type:'noun (masc)', translation:'Wednesday', example_fr:'Le cours est mercredi.', example_en:'The class is on Wednesday.' },
+    { level:'A1', word:'vendredi', word_type:'noun (masc)', translation:'Friday', example_fr:'Mon jour préféré est vendredi.', example_en:'My favourite day is Friday.' },
+    // Numbers
+    { level:'A1', word:'soixante-dix', word_type:'number', translation:'70', example_fr:'J\'ai soixante-dix ans.', example_en:'I am 70 years old.' },
+    { level:'A1', word:'quatre-vingts', word_type:'number', translation:'80', example_fr:'Il y a quatre-vingts élèves.', example_en:'There are 80 students.' },
+    { level:'A1', word:'quatre-vingt-dix', word_type:'number', translation:'90', example_fr:'Elle a quatre-vingt-dix ans.', example_en:'She is 90 years old.' },
+    // Articles & nouns
     { level:'A1', word:'bonjour', word_type:'exclamation', translation:'hello / good day', example_fr:'Bonjour, je m\'appelle Osama.', example_en:'Hello, my name is Osama.' },
-    { level:'A1', word:'au revoir', word_type:'exclamation', translation:'goodbye', example_fr:'Au revoir, bonne journée!', example_en:'Goodbye, have a good day!' },
-    { level:'A1', word:'merci', word_type:'exclamation', translation:'thank you', example_fr:'Merci beaucoup pour votre aide.', example_en:'Thank you very much for your help.' },
-    { level:'A1', word:'s\'il vous plaît', word_type:'phrase (formal)', translation:'please', example_fr:'Un café, s\'il vous plaît.', example_en:'A coffee, please.' },
     { level:'A1', word:'enchanté(e)', word_type:'exclamation', translation:'pleased to meet you', example_fr:'Enchanté de vous rencontrer.', example_en:'Pleased to meet you.' },
-    { level:'A1', word:'la maison', word_type:'noun (feminine)', translation:'the house', example_fr:'Ma maison est à Oakville.', example_en:'My house is in Oakville.' },
-    { level:'A1', word:'le travail', word_type:'noun (masculine)', translation:'the work / job', example_fr:'Je vais au travail en bus.', example_en:'I go to work by bus.' },
-    { level:'A1', word:'la ville', word_type:'noun (feminine)', translation:'the city / town', example_fr:'Oakville est une belle ville.', example_en:'Oakville is a beautiful city.' },
-    { level:'A1', word:'le quartier', word_type:'noun (masculine)', translation:'the neighbourhood', example_fr:'Mon quartier est tranquille.', example_en:'My neighbourhood is quiet.' },
-    { level:'A1', word:'la famille', word_type:'noun (feminine)', translation:'the family', example_fr:'Ma famille habite au Canada.', example_en:'My family lives in Canada.' },
-    { level:'A1', word:'l\'enfant', word_type:'noun (masc/fem)', translation:'the child', example_fr:'J\'ai deux enfants.', example_en:'I have two children.' },
-    { level:'A1', word:'grand / grande', word_type:'adjective', translation:'big / tall', example_fr:'Le lac Ontario est très grand.', example_en:'Lake Ontario is very big.' },
-    { level:'A1', word:'petit / petite', word_type:'adjective', translation:'small / short', example_fr:'J\'ai une petite voiture.', example_en:'I have a small car.' },
-    { level:'A1', word:'beau / belle', word_type:'adjective', translation:'beautiful / handsome', example_fr:'C\'est une belle journée.', example_en:'It\'s a beautiful day.' },
-    { level:'A1', word:'parler', word_type:'verb (-ER)', translation:'to speak', example_fr:'Je parle français et anglais.', example_en:'I speak French and English.' },
-    { level:'A1', word:'habiter', word_type:'verb (-ER)', translation:'to live (somewhere)', example_fr:'J\'habite à Oakville depuis 2023.', example_en:'I have lived in Oakville since 2023.' },
-    { level:'A1', word:'manger', word_type:'verb (-ER)', translation:'to eat', example_fr:'Je mange à midi.', example_en:'I eat at noon.' },
-    { level:'A1', word:'avoir', word_type:'verb (irregular)', translation:'to have', example_fr:'J\'ai un passeport canadien.', example_en:'I have a Canadian passport.' },
-    { level:'A1', word:'être', word_type:'verb (irregular)', translation:'to be', example_fr:'Je suis résident permanent.', example_en:'I am a permanent resident.' },
-    { level:'A1', word:'aujourd\'hui', word_type:'adverb', translation:'today', example_fr:'Aujourd\'hui, j\'ai un rendez-vous.', example_en:'Today, I have an appointment.' },
-    { level:'A2', word:'travailler', word_type:'verb (-ER)', translation:'to work', example_fr:'Je travaille à Burlington.', example_en:'I work in Burlington.' },
-    { level:'A2', word:'chercher', word_type:'verb (-ER)', translation:'to look for', example_fr:'Je cherche un emploi bilingue.', example_en:'I am looking for a bilingual job.' },
-    { level:'A2', word:'le rendez-vous', word_type:'noun (masculine)', translation:'the appointment / meeting', example_fr:'J\'ai un rendez-vous à l\'IRCC.', example_en:'I have an appointment at IRCC.' },
-    { level:'A2', word:'le permis de travail', word_type:'noun (masculine)', translation:'the work permit', example_fr:'Mon permis de travail expire en décembre.', example_en:'My work permit expires in December.' },
-    { level:'A2', word:'la demande', word_type:'noun (feminine)', translation:'the application / request', example_fr:'J\'ai soumis ma demande hier.', example_en:'I submitted my application yesterday.' },
-    { level:'A2', word:'souvent', word_type:'adverb', translation:'often', example_fr:'Je vais souvent au parc.', example_en:'I often go to the park.' },
-    { level:'A2', word:'quelquefois', word_type:'adverb', translation:'sometimes', example_fr:'Quelquefois je prends le GO Train.', example_en:'Sometimes I take the GO Train.' },
-    { level:'A2', word:'avoir besoin de', word_type:'expression', translation:'to need', example_fr:'J\'ai besoin d\'un formulaire.', example_en:'I need a form.' },
-    { level:'A2', word:'avoir raison', word_type:'expression', translation:'to be right', example_fr:'Vous avez raison!', example_en:'You are right!' },
-    { level:'B1', word:'cependant', word_type:'conjunction', translation:'however / nevertheless', example_fr:'C\'est difficile; cependant, je persévère.', example_en:'It\'s difficult; however, I persevere.' },
-    { level:'B1', word:'la résidence permanente', word_type:'noun (feminine)', translation:'permanent residency', example_fr:'J\'ai obtenu ma résidence permanente.', example_en:'I obtained my permanent residency.' },
-    { level:'B1', word:'néanmoins', word_type:'adverb', translation:'nevertheless', example_fr:'Néanmoins, il continue ses efforts.', example_en:'Nevertheless, he continues his efforts.' },
-    { level:'B1', word:'s\'améliorer', word_type:'verb (reflexive)', translation:'to improve oneself', example_fr:'Je m\'améliore en français chaque jour.', example_en:'I improve my French every day.' },
-    { level:'B1', word:'pourtant', word_type:'adverb', translation:'yet / still / even so', example_fr:'Il est fatigué, pourtant il étudie.', example_en:'He is tired, yet he studies.' },
-    { level:'B2', word:'à mon avis', word_type:'phrase', translation:'in my opinion', example_fr:'À mon avis, le bilinguisme est essentiel.', example_en:'In my opinion, bilingualism is essential.' },
-    { level:'B2', word:'par conséquent', word_type:'conjunction', translation:'consequently / therefore', example_fr:'Il a bien préparé; par conséquent, il a réussi.', example_en:'He prepared well; consequently, he succeeded.' },
-    { level:'B2', word:'la citoyenneté', word_type:'noun (feminine)', translation:'citizenship', example_fr:'Je veux obtenir la citoyenneté canadienne.', example_en:'I want to obtain Canadian citizenship.' },
-    { level:'B2', word:'force est de constater', word_type:'phrase (formal)', translation:'one must acknowledge', example_fr:'Force est de constater que la situation s\'améliore.', example_en:'One must acknowledge that the situation is improving.' },
-    { level:'B2', word:'en revanche', word_type:'conjunction (formal)', translation:'on the other hand / in contrast', example_fr:'En revanche, les coûts ont augmenté.', example_en:'On the other hand, costs have increased.' },
+    { level:'A1', word:'la maison', word_type:'noun (fem)', translation:'the house', example_fr:'Ma maison est à Oakville.', example_en:'My house is in Oakville.' },
+    { level:'A1', word:'le café', word_type:'noun (masc)', translation:'the café / coffee', example_fr:'Je vais au café.', example_en:'I am going to the café.' },
+    { level:'A1', word:'l\'école', word_type:'noun (fem)', translation:'the school', example_fr:'Elle va à l\'école.', example_en:'She goes to school.' },
+    { level:'A1', word:'l\'hôpital', word_type:'noun (masc)', translation:'the hospital', example_fr:'Il est à l\'hôpital.', example_en:'He is at the hospital.' },
+    // Possessives
+    { level:'A1', word:'mon / ma / mes', word_type:'possessive adj', translation:'my', example_fr:'Mon livre, ma maison, mes amis.', example_en:'My book, my house, my friends.' },
+    { level:'A1', word:'son / sa / ses', word_type:'possessive adj', translation:'his / her', example_fr:'Son père, sa mère, ses enfants.', example_en:'His/her father, mother, children.' },
+    { level:'A1', word:'leur / leurs', word_type:'possessive adj', translation:'their', example_fr:'Leur maison, leurs enfants.', example_en:'Their house, their children.' },
+    // Verbs
+    { level:'A1', word:'avoir', word_type:'verb (irreg)', translation:'to have', example_fr:'J\'ai un livre.', example_en:'I have a book.' },
+    { level:'A1', word:'être', word_type:'verb (irreg)', translation:'to be', example_fr:'Je suis étudiant.', example_en:'I am a student.' },
+    { level:'A1', word:'aller', word_type:'verb (irreg)', translation:'to go', example_fr:'Je vais à l\'école.', example_en:'I go to school.' },
+    { level:'A1', word:'faire', word_type:'verb (irreg)', translation:'to do / make', example_fr:'Il fait beau.', example_en:'The weather is nice.' },
+    { level:'A1', word:'boire', word_type:'verb (irreg)', translation:'to drink', example_fr:'Je bois de l\'eau.', example_en:'I drink water.' },
+    { level:'A1', word:'dire', word_type:'verb (irreg)', translation:'to say / tell', example_fr:'Tu dis bonjour.', example_en:'You say hello.' },
+    { level:'A1', word:'prendre', word_type:'verb (irreg)', translation:'to take', example_fr:'Je prends le bus.', example_en:'I take the bus.' },
+    { level:'A1', word:'comprendre', word_type:'verb (irreg)', translation:'to understand', example_fr:'Je comprends la leçon.', example_en:'I understand the lesson.' },
+    { level:'A1', word:'apprendre', word_type:'verb (irreg)', translation:'to learn', example_fr:'J\'apprends le français.', example_en:'I am learning French.' },
+    { level:'A1', word:'parler', word_type:'verb (-er)', translation:'to speak', example_fr:'Je parle français.', example_en:'I speak French.' },
+    { level:'A1', word:'manger', word_type:'verb (-er)', translation:'to eat', example_fr:'Nous mangeons ensemble.', example_en:'We eat together.' },
+    { level:'A1', word:'finir', word_type:'verb (-ir)', translation:'to finish', example_fr:'Tu finis tes devoirs.', example_en:'You finish your homework.' },
+    // Prepositions
+    { level:'A1', word:'chez', word_type:'preposition', translation:'at the home/place of', example_fr:'Je suis chez Marie.', example_en:'I am at Marie\'s place.' },
+    { level:'A1', word:'depuis', word_type:'preposition', translation:'since / for (ongoing)', example_fr:'J\'apprends le français depuis six mois.', example_en:'I have been learning French for six months.' },
+    { level:'A1', word:'à côté de', word_type:'preposition', translation:'next to / beside', example_fr:'La banque est à côté de la pharmacie.', example_en:'The bank is next to the pharmacy.' },
+    { level:'A1', word:'derrière', word_type:'preposition', translation:'behind', example_fr:'Le jardin est derrière la maison.', example_en:'The garden is behind the house.' },
+    { level:'A1', word:'devant', word_type:'preposition', translation:'in front of', example_fr:'Il attend devant l\'école.', example_en:'He waits in front of the school.' },
+    // Avoir expressions
+    { level:'A1', word:'avoir faim', word_type:'expression', translation:'to be hungry', example_fr:'J\'ai faim.', example_en:'I am hungry.' },
+    { level:'A1', word:'avoir soif', word_type:'expression', translation:'to be thirsty', example_fr:'Tu as soif ?', example_en:'Are you thirsty?' },
+    { level:'A1', word:'avoir raison', word_type:'expression', translation:'to be right', example_fr:'Vous avez raison.', example_en:'You are right.' },
   ];
 
-  vocab.forEach(v => DB.insert('vocab_cards', v));
-
-  // ── GRAMMAR DRILLS ────────────────────────────────────────────────────────────
-  const drills = [
-    { level:'A1', category:'articles', question:'Je vais à ___ bibliothèque.', options:JSON.stringify(['le','la','les','l\'']), correct_idx:1, explanation:'"Bibliothèque" is feminine, starts with consonant → la bibliothèque.' },
-    { level:'A1', category:'articles', question:'___ enfants jouent au parc.', options:JSON.stringify(['Le','La','Les','Un']), correct_idx:2, explanation:'"Les" is the plural definite article for ALL plural nouns.' },
-    { level:'A1', category:'articles', question:'"Je vais ___ Canada." (to Canada)', options:JSON.stringify(['à la','au','à le','à']), correct_idx:1, explanation:'"Canada" is masculine → à + le = AU. Always contract.' },
-    { level:'A1', category:'articles', question:'Je bois ___ eau. (some water)', options:JSON.stringify(['une','un','de l\'','des']), correct_idx:2, explanation:'"Eau" is feminine, starts with vowel → de l\'eau (partitive article).' },
-    { level:'A1', category:'articles', question:'"Les prix ___ magasins sont élevés."', options:JSON.stringify(['du','de la','des','de les']), correct_idx:2, explanation:'de + les = DES. "de les" is never used in French.' },
-    { level:'A1', category:'verbs', question:'Je ___ étudiant à Oakville.', options:JSON.stringify(['suis','es','est','êtes']), correct_idx:0, explanation:'Être: je → suis.' },
-    { level:'A1', category:'verbs', question:'Nous ___ deux enfants.', options:JSON.stringify(['a','ai','avons','ont']), correct_idx:2, explanation:'Avoir: nous → avons.' },
-    { level:'A1', category:'verbs', question:'Ils ___ au Canada depuis 2020.', options:JSON.stringify(['suis','sommes','sont','es']), correct_idx:2, explanation:'Être: ils → sont.' },
-    { level:'A1', category:'verbs', question:'Vous ___ votre passeport?', options:JSON.stringify(['ai','as','avez','ont']), correct_idx:2, explanation:'Avoir: vous → avez.' },
-    { level:'A1', category:'verbs', question:'"J\'___ faim." (I am hungry)', options:JSON.stringify(['suis','es','ai','est']), correct_idx:2, explanation:'"Avoir faim" = to be hungry. J\'ai faim. Never "je suis faim".' },
-    { level:'A1', category:'pronouns', question:'Marie et Sophie travaillent ici. ___ sont médecins.', options:JSON.stringify(['Ils','Elle','Elles','On']), correct_idx:2, explanation:'Two females → ELLES.' },
-    { level:'A1', category:'pronouns', question:'Paul et Marie vont au parc. ___ vont au parc.', options:JSON.stringify(['Elles','Elle','Ils','Il']), correct_idx:2, explanation:'Mixed group (male + female) → ILS. Any male = ils.' },
-    { level:'A2', category:'verbs', question:'"Elle ___ le bus GO chaque matin." (prendre — to take)', options:JSON.stringify(['prend','prends','prenons','prenez']), correct_idx:0, explanation:'Prendre: je prends, tu prends, il/elle PREND, nous prenons, vous prenez, ils prennent.' },
-    { level:'A2', category:'negation', question:'"Je ___ parle ___ anglais au bureau."', options:JSON.stringify(['ne/pas','n\'/pas','ne/point','pas/ne']), correct_idx:0, explanation:'ne...pas wraps the verb: Je NE parle PAS anglais.' },
-    { level:'A2', category:'negation', question:'"Je n\'ai pas ___ voiture." (I don\'t have a car)', options:JSON.stringify(['une','un','de','des']), correct_idx:2, explanation:'After negation: un/une/des → DE. Je n\'ai pas DE voiture.' },
-    { level:'A2', category:'negation', question:'"Il n\'a pas ___ enfants." (no children)', options:JSON.stringify(['des','de','d\'','les']), correct_idx:2, explanation:'After negation: des → de. Before vowel (enfants): de → d\'. Il n\'a pas D\'enfants.' },
-    { level:'B1', category:'past', question:'"Hier, je ___ (aller) au marché."', options:JSON.stringify(['suis allé','ai allé','suis aller','allais']), correct_idx:0, explanation:'"Aller" uses être: je SUIS allé(e). Agreement required.' },
-    { level:'B1', category:'past', question:'"Nous ___ (manger) au restaurant samedi."', options:JSON.stringify(['avons mangé','sommes mangés','avons manger','mangions']), correct_idx:0, explanation:'"Manger" uses avoir: nous avons mangé.' },
-    { level:'B1', category:'past', question:'"J\'___ reçu la lettre." (recevoir → reçu)', options:JSON.stringify(['suis','ai','être','avoir']), correct_idx:1, explanation:'"Recevoir" uses avoir: j\'AI reçu.' },
-    { level:'B1', category:'future', question:'"L\'année prochaine, je ___ (passer) le TEF."', options:JSON.stringify(['passerai','vais passe','passerais','ai passé']), correct_idx:0, explanation:'Futur simple: infinitive + -ai: je passerai.' },
-    { level:'B2', category:'opinion', question:'"___ mon avis, le bilinguisme est essentiel."', options:JSON.stringify(['À','Selon','D\'après','De']), correct_idx:0, explanation:'"À mon avis" — most common formal opinion phrase.' },
-    { level:'B2', category:'opinion', question:'"Bien ___ ce soit difficile, je continue."', options:JSON.stringify(['que','qui','quoi','dont']), correct_idx:0, explanation:'"Bien que" + subjunctive. The subjunctive form of "être" is "soit".' },
-    { level:'B2', category:'connectors', question:'Which connector shows CONSEQUENCE?', options:JSON.stringify(['Cependant','Néanmoins','Par conséquent','En outre']), correct_idx:2, explanation:'"Par conséquent" = consequently/therefore. Shows cause → effect.' },
-    { level:'B2', category:'connectors', question:'Which connector shows CONTRAST?', options:JSON.stringify(['En outre','De plus','Cependant','Car']), correct_idx:2, explanation:'"Cependant" = however. Introduces an opposing or nuancing idea.' },
-  ];
-
-  drills.forEach(d => DB.insert('grammar_drills', d));
-
-  console.log(`✅ Seeded: ${lessons.length} full lessons, ${vocab.length} vocab cards, ${drills.length} drills`);
+  lessons.forEach(l => DB.insert('lessons', l));
+  vocabCards.forEach(v => DB.insert('vocab_cards', v));
+  console.log(`✅ Seeded ${lessons.length} lessons and ${vocabCards.length} vocab cards.`);
 }
 
 module.exports = { seedIfEmpty };
