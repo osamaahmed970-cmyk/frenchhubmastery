@@ -44,6 +44,15 @@ router.get('/me', requireAuth, (req, res) => {
   res.json(safe);
 });
 
+router.patch('/me', requireAuth, (req, res) => {
+  const { target_exam, target_date } = req.body;
+  DB.update('users', u => u.id === req.user.id, { target_exam, target_date });
+  const user = DB.findOne('users', u => u.id === req.user.id);
+  if (!user) return res.status(404).json({ error: 'User not found.' });
+  const { password, ...safe } = user;
+  res.json(safe);
+});
+
 function seedDefaultPlanner(userId) {
   const today = new Date();
   const tasks = [

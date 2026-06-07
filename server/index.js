@@ -20,7 +20,7 @@ app.use(express.json({ limit: '10mb' }));
 
 // Ensure uploads directory exists
 const UPLOADS_DIR = path.join(__dirname, 'uploads', 'audio');
-fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+try { fs.mkdirSync(UPLOADS_DIR, { recursive: true }); } catch (e) { console.warn('[startup] Could not create uploads dir:', e.message); }
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // ── Seed database on startup ──────────────────────────────────────────────────
@@ -66,7 +66,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log('');
   console.log('  🇫🇷  French Mastery Hub');
   console.log(`  🌍  Running on port ${PORT}`);
