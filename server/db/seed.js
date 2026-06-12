@@ -1236,6 +1236,108 @@ function seedIfEmpty() {
   })
 },
 
+// ─────────────────────────────────────────────────────────────────
+// LESSON 15 — Prepositions 2 & Question Words
+// ─────────────────────────────────────────────────────────────────
+{
+  level: 'A1', sort_order: 15, duration_min: 35, xp_reward: 60,
+  title: 'Prepositions 2 & Question Words',
+  description: 'New spatial prepositions plus all essential question words (mots interrogatifs) to build real French questions.',
+  content: JSON.stringify({
+    intro: `Two essential building blocks in one lesson: spatial prepositions to describe where things are, and question words to ask about anything. Together they let you ask and answer a huge range of everyday questions — and they appear in every TEF/TCF oral and written section.`,
+    sections: [
+      {
+        type: 'vocabulary',
+        title: 'Section 1 — New Prepositions',
+        items: [
+          { fr: 'sur', en: 'on / on top of', pron: 'soor', note: 'Le livre est sur la table. — physical contact on a surface' },
+          { fr: 'sous', en: 'under / beneath', pron: 'soo', note: 'Le chat est sous la chaise. — directly below, with or without contact' },
+          { fr: 'pendant', en: 'during / while', pron: 'pohn-dohn', note: 'Pendant le cours, je prends des notes. — a duration or concurrent period' },
+          { fr: 'dans', en: 'in / inside', pron: 'dohn', note: 'Les clés sont dans mon sac. — inside a container or space' },
+          { fr: 'dehors / en dehors de', en: 'outside / outside of', pron: 'duh-or / ohn duh-or duh', note: 'Il est dehors. / En dehors de la ville. — dehors stands alone; en dehors de needs a reference noun' },
+          { fr: 'en face de', en: 'facing / across from', pron: 'ohn fas duh', note: 'La pharmacie est en face de la banque.' },
+          { fr: 'entre', en: 'between', pron: 'ohntr', note: 'Le stylo est entre le livre et le cahier. — always used with two reference points' },
+          { fr: 'loin de', en: 'far from', pron: 'lwan duh', note: 'L\'école est loin de chez moi. — opposite of près de' },
+          { fr: 'par', en: 'by / through / per', pron: 'par', note: 'Je passe par le parc. / deux fois par semaine = twice per week' },
+          { fr: 'pour', en: 'for / in order to', pron: 'poor', note: 'C\'est pour toi. / Je travaille pour vivre. — purpose or recipient' },
+          { fr: 'près de', en: 'near / close to', pron: 'preh duh', note: 'La gare est près d\'ici. — opposite of loin de' },
+          { fr: 'sans', en: 'without', pron: 'sohn', note: 'Je bois mon café sans sucre. — no partitive after sans: sans lait (not sans du lait)' },
+          { fr: 'en dessous de', en: 'below / underneath', pron: 'ohn duh-soo duh', note: 'More precise than sous — below but not necessarily touching. En dessous de la table.' },
+          { fr: 'à gauche de', en: 'to the left of', pron: 'ah gohsh duh', note: 'La poste est à gauche de la mairie. — à gauche alone = to the left (no reference)' },
+          { fr: 'à droite de', en: 'to the right of', pron: 'ah drwat duh', note: 'Le café est à droite de la boulangerie. — à droite alone = to the right' },
+        ]
+      },
+      {
+        type: 'vocabulary',
+        title: 'Section 2 — Question Words (Mots interrogatifs)',
+        items: [
+          { fr: 'combien (de)', en: 'how many / how much', pron: 'kom-byahn', note: 'Combien de frères as-tu ? — always followed by de before a noun (never des)' },
+          { fr: 'comment', en: 'how', pron: 'koh-mohn', note: 'Comment tu t\'appelles ? / Comment ça va ? — manner or method' },
+          { fr: 'quand', en: 'when', pron: 'kohn', note: 'Quand est-ce que tu arrives ? — asks about the time of an event' },
+          { fr: 'quel / quelle / quels / quelles', en: 'which / what (+ noun)', pron: 'kel', note: 'Agrees with the noun: quel jour (masc sg), quelle heure (fem sg), quels livres (masc pl), quelles filles (fem pl)' },
+          { fr: 'où', en: 'where', pron: 'oo', note: 'Où habites-tu ? — always has accent grave (ù). ou without accent = or' },
+          { fr: 'd\'où', en: 'from where', pron: 'doo', note: 'D\'où viens-tu ? — origin or starting point. de + où → d\'où' },
+          { fr: 'depuis quand', en: 'since when / how long', pron: 'duh-pwee kohn', note: 'Depuis quand apprends-tu le français ? — always uses present tense in French for ongoing actions' },
+          { fr: 'pourquoi', en: 'why', pron: 'poor-kwah', note: 'Pourquoi tu pars ? — answer always uses parce que (because)' },
+          { fr: 'à quelle heure', en: 'at what time', pron: 'ah kel uhr', note: 'À quelle heure commence le cours ? — quelle agrees with heure (feminine)' },
+          { fr: 'quelle heure est-il', en: 'what time is it', pron: 'kel uhr eh-teel', note: 'Fixed expression — answer: Il est trois heures. / Il est midi.' },
+          { fr: 'qu\'est-ce que c\'est', en: 'what is this / what is it', pron: 'kess-kuh seh', note: 'Qu\'est-ce que c\'est ? → C\'est un stylo. — identifies objects. Most natural spoken form.' },
+          { fr: 'qui', en: 'who', pron: 'kee', note: 'Qui est là ? — subject or object depending on position. Never elided.' },
+          { fr: 'à qui', en: 'to whom / for whom', pron: 'ah kee', note: 'À qui parles-tu ? / C\'est à qui, ce livre ?' },
+          { fr: 'de quoi', en: 'about what / of what', pron: 'duh kwah', note: 'De quoi parles-tu ? — what are you talking about?' },
+          { fr: 'à qui est', en: 'whose (is it)', pron: 'ah kee eh', note: 'À qui est ce sac ? → C\'est le sac de Marie. — to ask about ownership' },
+          { fr: 'qu\'est-ce que', en: 'what (object of verb)', pron: 'kess-kuh', note: 'Qu\'est-ce que tu veux ? — long-form question targeting the object. Most common spoken question form.' },
+          { fr: 'est-ce que', en: 'yes/no question marker', pron: 'ess-kuh', note: 'Est-ce que tu parles français ? — turns any statement into a yes/no question without inversion' },
+        ]
+      },
+      {
+        type: 'grammar',
+        title: 'Building Real Questions — Structures',
+        rules: [
+          { rule: 'où + est-ce que', example: 'Où est-ce que tu habites ?', translation: 'Where do you live?', breakdown: 'Question word + est-ce que + subject + verb — standard spoken structure' },
+          { rule: 'quand + est-ce que', example: 'Quand est-ce qu\'il arrive ?', translation: 'When does he arrive?', breakdown: 'est-ce que → est-ce qu\' before a vowel (élision of que)' },
+          { rule: 'pourquoi → parce que', example: 'Pourquoi tu études ? → Parce que j\'aime le français.', translation: 'Why do you study? → Because I love French.', breakdown: 'pourquoi (why) always pairs with parce que (because) in the answer' },
+          { rule: 'combien de + noun', example: 'Combien de personnes sont là ?', translation: 'How many people are there?', breakdown: 'combien must be followed by de (never du / des) before a noun' },
+          { rule: 'quel/quelle + noun (gender agreement)', example: 'Quel livre lis-tu ? / Quelle ville habites-tu ?', translation: 'Which book / Which city?', breakdown: 'quel changes form to match the gender and number of the noun it modifies' },
+          { rule: 'à quelle heure + verb', example: 'À quelle heure ouvre la banque ?', translation: 'At what time does the bank open?', breakdown: 'Common for appointments, schedules, and daily routines' },
+          { rule: 'est-ce que (yes/no)', example: 'Est-ce que tu aimes le café ?', translation: 'Do you like coffee?', breakdown: 'No inversion needed — the easiest way to form any question in spoken French' },
+          { rule: 'depuis quand + present tense', example: 'Depuis quand habites-tu ici ?', translation: 'How long have you been living here?', breakdown: 'Use present tense in French — not passé composé — for ongoing actions still in progress' },
+        ]
+      },
+      {
+        type: 'tips',
+        title: 'Key Rules & Exam Tips',
+        tips: [
+          'où (accent) = where — ou (no accent) = or. This difference is always tested in written exams.',
+          'quel agrees with its noun: quel garçon, quelle fille, quels livres, quelles filles',
+          'combien de is always de — never du or des: combien de livres (not combien des livres)',
+          'est-ce que is your safest question form — no inversion, works in any tense',
+          'pourquoi question → always answer with parce que (because) — a classic exam pairing',
+          'depuis quand uses present tense in French: "Depuis quand apprends-tu?" not passé composé',
+          'sous = physically under with contact; en dessous de = below, possibly not touching',
+          'à gauche / à droite alone = to the left/right; add de for "to the left/right of" something',
+          'sans never takes du/de la/des — always bare noun: sans sucre, sans lait, sans argent',
+        ]
+      }
+    ],
+    exercises: [
+      { type: 'multiple_choice', question: 'Le chat est ___ la chaise. (under)', options: ['sur', 'sous', 'dans', 'entre'], correct: 1, explanation: '"sous" = under/beneath. Le chat est sous la chaise. "Sur" is the opposite: on top of.' },
+      { type: 'multiple_choice', question: 'Complete: "___ tu pars si tôt ?" (Why are you leaving so early?)', options: ['Quand', 'Où', 'Pourquoi', 'Comment'], correct: 2, explanation: 'Pourquoi = why. The answer to this question would use "parce que" (because).' },
+      { type: 'multiple_choice', question: '"À ___ heure commence le film ?" (At what time does the film start?)', options: ['quelle', 'quel', 'quels', 'quelles'], correct: 0, explanation: '"heure" is feminine singular, so quel takes feminine form: À quelle heure commence le film ?' },
+      { type: 'fill_blank', question: '"___ est-ce que tu veux ?" (What do you want?)', options: ['Où', 'Qu\'', 'Qui', 'Quand'], correct: 1, explanation: 'Qu\'est-ce que (what) asks about the object of the verb. Qu\' is the elision of que before est.' },
+      { type: 'multiple_choice', question: '"La boulangerie est ___ de la pharmacie." (to the right of)', options: ['à gauche', 'à droite', 'en face', 'loin'], correct: 1, explanation: '"à droite de" = to the right of. La boulangerie est à droite de la pharmacie.' },
+      { type: 'translate', question: 'Translate: "How many students are in the class?"', answer: 'Combien d\'étudiants sont dans la classe ?', alternatives: ['Combien d\'élèves sont dans la classe ?', 'Il y a combien d\'étudiants dans la classe ?'], explanation: 'combien de + noun. Before a vowel, de contracts: de + étudiants → d\'étudiants. "dans" = inside/in.' },
+    ],
+    quiz: [
+      { question: '"où" means ___ and "ou" (no accent) means ___', options: ['where / or', 'or / where', 'who / or', 'where / why'], correct: 0, explanation: 'où (with accent) = where. ou (without accent) = or. Accent marks change meaning in French.' },
+      { question: 'Which form of "quel" is correct: "___ sont tes livres préférés ?"', options: ['Quel', 'Quelle', 'Quels', 'Quelles'], correct: 2, explanation: '"livres" is masculine plural, so quel takes -s: Quels sont tes livres préférés ?' },
+      { question: '"Est-ce que tu parles arabe ?" is what type of question?', options: ['A question about time', 'A yes/no question', 'A question about location', 'A question about quantity'], correct: 1, explanation: '"Est-ce que" turns any statement into a yes/no question without requiring inversion.' },
+      { question: 'What word completes: "Je bois mon thé ___ lait." (I drink my tea without milk.)', options: ['avec', 'sans', 'pour', 'par'], correct: 1, explanation: '"sans" = without. Je bois mon thé sans lait. Note: no du/de la after sans — always bare noun.' },
+      { question: '"Depuis quand apprends-tu le français ?" uses which tense?', options: ['passé composé', 'imparfait', 'présent', 'futur'], correct: 2, explanation: 'French uses present tense with "depuis quand" for ongoing actions — unlike English which uses the present perfect ("have been learning").' },
+    ]
+  })
+},
+
   ]; // end lessons array
 
   // ── Vocab cards (from notes) ──────────────────────────────────────────────
@@ -1295,6 +1397,40 @@ function seedIfEmpty() {
     { level:'A1', word:'lire', word_type:'verb (irreg)', translation:'to read', example_fr:'Je lis un roman.', example_en:'I am reading a novel.' },
     { level:'A1', word:'écrire', word_type:'verb (irreg)', translation:'to write', example_fr:'J\'écris une lettre.', example_en:'I am writing a letter.' },
     { level:'A1', word:'connaître', word_type:'verb (irreg)', translation:'to know (person/place)', example_fr:'Je connais bien Paris.', example_en:'I know Paris well.' },
+    // Lesson 15 prepositions
+    { level:'A1', word:'sur', word_type:'preposition', translation:'on / on top of', example_fr:'Le livre est sur la table.', example_en:'The book is on the table.' },
+    { level:'A1', word:'sous', word_type:'preposition', translation:'under / beneath', example_fr:'Le chat est sous la chaise.', example_en:'The cat is under the chair.' },
+    { level:'A1', word:'pendant', word_type:'preposition', translation:'during / while', example_fr:'Pendant le cours, je prends des notes.', example_en:'During class, I take notes.' },
+    { level:'A1', word:'dans', word_type:'preposition', translation:'in / inside', example_fr:'Les clés sont dans mon sac.', example_en:'The keys are in my bag.' },
+    { level:'A1', word:'en dehors de', word_type:'preposition', translation:'outside of', example_fr:'Il habite en dehors de la ville.', example_en:'He lives outside the city.' },
+    { level:'A1', word:'en face de', word_type:'preposition', translation:'facing / across from', example_fr:'La pharmacie est en face de la banque.', example_en:'The pharmacy is across from the bank.' },
+    { level:'A1', word:'entre', word_type:'preposition', translation:'between', example_fr:'Le stylo est entre le livre et le cahier.', example_en:'The pen is between the book and the notebook.' },
+    { level:'A1', word:'loin de', word_type:'preposition', translation:'far from', example_fr:'L\'école est loin de chez moi.', example_en:'The school is far from my home.' },
+    { level:'A1', word:'par', word_type:'preposition', translation:'by / through / per', example_fr:'Je passe par le parc.', example_en:'I go through the park.' },
+    { level:'A1', word:'pour', word_type:'preposition', translation:'for / in order to', example_fr:'C\'est pour toi.', example_en:'This is for you.' },
+    { level:'A1', word:'près de', word_type:'preposition', translation:'near / close to', example_fr:'La gare est près d\'ici.', example_en:'The station is near here.' },
+    { level:'A1', word:'sans', word_type:'preposition', translation:'without', example_fr:'Je bois mon café sans sucre.', example_en:'I drink my coffee without sugar.' },
+    { level:'A1', word:'en dessous de', word_type:'preposition', translation:'below / underneath', example_fr:'Le chat dort en dessous de la table.', example_en:'The cat sleeps underneath the table.' },
+    { level:'A1', word:'à gauche de', word_type:'preposition', translation:'to the left of', example_fr:'La poste est à gauche de la mairie.', example_en:'The post office is to the left of the town hall.' },
+    { level:'A1', word:'à droite de', word_type:'preposition', translation:'to the right of', example_fr:'Le café est à droite de la boulangerie.', example_en:'The café is to the right of the bakery.' },
+    // Lesson 15 question words
+    { level:'A1', word:'combien (de)', word_type:'question word', translation:'how many / how much', example_fr:'Combien de frères as-tu ?', example_en:'How many brothers do you have?' },
+    { level:'A1', word:'comment', word_type:'question word', translation:'how', example_fr:'Comment tu t\'appelles ?', example_en:'What is your name?' },
+    { level:'A1', word:'quand', word_type:'question word', translation:'when', example_fr:'Quand est-ce que tu arrives ?', example_en:'When do you arrive?' },
+    { level:'A1', word:'quel / quelle', word_type:'question word', translation:'which / what (+ noun)', example_fr:'Quel jour sommes-nous ?', example_en:'What day is it?' },
+    { level:'A1', word:'où', word_type:'question word', translation:'where', example_fr:'Où habites-tu ?', example_en:'Where do you live?' },
+    { level:'A1', word:'d\'où', word_type:'question word', translation:'from where', example_fr:'D\'où viens-tu ?', example_en:'Where are you from?' },
+    { level:'A1', word:'depuis quand', word_type:'question word', translation:'since when / how long', example_fr:'Depuis quand apprends-tu le français ?', example_en:'How long have you been learning French?' },
+    { level:'A1', word:'pourquoi', word_type:'question word', translation:'why', example_fr:'Pourquoi tu pars ?', example_en:'Why are you leaving?' },
+    { level:'A1', word:'à quelle heure', word_type:'question phrase', translation:'at what time', example_fr:'À quelle heure commence le cours ?', example_en:'At what time does the class start?' },
+    { level:'A1', word:'quelle heure est-il', word_type:'question phrase', translation:'what time is it', example_fr:'Quelle heure est-il ? → Il est trois heures.', example_en:'What time is it? → It is three o\'clock.' },
+    { level:'A1', word:'qu\'est-ce que c\'est', word_type:'question phrase', translation:'what is this / what is it', example_fr:'Qu\'est-ce que c\'est ? → C\'est un stylo.', example_en:'What is this? → It\'s a pen.' },
+    { level:'A1', word:'qui', word_type:'question word', translation:'who', example_fr:'Qui est là ?', example_en:'Who is there?' },
+    { level:'A1', word:'à qui', word_type:'question word', translation:'to whom / for whom', example_fr:'À qui parles-tu ?', example_en:'To whom are you speaking?' },
+    { level:'A1', word:'de quoi', word_type:'question word', translation:'about what / of what', example_fr:'De quoi parles-tu ?', example_en:'What are you talking about?' },
+    { level:'A1', word:'à qui est', word_type:'question phrase', translation:'whose (is it)', example_fr:'À qui est ce sac ?', example_en:'Whose bag is this?' },
+    { level:'A1', word:'qu\'est-ce que', word_type:'question phrase', translation:'what (object of verb)', example_fr:'Qu\'est-ce que tu veux ?', example_en:'What do you want?' },
+    { level:'A1', word:'est-ce que', word_type:'question marker', translation:'yes/no question marker', example_fr:'Est-ce que tu parles français ?', example_en:'Do you speak French?' },
   ];
 
   lessons.forEach(l => DB.insert('lessons', l));
